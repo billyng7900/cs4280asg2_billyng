@@ -29,7 +29,7 @@
             <a href="HomePage.jsp#2">
                 <div class="menuItem">
                     <ul>
-                        <p>Item 22</p>
+                        <p>Item 2</p>
                     </ul>
                 </div>
             </a>
