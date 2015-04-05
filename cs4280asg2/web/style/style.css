@@ -1,0 +1,82 @@
+body
+{
+    color: #333300;
+}
+
+a
+{
+    color: #333300;
+    text-decoration: none;
+}
+
+.banner
+{
+    width: 98%;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #C9C9C7;
+    font-family: Cambria;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    position: fixed;
+}
+
+#header
+{
+    top: 0px;
+    float:top;
+}
+
+#footer
+{
+    bottom: 0px;
+    float: bottom;
+}
+
+.headerMsg
+{
+    font-family: Cambria;
+    color: #000000;
+    text-align: center;
+}
+
+#leftPanel
+{
+    width: 20%;
+    height: 100%;
+    background-color: #EBF0F5;
+    float: left;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+.menuItem
+{
+    background-color: #EBF0F5;
+    text-align: left;
+}
+
+#mainPanel
+{
+    float: left;
+    margin-top: 30px;
+    padding-top: 20px;
+    width:80%
+}
+
+.contentItem
+{
+    text-align: center;
+    width: 25%;
+    float: left;
+    padding-left: 8%;
+}
+
+.detailItem
+{
+    float: left;
+}
