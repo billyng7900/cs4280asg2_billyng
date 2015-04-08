@@ -60,6 +60,10 @@ public class ProcessLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //connect DB logic
+        
+        
+        //end DB logic
         HttpSession session = request.getSession(true); 
         String previousURL = request.getParameter("requestURL");
         if(session.getAttribute("username")==null)

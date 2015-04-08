@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="BO.*" %>
 <!DOCTYPE html>
 <html>
     <head>
