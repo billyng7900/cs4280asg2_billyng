@@ -13,6 +13,10 @@
         <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
+        <%
+            if(session.getAttribute("username")==null)
+                response.sendRedirect("Login.jsp");
+        %>
         <div id="header" class="banner">
             <jsp:include page="Header.html" flush="true" />           
         </div>

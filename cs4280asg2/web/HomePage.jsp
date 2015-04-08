@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
+        
         <div id="header" class="banner">
             <jsp:include page="Header.html" flush="true" />        
         </div>
