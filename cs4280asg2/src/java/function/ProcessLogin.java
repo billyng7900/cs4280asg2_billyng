@@ -61,10 +61,14 @@ public class ProcessLogin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true); 
+        String previousURL = request.getParameter("requestURL");
         if(session.getAttribute("username")==null)
         {
             session.setAttribute("username", request.getParameter("username"));
-            response.sendRedirect("HomePage.jsp");
+            if(previousURL!=null)
+                response.sendRedirect(previousURL);
+            else
+                response.sendRedirect("HomePage.jsp");
         }
         
     }
