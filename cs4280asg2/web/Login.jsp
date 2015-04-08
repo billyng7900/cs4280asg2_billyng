@@ -62,7 +62,7 @@
                 <input type="text" id="username" name="username" value=""/><BR>
                 <label for password>password:</label>
                 <input type="password" id="password" name="password" value=""/><BR>
-                <input type="hidden" name="requestURL" value=<%= request.getHeader("Referer") %> />
+                <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> />
                 <input type="submit" value="Login" />
             </Form>
         </div>

@@ -15,7 +15,7 @@
     <body>
         <%
             if(session.getAttribute("username")==null)
-                response.sendRedirect("Login.jsp");
+                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI());
         %>
         <div id="header" class="banner">
             <jsp:include page="Header.html" flush="true" />           
@@ -107,7 +107,10 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right">
-                                    <button>Add to chart</button>
+                                    <form>
+                                    <input type="hidden" name="bookID" value="1"/>
+                                    <input type="submit" value="Add to chart" />
+                                    </form>
                                 </td>
                             </tr>
                         </table>
