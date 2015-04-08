@@ -14,8 +14,7 @@
     </head>
     <body>
         <div id="header" class="banner">
-            This web site exists to fulfill the coursework requirement of CS4280.<br>
-            Do not use your real personal data as input.           
+            <jsp:include page="Header.html" flush="true" />           
         </div>
         
         <div id="leftPanel">           
@@ -113,8 +112,7 @@
         </div>
         
         <div id="footer" class="banner">
-            This web site exists to fulfill the coursework requirement of CS4280.<br>
-            Do not use your real personal data as input.           
+            <jsp:include page="Header.html" flush="true" />           
         </div>
     </body>
 </html>
