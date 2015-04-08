@@ -67,14 +67,14 @@
                 <table>
                     <tr>
                         <td>
-                            <a href="DetailPage.jsp">
+                            <a href="DetailPage.jsp?bookID=1">
                                 <img src="image\image1.jpg" alt="image1">
                             </a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="DetailPage.jsp">
+                            <a href="DetailPage.jsp?bookID=1">
                                 Java: A Beginner's Guide Paperback
                             </a>
                         </td>
