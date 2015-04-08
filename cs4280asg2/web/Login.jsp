@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details Page</title>
+        <title>Login Page</title>
         <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
@@ -69,6 +69,7 @@
                 <label for password>password:</label>
                 <input type="password" id="password" name="password" value=""/><BR>
                 <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> />
+                <input type="submit" value="Login"/>
             </Form>
         </div>
         
