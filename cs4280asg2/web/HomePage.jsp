@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         
@@ -20,48 +20,7 @@
         </div>
         
         <div id="leftPanel">           
-            <a href="DetailPage.jsp">
-                <div class="menuItem">
-                    <ul>
-                        <p>Detail Page</p>
-                    </ul>
-                </div>
-            </a>
-            <a href="HomePage.jsp#2">
-                <div class="menuItem">
-                    <ul>
-                        <p>Item 2</p>
-                    </ul>
-                </div>
-            </a>
-            <a href="HomePage.jsp#3">
-                <div class="menuItem">
-                    <ul>
-                        <p>Item 3</p>
-                    </ul>
-                </div>
-            </a>
-            <a href="HomePage.jsp#4">
-                <div class="menuItem">
-                    <ul>
-                        <p>Item 4</p>
-                    </ul>
-                </div>
-            </a>
-            <a href="HomePage.jsp#5">
-                <div class="menuItem">
-                    <ul>
-                        <p>Item 5</p>
-                    </ul>
-                </div>
-            </a>
-            <a href="HomePage.jsp#6">
-                <div class="menuItem">
-                    <ul>
-                        <p>Item 6</p>
-                    </ul>
-                </div>
-            </a>
+            <jsp:include page="Menu.html" flush="true" />  
         </div>
         
         <div id="mainPanel">
