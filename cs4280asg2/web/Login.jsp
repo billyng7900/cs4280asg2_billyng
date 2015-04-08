@@ -57,13 +57,18 @@
         </div>
         
         <div id="mainPanel">
+            <%
+               if(request.getParameter("error")!=null)
+               {
+                   out.println("Username or Password incorrect. Please Try Again");
+               }
+             %>
             <Form action="ProcessLogin" method="Get">
                 <label for username>username:</label>
                 <input type="text" id="username" name="username" value=""/><BR>
                 <label for password>password:</label>
                 <input type="password" id="password" name="password" value=""/><BR>
                 <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> />
-                <input type="submit" value="Login" />
             </Form>
         </div>
         
