@@ -28,7 +28,30 @@
         </div>
         
         <div id="mainPanel">
-            <div class="contentItem">
+            <%
+            for(Book b:booklist)
+            {
+                out.println("<div class='contentItem'>");
+                out.println("<table>");
+                out.println("<tr>");
+                out.println("<td>");
+                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
+                out.println("<img src='image\\"+b.getImageURL()+".jpg' alt='image1'>");
+                out.println("</a>");
+                out.println("</td>");
+                out.println("</tr>");
+                out.println("<tr>");
+                out.println("<td>");
+                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
+                out.println(b.getBookName());
+                out.println("</a>");
+                out.println("</td>");
+                out.println("</tr>");
+                out.println("</table>");
+                out.println("</div>");
+            }
+            %>
+            <!--<div class="contentItem">
                 <table>
                     <tr>
                         <td>
@@ -74,7 +97,7 @@
                     </tr>
                 </table>               
             </div>
-        </div>
+        </div> -->
         
         <div id="footer" class="banner">
             <jsp:include page="Header.html" flush="true" />               
