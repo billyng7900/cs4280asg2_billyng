@@ -11,7 +11,7 @@ a
 
 .banner
 {
-    width: 98%;
+    width: 99%;
     height: 40px;
     margin-left: auto;
     margin-right: auto;
@@ -70,7 +70,9 @@ a
 #mainPanel
 {
     float: left;
-    margin-top: 30px;
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 50px;
     margin-left: 250px;
     padding-top: 20px;
     width: 75%;
@@ -80,11 +82,11 @@ a
 {
     text-align: center;
     padding: 1%;
-    width: 280px;
+    width: 290px;
     float: left;
 }
 
-#detailItem
+.detailItem
 {
     float: left;
 }

@@ -11,14 +11,14 @@
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
-                if(username==""||username.replace(/ /g,'').length==0)
+                if(!username)
                 {
-                    alert("username cannot be empty");
+                    alert("Username cannot be empty");
                     return false;
                 }
-                else if (password==""||password.replace(/ /g,'').length==0)
+                else if (!password)
                 {
-                    alert("password cannot be empty");
+                    alert("Password cannot be empty");
                     return false;
                 }
             }
@@ -41,13 +41,20 @@
                }
              %>
             <Form action="ProcessLogin" method="Get" onsubmit="return checksubmit()">
-                <label for username>username:</label>
-                <input type="text" id="username" name="username" value=""/><BR>
-                <label for password>password:</label>
-                <input type="password" id="password" name="password" value=""/><BR>
-                <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> />
-                <input type="submit" value="Login"/>
-                
+                <table>
+                    <tr>
+                        <td><label for username>username:</label></td>
+                        <td><input type="text" id="username" name="username" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><label for password>password:</label></td>
+                        <td><input type="password" id="password" name="password" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Login"/></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> /> 
             </Form>
             
         </div>
