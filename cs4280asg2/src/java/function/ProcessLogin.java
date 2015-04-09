@@ -32,7 +32,7 @@ public class ProcessLogin extends HttpServlet {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             int numRow = 0;
-            if(rs != null && rs.next() != false)
+            if(rs != null&& rs.next() != false)
             {
                 HttpSession session = request.getSession(true); 
                 if(session.getAttribute("username")==null)

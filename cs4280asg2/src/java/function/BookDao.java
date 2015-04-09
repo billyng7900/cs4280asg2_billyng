@@ -25,7 +25,7 @@ public class BookDao {
         PreparedStatement pstmt = con.prepareStatement("Select * from [book] where [bookID] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
         pstmt.setInt(1, bookID);
         ResultSet rs = pstmt.executeQuery();
-        if(rs != null && rs.next() != false)
+        if(rs != null && rs.next()!=false)
         {
             String bookName = rs.getString("book_name");
             String bookDescription = rs.getString("book_description");
@@ -55,8 +55,9 @@ public class BookDao {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             String getBookSql = "Select * from [book]";
             ResultSet rs = stmt.executeQuery(getBookSql);
-            if(rs != null && rs.next() != false)
+            if(rs != null)
             {
+                rs.beforeFirst();
                 while(rs.next())
                 {
                     int bookID = rs.getInt("bookID");

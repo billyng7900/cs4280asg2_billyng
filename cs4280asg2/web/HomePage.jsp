@@ -27,7 +27,21 @@
             <jsp:include page="Menu.html" flush="true" />  
         </div>
         
-        <div id="mainPanel">
+        <div id="mainPanel">                    
+            <%
+            for(Book b:booklist)
+            {
+                out.println("<div class='contentItem'>");
+                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
+                out.println("<img src='image\\"+b.getImageURL()+".jpg' alt='image'>");
+                out.println("</a>");
+                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
+                out.println(b.getBookName());
+                out.println("</a>");
+                out.println("</div>");
+            }
+            %>
+            <!--
             <div class="contentItem">               
                 <a href="DetailPage.jsp?bookID=1">
                     <img src="image\book_1.jpg" alt="Java: A Beginner's Guide Paperback" height="150px">
@@ -53,7 +67,7 @@
                 <br><br>
                 <a href="DetailPage.jsp?bookID=3">
                     Head First Java (2nd Edition)
-                </a>               
+                </a>      
             </div>
             <div class="contentItem">
                 <a href="DetailPage.jsp?bookID=4">
@@ -100,6 +114,7 @@
                     Java 8 Preview Sampler 
                 </a>            
             </div>
+            -->
         </div>        
         <div id="footer" class="banner">
             <jsp:include page="Header.html" flush="true" />               
