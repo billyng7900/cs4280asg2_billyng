@@ -57,7 +57,6 @@ public class BookDao {
             ResultSet rs = stmt.executeQuery(getBookSql);
             if(rs != null)
             {
-                rs.beforeFirst();
                 while(rs.next())
                 {
                     int bookID = rs.getInt("bookID");
