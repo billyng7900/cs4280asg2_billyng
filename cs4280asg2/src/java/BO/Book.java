@@ -13,11 +13,13 @@ public class Book {
     private int bookID;
     private String bookName;
     private String bookDescription;
+    private int availability;
     
-    public Book(int bookID, String bookName, String bookDescription)
+    public Book(int bookID, String bookName, String bookDescription, int availability)
     {
         this.bookID = bookID;
         this.bookName = bookName;
         this.bookDescription = bookDescription;
+        this.availability = availability;
     }
 }
