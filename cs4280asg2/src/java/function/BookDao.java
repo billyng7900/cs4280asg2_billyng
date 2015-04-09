@@ -17,7 +17,7 @@ import java.sql.Statement;
  * @author billyng
  */
 public class BookDao {
-    public void getBook(int bookID)
+    public Book getBook(int bookID)
     {
         try{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -25,12 +25,25 @@ public class BookDao {
         PreparedStatement pstmt = con.prepareStatement("Select * from [book] where [bookID] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
         pstmt.setInt(1, bookID);
         ResultSet rs = pstmt.executeQuery();
+        if(rs != null && rs.next() != false)
+        {
+            String bookName = rs.getString("book_name");
+            String bookDescription = rs.getString("book_description");
+            int availability = rs.getInt("availability");
+            String imageURL = rs.getString("imageURL");
+            Book book = new Book(bookID,bookName,bookDescription,availability,imageURL);
+            rs.close();
+            if(con!=null)
+                con.close();
+            return book;
+        }
+        return null;
         }catch (ClassNotFoundException e) {
             System.out.println("<div style='color: red'>" + e.toString() + "</div>");
         }catch (SQLException e) {
             System.out.println("<div style='color: red'>" + e.toString() + "</div>");
         }
-        final
+        return null;
     }
     
     public ArrayList<Book> getBookList()
@@ -54,6 +67,9 @@ public class BookDao {
                     Book book = new Book(bookID,bookName,bookDescription,availability,imageURL);
                     bookList.add(book);
                 }
+                rs.close();
+                if(con!=null)
+                    con.close();
                 return bookList;
             }
             else
