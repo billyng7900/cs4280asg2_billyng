@@ -33,7 +33,10 @@
         </script>
     </head>
     <body onload="loadData()">
-        
+        <%
+            if(session.getAttribute("username")==null)
+                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI());
+        %>
         
         <div id="header" class="banner">
             <jsp:include page="Header.html" flush="true" />           
