@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="BO.*" %>
+<%@page import="BO.*,java.util.*,function.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,11 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        
+        <%
+            ArrayList<Book> booklist = new ArrayList<Book>();
+            BookDao bookdao = new BookDao();
+            booklist = bookdao.getBookList();
+        %>
         <div id="header" class="banner">
             <jsp:include page="Header.html" flush="true" />        
         </div>

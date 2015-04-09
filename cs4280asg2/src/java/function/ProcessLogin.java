@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import BO.*;
 
 public class ProcessLogin extends HttpServlet {
    
@@ -34,9 +35,18 @@ public class ProcessLogin extends HttpServlet {
             if(rs != null && rs.next() != false)
             {
                 HttpSession session = request.getSession(true); 
-                
                 if(session.getAttribute("username")==null)
                 {
+                    String name = rs.getString("username");
+                    if(rs.getInt("ismanager")==1)
+                    {
+                        int loyaltyPoints = rs.getInt("loyaltyPoints");
+                        User user = new Customer(name,loyaltyPoints);
+                    }
+                    else
+                    {
+                        User user = new Manager(name);
+                    }
                     session.setAttribute("username", rs.getString("username"));
                     if(previousURL.equals("null"))
                         response.sendRedirect("HomePage.jsp");

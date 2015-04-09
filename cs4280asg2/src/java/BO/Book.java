@@ -14,12 +14,40 @@ public class Book {
     private String bookName;
     private String bookDescription;
     private int availability;
+    private String imageURL;
     
-    public Book(int bookID, String bookName, String bookDescription, int availability)
+    public Book(int bookID, String bookName, String bookDescription, int availability, String imageURL)
     {
         this.bookID = bookID;
         this.bookName = bookName;
         this.bookDescription = bookDescription;
         this.availability = availability;
+        this.imageURL = imageURL;
+        
+    }
+    
+    public String getBookName()
+    {
+        return bookName;
+    }
+    
+    public String getBookDescription()
+    {
+        return bookDescription;
+    }
+    
+    public int getAvailability()
+    {
+        return availability;
+    }
+    
+    public String getImageURL()
+    {
+        return imageURL;
+    }
+    
+    public int getBookID()
+    {
+        return bookID;
     }
 }
