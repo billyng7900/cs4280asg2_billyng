@@ -35,6 +35,7 @@
                 out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
                 out.println("<img src='image\\"+b.getImageURL()+".jpg' alt='image'>");
                 out.println("</a>");
+                out.println("<br><br>");
                 out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
                 out.println(b.getBookName());
                 out.println("</a>");
