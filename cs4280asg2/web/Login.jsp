@@ -26,11 +26,11 @@
     </head>
     <body>
         <div id="header" class="banner">
-            <jsp:include page="Header.html" flush="true" />           
+            <jsp:include page="common/Header.html" flush="true" />           
         </div>
         
         <div id="leftPanel">           
-            <jsp:include page="Menu.html" flush="true" />  
+            <jsp:include page="common/Menu.html" flush="true" />  
         </div>
         
         <div id="mainPanel">
@@ -60,7 +60,7 @@
         </div>
         
         <div id="footer" class="banner">
-            <jsp:include page="Header.html" flush="true" />           
+            <jsp:include page="common/Header.html" flush="true" />           
         </div>
     </body>
 </html>

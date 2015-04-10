@@ -90,3 +90,11 @@ a
 {
     float: left;
 }
+
+#shoppingCart td
+{
+   vertical-align: top;
+   border-bottom: solid;
+   border-width: 1px;
+}
+

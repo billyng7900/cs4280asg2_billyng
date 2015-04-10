@@ -33,20 +33,20 @@
         </script>
     </head>
     <%
-            if(session.getAttribute("username")==null)
-            {
-                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI()+"?"+request.getQueryString());
-            }
-        %>
+        if(session.getAttribute("username")==null)
+        {
+            response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI()+"?"+request.getQueryString());
+        }
+    %>
         
     <body onload="loadData()">
         
         <div id="header" class="banner">
-            <jsp:include page="Header.html" flush="true" />           
+            <jsp:include page="common/Header.html" flush="true" />           
         </div>
         
         <div id="leftPanel">           
-            <jsp:include page="Menu.html" flush="true" />  
+            <jsp:include page="common/Menu.html" flush="true" />  
         </div>
         
         <div id="mainPanel">
@@ -99,7 +99,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="1"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -166,7 +166,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="2"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -235,7 +235,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="3"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -309,7 +309,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="4"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -381,7 +381,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="5"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -459,7 +459,7 @@
                             <td style="text-align: right">
                                 <form>
                                 <input type="hidden" name="bookID" value="6"/>
-                                <input type="submit" value="Add to chart" />
+                                <input type="submit" value="Add to cart" />
                                 </form>
                             </td>
                         </tr>
@@ -469,7 +469,7 @@
         </div>
         
         <div id="footer" class="banner">
-            <jsp:include page="Header.html" flush="true" />           
+            <jsp:include page="common/Header.html" flush="true" />           
         </div>
     </body>
 </html>
