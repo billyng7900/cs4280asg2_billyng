@@ -56,7 +56,7 @@ public class ProcessLogin extends HttpServlet {
             }
             else
             {
-                response.sendRedirect("Login.jsp?error=1&requsetURL="+previousURL);
+                response.sendRedirect("Login.jsp?error=1&requestURL="+previousURL);
             }
             //end DB logic
             

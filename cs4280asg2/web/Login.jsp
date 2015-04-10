@@ -54,7 +54,7 @@
                         <td><input type="submit" value="Login"/></td>
                     </tr>
                 </table>
-                <input type="hidden" name="requestURL" value=<%= request.getParameter("requestURL") %> /> 
+                <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" /> 
             </Form>
             
         </div>
