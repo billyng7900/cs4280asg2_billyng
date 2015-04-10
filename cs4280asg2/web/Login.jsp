@@ -11,12 +11,12 @@
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
-                if(!username)
+                if(!username || username.replace(/ /g,'').length==0)
                 {
                     alert("Username cannot be empty");
                     return false;
                 }
-                else if (!password)
+                else if (!password || password.replace(/ /g,'').length==0)
                 {
                     alert("Password cannot be empty");
                     return false;
