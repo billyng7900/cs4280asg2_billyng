@@ -92,7 +92,7 @@ a
     float: left;
 }
 
-#shoppingCart td
+.shoppingCart td
 {
    vertical-align: top;
    border-bottom: solid;
