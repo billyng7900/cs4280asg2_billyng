@@ -49,7 +49,7 @@ public class ProcessLogin extends HttpServlet {
                     }
                     session.setAttribute("username", rs.getString("username"));
                     if(previousURL.equals("null"))
-                        response.sendRedirect("HomePage.jsp");
+                        response.sendRedirect("Home");
                     else
                         response.sendRedirect(previousURL);
                 }
