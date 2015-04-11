@@ -31,12 +31,16 @@ public class BookDao {
             String bookDescription = rs.getString("book_description");
             int availability = rs.getInt("availability");
             String imageURL = rs.getString("imageURL");
+            float price = rs.getFloat("price");
+            String author = rs.getString("author");
             Book book = new Book();
             book.setBookID(bookID);
             book.setBookName(bookName);
             book.setBookDescription(bookDescription);
             book.setAvailability(availability);
             book.setImageURL(imageURL);
+            book.setAuthor(author);
+            book.setPrice(price);
             rs.close();
             if(con!=null)
                 con.close();
@@ -69,12 +73,16 @@ public class BookDao {
                     String bookDescription = rs.getString("book_description");
                     int availability = rs.getInt("availability");
                     String imageURL = rs.getString("imageURL");
+                    float price = rs.getFloat("price");
+                    String author = rs.getString("author");
                     Book book = new Book();
                     book.setBookID(bookID);
                     book.setBookName(bookName);
                     book.setBookDescription(bookDescription);
                     book.setAvailability(availability);
                     book.setImageURL(imageURL);
+                    book.setAuthor(author);
+                    book.setPrice(price);
                     bookList.add(book);
                 }
                 rs.close();

@@ -15,6 +15,8 @@ public class Book {
     private String bookDescription;
     private int availability;
     private String imageURL;
+    private String author;
+    private float price;
     
     public Book()
     {
@@ -46,6 +48,16 @@ public class Book {
         this.imageURL = imageURL;
     }
     
+    public void setAuthor(String author)
+    {
+        this.author = author;
+    }
+    
+    public void setPrice(float price)
+    {
+        this.price = price;
+    }
+    
     public String getBookName()
     {
         return bookName;
@@ -69,5 +81,15 @@ public class Book {
     public int getBookID()
     {
         return bookID;
+    }
+    
+    public String getAuthor()
+    {
+        return author;
+    }
+    
+    public float getPrice()
+    {
+        return price;
     }
 }

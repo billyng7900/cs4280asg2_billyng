@@ -31,11 +31,11 @@ public class BookList {
         for(Book b:booklist)
             {
                 printlist+="<div class='contentItem'>";
-                printlist+="<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>";
+                printlist+="<a href='DetailPage?bookID="+b.getBookID()+"'>";
                 printlist+="<img src='image\\"+b.getImageURL()+".jpg' alt='image' height='150px'>";
                 printlist+="</a>";
                 printlist+="<br><br>";
-                printlist+="<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>";
+                printlist+="<a href='DetailPage?bookID="+b.getBookID()+"'>";
                 printlist+=b.getBookName();
                 printlist+="</a>";
                 printlist+="</div>";
