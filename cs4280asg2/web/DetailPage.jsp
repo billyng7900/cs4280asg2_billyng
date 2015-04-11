@@ -59,8 +59,8 @@
                         </tr>
                         <tr>
                             <td style="text-align: right">
-                                <form>
-                                <input type="hidden" name="<jsp:getProperty name='book' property='bookID' />" value="1"/>
+                                <form action="ShoppingCartAddController" method="POST">
+                                <input type="hidden" name="bookID" value="<jsp:getProperty name='book' property='bookID' />"/>
                                 <input type="submit" value="Add to cart" />
                                 </form>
                             </td>

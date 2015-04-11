@@ -12,6 +12,10 @@
         <servlet-name>DetailPageController</servlet-name>
         <servlet-class>controller.DetailPageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShoppingCartAddController</servlet-name>
+        <servlet-class>controller.ShoppingCartAddController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>DetailPageController</servlet-name>
         <url-pattern>/DetailPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShoppingCartAddController</servlet-name>
+        <url-pattern>/ShoppingCartAddController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

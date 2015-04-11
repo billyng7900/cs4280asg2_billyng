@@ -24,7 +24,7 @@
         </div>
         
         <div id="mainPanel">                    
-            <jsp:getProperty name="booklist" property="bookList" />            
+            <jsp:getProperty name="booklist" property="homeBookList" />            
         </div>        
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               

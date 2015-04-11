@@ -14,6 +14,7 @@
     </head>
     
     <body>
+        <jsp:useBean id="cart" type="BO.BookList" scope="session" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>
@@ -30,40 +31,7 @@
                     <td width="150px">Price</td>
                     <td width="150px">Quantity</td>
                 </tr>
-                <tr>
-                    <td>
-                        <a href="DetailPage.jsp?bookID=1"><image src="image/book_1.jpg" height="150px"></a>
-                    </td>
-                    <td>
-                        <a href="DetailPage.jsp?bookID=1">
-                            <label style="text-decoration: bold; font-size: 20px">
-                                Java: A Beginner's Guide
-                            </label>
-                            <label style="font-size: 12px;">
-                                by Herbert Schildt<br><br>
-                            </label>
-                        </a>
-                    </td>
-                    <td><label>$24.37</label></td>
-                    <td><input type="text" id="quantity" name="quantity" value="1"/></td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="DetailPage.jsp?bookID=1"><image src="image/book_1.jpg" height="150px"></a>
-                    </td>
-                    <td>
-                        <a href="DetailPage.jsp?bookID=1">
-                            <label style="text-decoration: bold; font-size: 20px">
-                                Java: A Beginner's Guide
-                            </label>
-                            <label style="font-size: 12px;">
-                                by Herbert Schildt<br><br>
-                            </label>
-                        </a>
-                    </td>
-                    <td><label>$24.37</label></td>
-                    <td><input type="text" id="quantity" name="quantity" value="1"/></td>
-                </tr>
+                <jsp:getProperty name="cart" property="cartBookList" />
                 <tr>
                     <td colspan="4" style="text-align: right; border-style: none">
                         <br><input type="submit" value="Checkout"/>
