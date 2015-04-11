@@ -16,14 +16,34 @@ public class Book {
     private int availability;
     private String imageURL;
     
-    public Book(int bookID, String bookName, String bookDescription, int availability, String imageURL)
+    public Book()
+    {
+
+    }
+    
+    public void setBookID(int bookID)
     {
         this.bookID = bookID;
+    }
+    
+    public void setBookName(String bookName)
+    {
         this.bookName = bookName;
+    }
+    
+    public void setBookDescription(String bookDescription)
+    {
         this.bookDescription = bookDescription;
+    }
+    
+    public void setAvailability(int availability)
+    {
         this.availability = availability;
+    }
+    
+    public void setImageURL(String imageURL)
+    {
         this.imageURL = imageURL;
-        
     }
     
     public String getBookName()

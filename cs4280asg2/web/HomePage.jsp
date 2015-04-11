@@ -14,11 +14,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <%
-            ArrayList<Book> booklist = new ArrayList<Book>();
-            BookDao bookdao = new BookDao();
-            booklist = bookdao.getBookList();
-        %>
+    <jsp:useBean id="booklist" type="BO.BookList" scope="request" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />        
         </div>
@@ -28,20 +24,7 @@
         </div>
         
         <div id="mainPanel">                    
-            <%
-            for(Book b:booklist)
-            {
-                out.println("<div class='contentItem'>");
-                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
-                out.println("<img src='image\\"+b.getImageURL()+".jpg' alt='image' height='150px'>");
-                out.println("</a>");
-                out.println("<br><br>");
-                out.println("<a href='DetailPage.jsp?bookID="+b.getBookID()+"'>");
-                out.println(b.getBookName());
-                out.println("</a>");
-                out.println("</div>");
-            }
-            %>            
+            <jsp:getProperty name="booklist" property="bookList" />            
         </div>        
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               
