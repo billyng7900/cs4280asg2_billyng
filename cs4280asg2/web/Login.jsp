@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
+        <title>Login</title>
         <link rel="stylesheet" href="css/style.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">
@@ -37,21 +37,25 @@
             <%
                if(request.getParameter("error")!=null)
                {
-                   out.println("Username or Password incorrect. Please Try Again");
+                   out.println("Username or Password incorrect. Please Try Again.");
                }
-             %>
+            %>            
             <Form action="ProcessLogin" method="Get" onsubmit="return checksubmit()">
-                <table>
+                <table style="background-color: #F1F6F7">
                     <tr>
-                        <td><label for username>username:</label></td>
+                        <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Login</b></td>
+                    </tr>
+                    <tr>
+                        <td><label for username>Username:</label></td>
                         <td><input type="text" id="username" name="username" value=""/></td>
                     </tr>
                     <tr>
-                        <td><label for password>password:</label></td>
+                        <td><label for password>Password:</label></td>
                         <td><input type="password" id="password" name="password" value=""/></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Login"/></td>
+                        <td style="font-size: 10px; text-align: right"><a href="RegistrationPage.jsp">[Register]</a></td>
                     </tr>
                 </table>
                 <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" /> 

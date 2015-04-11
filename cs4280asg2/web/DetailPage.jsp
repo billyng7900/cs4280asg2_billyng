@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details Page</title>
+        <title>Details</title>
         <link rel="stylesheet" href="css/style.css">
         <script type="text/javascript">
             function loadData()
