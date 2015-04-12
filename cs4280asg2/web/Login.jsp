@@ -41,7 +41,7 @@
                }
             %>            
             <Form action="ProcessLogin" method="Get" onsubmit="return checksubmit()">
-                <table style="background-color: #F1F6F7">
+                <table style="background-color: #F1F6F7; margin: auto">
                     <tr>
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Login</b></td>
                     </tr>

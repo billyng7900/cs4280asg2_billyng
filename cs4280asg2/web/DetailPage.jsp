@@ -12,7 +12,8 @@
         <title>Details</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-        
+    
+    <body>
     <jsp:useBean id="book" type="BO.Book" scope="request" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
@@ -23,7 +24,6 @@
         </div>
         
         <div id="mainPanel">
-            <!--Book ID:1-->
             <div class="detailItem" >
                 <div style="float: left; width: 300px; text-align: center">
                     <img src="image\<jsp:getProperty name='book' property='imageURL' />.jpg" alt="<jsp:getProperty name='book' property='bookName' />">
@@ -50,7 +50,7 @@
                                 <form>
                                 <fieldset>
                                 <legend>Book Description</legend>
-                                    <p>
+                                    <p>                                        
                                         <jsp:getProperty name="book" property="bookDescription" />
                                     </p>
                                 </fieldset>
@@ -67,7 +67,8 @@
                         </tr>
                     </table>
                 </div>
-            </div>                  
+            </div>
+        </div>
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>
