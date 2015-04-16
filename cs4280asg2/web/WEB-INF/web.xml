@@ -16,6 +16,10 @@
         <servlet-name>ShoppingCartAddController</servlet-name>
         <servlet-class>controller.ShoppingCartAddController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisteController</servlet-name>
+        <servlet-class>controller.RegisterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ShoppingCartAddController</servlet-name>
         <url-pattern>/ShoppingCartAddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisteController</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -21,7 +21,7 @@
         </div>
         
         <div id="mainPanel">
-            <Form action="">
+            <Form action="Register">
                 <table style="background-color: #F1F6F7; margin: auto">
                     <tr>
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Register</b></td>

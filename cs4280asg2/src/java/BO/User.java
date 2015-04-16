@@ -11,8 +11,15 @@ package BO;
  */
 public class User {
     String username;
+    boolean isManager;
+    int loyaltyPoints;
     
-    public User(String username)
+    public User()
+    {
+        
+    }
+    
+    public void setUserName(String username)
     {
         this.username = username;
     }
@@ -20,5 +27,25 @@ public class User {
     public String getUserName()
     {
         return username;
+    }
+    
+    public void setIsManager(boolean isManager)
+    {
+        this.isManager = isManager;
+    }
+    
+    public boolean getIsManager()
+    {
+        return isManager;
+    }
+    
+    public void setLoyaltyPoints(int loyaltyPoints)
+    {
+        this.loyaltyPoints = loyaltyPoints;
+    }
+    
+    public int getLoyaltyPoints()
+    {
+        return loyaltyPoints;
     }
 }

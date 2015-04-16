@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
 import function.*;
@@ -14,9 +15,9 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author Billy
+ * @author yuchunng3
  */
-public class DetailPageController extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +33,23 @@ public class DetailPageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession(true);
-            if(session.getAttribute("user")==null)
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            UserDao dao = new UserDao();
+            boolean isUserNameRepeated = dao.checkRepeatedUserName(username);
+            if(isUserNameRepeated == false)
             {
-                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI()+"?"+request.getQueryString());
+                int success = dao.registerUser(username, password);
+                if(success==1)
+                    response.sendRedirect("Home");
+                else
+                    response.sendRedirect("Login.jsp");
             }
             else
             {
-                BookDao dao = new BookDao();
-                String bookID = request.getParameter("bookID");
-                Book book = dao.getBook(Integer.parseInt(bookID));
-                request.setAttribute("book", book);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DetailPage.jsp");
-                dispatcher.forward(request, response);
+                response.sendRedirect("RegistrationPage.jsp");
             }
-        }finally {
+        } finally {
             out.close();
         }
     }
