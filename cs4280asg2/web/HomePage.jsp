@@ -20,7 +20,7 @@
         </div>
         
         <div id="leftPanel">           
-            <jsp:include page="common/Menu.html" flush="true" />  
+            <jsp:include page="Menu" flush="true" />  
         </div>
         
         <div id="mainPanel">                    

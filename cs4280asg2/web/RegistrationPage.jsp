@@ -27,32 +27,21 @@
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Register</b></td>
                     </tr>
                     <tr>
-                        <td>Login Username:</td>
+                        <td><label for='username'>Username:</label></td>
                         <td><input type="text" id="username" name="username" value=""/></td>
                     </tr>
                     <tr>
-                        <td>Password:</td>
+                        <td><label for='password'>Password:</label></td>
                         <td><input type="password" id="password" name="password" value=""/></td>
                     </tr>
                     <tr>
-                        <td>Confirm Password:</td>
-                        <td><input type="pw_confirm" id="password" name="pw_confirm" value=""/></td>
+                        <td><label for='password'>Confirm Password:</label></td>
+                        <td><input type="password" id="pw_confirm" name="pw_confirm" value=""/></td>
                     </tr>    
                     <tr>
-                        <td>First Name:</td>
-                        <td><input type="text" id="firstname" name="firstname" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td><input type="text" id="lastname" name="lastname" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td>Gender:</td>
-                        <td>
-                            Male<input type="radio" id="gender" name="gender" value="Male"/>
-                            Female<input type="radio" id="gender" name="gender" value="Female"/>
-                        </td>
-                    </tr>
+                        <td><label for='realname'>Real Name:</label></td>
+                        <td><input type="text" id="realname" name="realname" value=""/></td>                   
+                    </tr>                    
                     <tr>
                         <td><input type="submit" value="Submit"/></td>
                     </tr>
