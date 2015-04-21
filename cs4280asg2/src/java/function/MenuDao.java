@@ -31,9 +31,9 @@ public class MenuDao {
             String getMenuSql = "";
             if (type == 1)
                 getMenuSql = "Select * from [Menu] where access_type in ('V','A')";
-            if (type == 2)
+            else if (type == 2)
                 getMenuSql = "Select * from [Menu] where access_type in ('C','A')";
-            if (type == 3)
+            else if (type == 3)
                 getMenuSql = "Select * from [Menu] where access_type in ('C','M','A')";
             ResultSet rs = stmt.executeQuery(getMenuSql);
             if(rs != null)

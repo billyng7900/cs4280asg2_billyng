@@ -28,19 +28,19 @@
                     </tr>
                     <tr>
                         <td><label for='username'>Username:</label></td>
-                        <td>//from db</td>
+                        <td>${user.userName}</td>
                     </tr>
                     <tr>
                         <td><label for='realname'>Real Name:</label></td>
                         <td><input type="text" id="realname" name="realname" value="//from db"/></td>
                     </tr>                    
                     <tr>
-                        <td><label for='points'>Accumulated Points:</label></td>
-                        <td>//from db</td>
+                        <td><label for='points'>Loyalty Points:</label></td>
+                        <td>${user.loyaltyPoints}</td>
                     </tr>
                     <tr>
                         <td><label for='history'>Purchase History:</label></td>
-                        <td><a href='#' ><u>Purchase Histrory</u></a></td>
+                        <td><a href='#' ><u>Purchase History</u></a></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Change Password</b></td>

@@ -4,6 +4,7 @@
     Author     : liwaihing
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,6 @@
     </head>
     
     <body>
-        <jsp:useBean id="cart" type="BO.BookList" scope="session" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>
@@ -31,7 +31,7 @@
                     <td width="150px">Price</td>
                     <td width="150px">Quantity</td>
                 </tr>
-                <jsp:getProperty name="cart" property="cartBookList" />
+                    ${cart.cartBookList}
                 <tr>
                     <td colspan="4" style="text-align: right; border-style: none">
                         <br><input type="submit" value="Checkout"/>
