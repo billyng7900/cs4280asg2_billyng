@@ -47,30 +47,4 @@ public class BookList {
     {
         return booklist;
     }
-    
-    public String getCartBookList()
-    {
-        String printlist = "";
-        for(Book b:booklist)
-        {
-            printlist+="<tr>";
-            printlist+="<td>";
-            printlist+="<a href='DetailPage?bookID="+b.getBookID()+"'><image src='image/"+b.getImageURL()+".jpg' height='150px'></a>";
-            printlist+="</td>";
-            printlist+="<td>";
-            printlist+="<a href='DetailPage?bookID="+b.getBookID()+"'>";
-            printlist+="<label style='text-decoration: bold; font-size: 20px'>";
-            printlist+=b.getBookName();
-            printlist+="</label>";
-            printlist+="<label style='font-size: 12px;'>";
-            printlist+="by "+b.getAuthor()+"<br><br>";
-            printlist+="</label>";
-            printlist+="</a>";
-            printlist+="</td>";
-            printlist+="<td><label>$"+b.getPrice()+"</label></td>";
-            printlist+="<td><input type='text' id='quantity' name='quantity' value='1'/></td>";
-            printlist+="</tr>";
-        }
-        return printlist;
-    }
 }

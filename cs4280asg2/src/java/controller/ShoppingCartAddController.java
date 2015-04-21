@@ -77,21 +77,37 @@ public class ShoppingCartAddController extends HttpServlet {
         BookDao dao = new BookDao();
         String bookID = request.getParameter("bookID");
         Book book = dao.getBook(Integer.parseInt(bookID));
-        ArrayList<Book> booklist = new ArrayList<Book>();
+        CartBook cbook = new CartBook();
+        cbook.setBook(book);
+        ArrayList<CartBook> booklist = new ArrayList<CartBook>();
         HttpSession session = request.getSession();
         if(session.getAttribute("cart")==null)
         {
-            booklist.add(book);
-            BookList bo = new BookList();
-            bo.setBookList(booklist);
+            cbook.setQuantity(1);
+            booklist.add(cbook);
+            ShoppingCart bo = new ShoppingCart();
+            bo.setShoppingCart(booklist);
             session.setAttribute("cart", bo);
         }
         else//has item
         {
-            BookList bo = (BookList)session.getAttribute("cart");
-            booklist = bo.getBookList();
-            booklist.add(book);
-            bo.setBookList(booklist);
+            ShoppingCart bo = (ShoppingCart)session.getAttribute("cart");
+            booklist = bo.getShoppingCart();
+            boolean hasrepeateditem = false;
+            for(CartBook b:booklist)
+            {
+                if(b.getBook().getBookID()==cbook.getBook().getBookID())
+                {
+                    b.setQuantity(b.getQuantity()+1);
+                    hasrepeateditem = true;
+                }
+            }
+            if(!hasrepeateditem)
+            {
+                cbook.setQuantity(1);
+                booklist.add(cbook);
+            }
+            bo.setShoppingCart(booklist);
             session.setAttribute("cart", bo);
         }
         response.sendRedirect("DetailPage?bookID="+bookID);
