@@ -10,6 +10,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registration</title>
+        <script type="text/javascript">
+            function checksubmit()
+            {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var password_confirm = $("#pw_confirm").val();
+                if(password != password_confirm)
+                {
+                    alert("The password not match!");
+                    return false;
+                }
+                if(!username || username.replace(/ /g,'').length==0)
+                {
+                    alert("Username cannot be empty");
+                    return false;
+                }
+                else if (!password || password.replace(/ /g,'').length==0)
+                {
+                    alert("Password cannot be empty");
+                    return false;
+                }
+            }
+        </script>
     </head>
     <body>
         <div id="header" class="banner">
@@ -21,7 +44,7 @@
         </div>
         
         <div id="mainPanel">
-            <Form action="Register">
+            <Form action="Register" onsubmit="return checksubmit()" method="POST">
                 <table style="background-color: #F1F6F7; margin: auto">
                     <tr>
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Register</b></td>

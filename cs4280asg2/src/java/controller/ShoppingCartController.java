@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import function.*;
 import BO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
  *
- * @author yuchunng3
+ * @author billyng
  */
-public class RegisterController extends HttpServlet {
+public class ShoppingCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,27 +35,30 @@ public class RegisterController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            UserDao dao = new UserDao();
-            boolean isUserNameRepeated = dao.checkRepeatedUserName(username);
-            if(isUserNameRepeated == false)
+            HttpSession session = request.getSession();
+            if(session.getAttribute("cart")==null)
             {
-                int success = dao.registerUser(username, password);
-                if(success==1)
-                    response.sendRedirect("Home");
-                else
-                    response.sendRedirect("Login.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
+                dispatcher.forward(request, response);//in real, set a shopping cart empty jsp page and redirect to it.
             }
             else
-            {
-                response.sendRedirect("RegistrationPage.jsp?error=1");
-            }
+                response.sendRedirect("");
         } finally {
             out.close();
         }
     }
-
+    
+    private void forward(HttpServletRequest request,HttpServletResponse response,String url)
+    {
+        
+        try {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
+            dispatcher.forward(request, response);
+        } catch(Exception e)
+        {
+            System.out.println("Error Occurred, please try again.");
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

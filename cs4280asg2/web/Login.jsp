@@ -35,9 +35,9 @@
         
         <div id="mainPanel">
             <%
-               if(request.getParameter("error")!=null)
+               if(request.getParameter("error")=="1")
                {
-                   out.println("Username or Password incorrect. Please Try Again.");
+                   out.println("Username exist,please use another one to register.");
                }
             %>            
             <Form action="ProcessLogin" method="Get" onsubmit="return checksubmit()">
