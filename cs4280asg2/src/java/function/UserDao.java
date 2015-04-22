@@ -44,7 +44,7 @@ public class UserDao {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("Select * from [login] where [username] COLLATE Latin1_General_CS_AS = ? COLLATE Latin1_General_CS_AS and [password] COLLATE Latin1_General_CS_AS = ? COLLATE Latin1_General_CS_AS",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("Select * from [User] where [username] COLLATE Latin1_General_CS_AS = ? COLLATE Latin1_General_CS_AS and [password] COLLATE Latin1_General_CS_AS = ? COLLATE Latin1_General_CS_AS",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
@@ -52,13 +52,13 @@ public class UserDao {
             if(rs != null&& rs.next() != false)
             {
                 String name = rs.getString("username");
+                int userId = rs.getInt("userid");
                 User user = new User();
+                user.setUserName(username);
+                user.setUserId(userId);
                 if(rs.getInt("ismanager")==1)
                 {
-                    
-                    user.setUserName(username);
-                    user.setIsManager(true);
-                    
+                    user.setIsManager(true); 
                 }
                 else
                 {
@@ -84,7 +84,7 @@ public class UserDao {
          try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("Select * from [login] where [username] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("Select * from [User] where [username] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             if(rs != null&& rs.next() != false)

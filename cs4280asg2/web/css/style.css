@@ -99,3 +99,16 @@ a
    border-width: 1px;
 }
 
+input[type=submit]
+{
+    border : solid 1px #666bff;
+    font-size : 20px;
+    color : #ffffff;
+    padding : 5px 20px;
+    background-color : #666bff;
+}
+input[type=text]
+{
+    //do something
+}
+

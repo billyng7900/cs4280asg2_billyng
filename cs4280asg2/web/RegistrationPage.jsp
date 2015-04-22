@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registration</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">
             function checksubmit()
             {
@@ -66,7 +67,7 @@
                         <td><input type="text" id="realname" name="realname" value=""/></td>                   
                     </tr>                    
                     <tr>
-                        <td><input type="submit" value="Submit"/></td>
+                        <td><input type="submit" value="Register"/></td>
                     </tr>
                 </table>
             </Form>

@@ -23,7 +23,19 @@
         </div>
         
         <div id="mainPanel">
+            <%
+                if(session.getAttribute("cart")==null)
+                {
+            %>
+                <!--If no items in cart-->
+                <h2>No Items Yet</h2>
+            <%
+                }
+                else
+                {
+            %>
             <table class="shoppingCart">
+                <form action="Purchase" method="POST">
                 <tr>
                     <td width="150px" style="font-size: 20px">Shopping Cart</td>
                     <td width="500px"></td>
@@ -36,7 +48,11 @@
                         <br><input type="submit" value="Checkout"/>
                     </td>
                 </tr>
+                </form>
             </table>
+            <%
+                }
+            %>
             
             
             

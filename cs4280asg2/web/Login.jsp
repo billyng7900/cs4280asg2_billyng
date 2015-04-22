@@ -41,17 +41,15 @@
                }
             %>            
             <Form action="ProcessLogin" method="Get" onsubmit="return checksubmit()">
-                <table style="background-color: #F1F6F7; margin: auto">
+                <table style="background-color: #F1F6F7; margin: auto;" >
                     <tr>
                         <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Login</b></td>
                     </tr>
                     <tr>
-                        <td><label for username>Username:</label></td>
-                        <td><input type="text" id="username" name="username" value=""/></td>
+                        <td><input type="text" id="username" name="username" value="" placeholder="Username"/></td>
                     </tr>
                     <tr>
-                        <td><label for password>Password:</label></td>
-                        <td><input type="password" id="password" name="password" value=""/></td>
+                        <td><input type="password" id="password" name="password" value="" placeholder="Password"/></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Login"/></td>

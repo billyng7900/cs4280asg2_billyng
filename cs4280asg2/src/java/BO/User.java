@@ -13,12 +13,21 @@ public class User {
     String username;
     boolean isManager;
     int loyaltyPoints;
-    
+    int userId;
     public User()
     {
         
     }
     
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
+    }
+    
+    public int getUserId()
+    {
+        return userId;
+    }
     public void setUserName(String username)
     {
         this.username = username;
