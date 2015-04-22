@@ -27,13 +27,14 @@
     <body>
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
-        </div>
-        
-        <div id="leftPanel">           
-            <jsp:include page="common/Menu.html" flush="true" />  
-        </div>
-        
-        <div id="mainPanel">
+        </div>        
+        <div id="topPanel">
+            <div class="topnav">
+                <jsp:include page="common/TopPanel.html" flush="true" />
+                <jsp:include page="Menu" flush="true" />
+            </div>
+        </div>        
+        <div id="centerPanel">          
             <%
                if(request.getParameter("error")=="1")
                {
@@ -58,9 +59,7 @@
                 </table>
                 <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" /> 
             </Form>
-            
         </div>
-        
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>

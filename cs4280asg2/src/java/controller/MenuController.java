@@ -28,17 +28,20 @@ public class MenuController extends HttpServlet{
             if(session.getAttribute("user")==null)
             {
                 dao = new MenuDao();
-                menuList = dao.getMenu(1);
-                
+                menuList = dao.getMenu(1); 
+                MenuList mo = new MenuList();
+                mo.setMenuList(menuList);
+                out.println(mo.getMenuList(1));
             }
             else
             {
                 dao = new MenuDao();
-                menuList = dao.getMenu(2);               
+                menuList = dao.getMenu(2);   
+                MenuList mo = new MenuList();
+                mo.setMenuList(menuList);
+                out.println(mo.getMenuList(2));
             }
-            MenuList mo = new MenuList();
-            mo.setMenuList(menuList);
-            out.println(mo.getMenuList());
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

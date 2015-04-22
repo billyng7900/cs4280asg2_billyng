@@ -17,15 +17,21 @@
     <jsp:useBean id="booklist" type="BO.BookList" scope="request" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />        
+        </div>       
+        <div id="topPanel">
+            <div class="topnav">
+                <jsp:include page="common/TopPanel.html" flush="true" />
+                <jsp:include page="Menu" flush="true" />
+            </div>
+        </div>             
+        <div id="centerPanel">    
+            <div id="leftPanel">           
+                <jsp:include page="Menu" flush="true" />  
+            </div>
+            <div id="mainPanel">                    
+                <jsp:getProperty name="booklist" property="homeBookList" />            
+            </div>
         </div>
-        
-        <div id="leftPanel">           
-            <jsp:include page="Menu" flush="true" />  
-        </div>
-        
-        <div id="mainPanel">                    
-            <jsp:getProperty name="booklist" property="homeBookList" />            
-        </div>        
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               
         </div>

@@ -30,11 +30,11 @@ public class MenuDao {
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             String getMenuSql = "";
             if (type == 1)
-                getMenuSql = "Select * from [Menu] where access_type in ('V','A')";
+                getMenuSql = "Select * from [Menu] where access_type in ('V')";
             else if (type == 2)
-                getMenuSql = "Select * from [Menu] where access_type in ('C','A')";
+                getMenuSql = "Select * from [Menu] where access_type in ('C')";
             else if (type == 3)
-                getMenuSql = "Select * from [Menu] where access_type in ('C','M','A')";
+                getMenuSql = "Select * from [Menu] where access_type in ('C','M')";
             ResultSet rs = stmt.executeQuery(getMenuSql);
             if(rs != null)
             {

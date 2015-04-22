@@ -1,5 +1,5 @@
 <%-- 
-    Document   : ShoppingChart
+    Document   : ShoppingCart
     Created on : 2015/4/10, 下午 03:44:06
     Author     : liwaihing
 --%>
@@ -17,12 +17,13 @@
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>
-        
-        <div id="leftPanel">           
-            <jsp:include page="common/Menu.html" flush="true" />  
-        </div>
-        
-        <div id="mainPanel">
+        <div id="topPanel">
+            <div class="topnav">
+                <jsp:include page="common/TopPanel.html" flush="true" />
+                <jsp:include page="Menu" flush="true" />
+            </div>
+        </div>        
+        <div id="centerPanel">  
             <%
                 if(session.getAttribute("cart")==null)
                 {
@@ -53,11 +54,7 @@
             <%
                 }
             %>
-            
-            
-            
-            
-        </div>
+         </div>
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               
         </div>
