@@ -13,17 +13,17 @@ a
 .banner
 {
     width: 99%;
-    height: 40px;
+    height: 33px;
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
     border-width: 1px;
     background-color: #C9C9C7;
     font-family: Cambria;
-    font-size: 16px;
+    font-size: 14px;
     color: #000000;
     text-align: center;
-    position: fixed;
+    position: absolute;
 }
 
 #header
@@ -112,3 +112,50 @@ input[type=text]
     //do something
 }
 
+#topPanel
+{
+    background-color: #151513;
+    height: 60px;
+    position: relative;
+}
+
+.topnav
+{
+    width: 1000px;
+    margin: auto;
+    background-color: #151513;
+    margin-top: 33px;
+    height: 60px;
+    position: relative;
+}
+
+#searcharea
+{
+    float:left;
+    height: 60px;
+    padding-left: 30px;
+}
+
+#searchquery
+{
+    width: 200px; 
+    border: 0px solid; 
+    height: 27px; 
+    padding: 0px 3px; 
+    position: relative;
+}
+
+#search
+{
+    border-style: none; 
+    background: url('image\searchbutton3.gif') no-repeat; 
+    width: 24px; 
+    height: 30px;
+    background-color: #E8E8E7; 
+}
+
+#searchform
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
