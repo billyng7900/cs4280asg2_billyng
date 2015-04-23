@@ -13,26 +13,42 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
         <style>
-            .checkableItemContainer td label
+            #checkableItemContainer
             {
-                float: left;
-                margin: 1px;
-                width:150px;
-                
+                text-align: left;
             }
-            .checkableItemContainer td input
+            
+            #checkableItemContainer th
             {
-                
+                background-color: #707070;
+                color: #FFFFFF;
             }
-            #centerPanel h2
+            
+            #checkableItemContainer td
             {
-                background-color: #DCDCDC; 
-                padding:20px 20px ;
+                height: 40px;
             }
-            .checkableItemContainer th
+            
+            #checkableItemContainer label
             {
-                background-color:#AFEEEE;
-                width:400px;
+                padding-left: 30px; 
+            }
+            
+            .itemHeader
+            {
+                width: 300px;
+                background-color: #F8F8F8 ;
+                padding: 0px;
+                border: 1px solid #E8E8E8;
+                border-top: 0px;
+            }
+            
+            .checkoutItemContainer
+            {
+                border: 1px solid #E8E8E8;
+                text-align: center;
+                border-top: 0px;
+                border-right: 0px;
             }
         </style>
     </head>
@@ -46,82 +62,100 @@
                 <jsp:include page="common/TopPanel.html" flush="true" />
             </div>
         </div>
-            <div id="centerPanel" >
+        <div id="centerPanel" >
+            <div id="checkableItemContainer">
+                <h2><label for="payment">Checkout</label></h2>
                 <form>
-                    <h2>Payment Method</h2>
-                    <div class="checkableItemContainer">
-                        <table>
-                            <tr>
-                                <th><input type="radio" name="payment_method"
-					value="1" id="payment_method"
-					class="inputRadio" checked="checked">
-                                    <label for="paymentmethod">Credit Card</label>
-				</th>
-                                <td>
-                                    <label for="cardno">Credit Card No.</label>
-                                    <input type="text" id="cardno" name="cardno" value="" placeholder="Credit Card No."/><br>
-                                    <label for="vailddate">Valid Date</label>
-                                    <input type="text" id="vailddate" name="vailddate" value="" placeholder="Valid Date"/><br>
-                                    <label for="cardholdername">Card Holder Name</label>
-                                    <input type="text" id="cardholdername" name="cardholdername" value="" placeholder="Card Holder Name"/><br>
-                                    <label for="cardholdername">Security Code</label>
-                                    <input type="text" id="securitycode" name="securitycode" value="" placeholder="Security Code"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h2>Loyalty Points</h2>
-                    <p>Your current loyalty points is : 100pt</p>
-                    <div class="checkableItemContainer">
-                        <table>
-                            <tr>
-                                <th>
-                                    <input type="radio" name="loyaltypoints"
-					value="1" id="loyaltypoints"
-					class="inputRadio" checked="checked">
-                                    <label for="loyaltypoints">Use All Loyalty Points</label>
-                                </th>
-                                <td>
-                                    <p>100pt</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <input type="radio" name="loyaltypoints"
-					value="2" id="loyaltypoints"
-					class="inputRadio" checked="checked">
-                                    <label for="loyaltypoints">Use Some of My Loyalty Points</label>
-                                </th>
-                                <td>
-                                    <input type="text" id="loyaltypointsinput" name="loyaltypointsinput" value="" style="width:40px"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <input type="radio" name="loyaltypoints"
-                                        value="3" id="loyaltypoints"
-                                        class="inputRadio" checked="checked">
-                                    <label for="loyaltypoints">I Would Not Use My loyalty Points</label>
-                                </th>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="checkableItemContainer">
-                        <table>
-                            <tr>
-                                <th>
-				</th>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th colspan="4">
+                                <h3><label for="payment">Payment Method</label></h3>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td rowspan="5" class="itemHeader">
+                                <label for="payment">Credit Card</label>
+                            </td>                                
+                            <td><label for="payment">Credit Card No.</label></td>
+                            <td><input type="text" name="cardno" placeholder="Credit Card No."></td>
+                        </tr>
+                        <tr>
+                            <td><label for="payment">Valid Date</label></td>
+                            <td><select>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                /
+                                <input type="text" name="validdateY" placeholder="YYYY" style="width:50px">
+                            </td>
+                        </tr>                        
+                        <tr>
+                            <td><label for="payment">Card Holder Name</label></td>
+                            <td><input type="text" name="cardholder" placeholder="Card Holder Name"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="payment">Security Code</label></td>
+                            <td><input type="text" name="security code" placeholder="Security Code"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br>
+                                <label><b>Reminder:</b></label>
+                                <ul>
+                                    <li>
+                                        Do not use your real personal data as input.
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: left; background-color: #D8D8D8 ">
+                                <label for="payment"><b>Your current loyalty points is: 100pt </b></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="3" class="checkoutItemContainer">                                                                
+                                <p>
+                                    <input type='radio' name='paymentmethod' value='loyaltypoint'>
+                                    Pay by Loyalty Points
+                                </p>
+                                <p>
+                                    <input type='radio' name='paymentmethod' value='creditcard'>
+                                    Pay by Credit Card Only
+                                </p>                                
+                            </td>
+                            <td class="checkoutItemContainer">
+                                <p><b>Items Total</b></p>
+                                <p><b>Loyalty Points</b></p>
+                            </td>
+                            <td class="checkoutItemContainer">
+                                <p>$1000</p>
+                                <p>100</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkoutItemContainer"><b>Total</b></td>
+                            <td class="checkoutItemContainer">$900</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="checkoutItemContainer">
+                                <input type="submit" value="Pay" name="checkout" width="200px">
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
+        </div>
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               
         </div>
