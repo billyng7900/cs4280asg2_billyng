@@ -13,6 +13,10 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
         <style>
+            h2{
+                padding-left: 50px;
+            }
+            
             .shoppingCart td
             {
                vertical-align: top;

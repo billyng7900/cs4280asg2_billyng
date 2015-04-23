@@ -15,7 +15,7 @@
         <style>
             #registerPageContainer h2
             {
-                padding-left: 30px;
+                padding-left: 50px;
             }
             
             #registerItemContainer
@@ -39,30 +39,17 @@
                 border-top: 1px solid #E8E8E8;
             }
             
-            #username
+            #registerItemContainer input[type=text]
             {
                 width: 100%;
                 padding: 10px;
             }
             
-            #password
+            #registerItemContainer input[type=password]
             {
                 width: 100%;
                 padding: 10px;
             }
-            
-            #pw_confirm
-            {
-                width: 100%;
-                padding: 10px;
-            }
-            
-            #realname
-            {
-                width: 100%;
-                padding: 10px;
-            }
-            
         </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">

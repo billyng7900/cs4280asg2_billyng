@@ -9,7 +9,7 @@
         <style>
             #loginPageContainer h2
             {
-                padding-left: 30px;
+                padding-left: 50px;
             }
             
             #loginItemContainer
@@ -44,6 +44,15 @@
                 padding: 10px;
             }
             
+            #loginItemContainer a
+            {
+                color: #2490D0;
+            }
+            
+            #loginItemContainer a:hover
+            {
+                text-decoration: underline;
+            }
         </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">

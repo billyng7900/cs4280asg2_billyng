@@ -36,7 +36,7 @@
         </div>             
         <div id="centerPanel">    
             <div id="leftPanel">           
-                <jsp:include page="Menu" flush="true" />  
+                <jsp:include page="common/Menu.html" flush="true" />  
             </div>
             <div id="mainPanel">                    
                 <jsp:getProperty name="booklist" property="homeBookList" />            

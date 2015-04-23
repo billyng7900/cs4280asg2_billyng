@@ -9,13 +9,13 @@ body
 
 a
 {
-    color: #2490D0;
+    color: #333300;
     text-decoration: none;
 }
 
 a:hover
 {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 table
@@ -95,9 +95,7 @@ table
 .menuItem
 {
     background-color: #F1F6F7;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 10%;
+    padding: 5% 10%;
     text-align: left;
 }
 
