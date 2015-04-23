@@ -13,6 +13,15 @@
         <title>Home</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
+        <style>
+        .contentItem
+        {
+            text-align: center;
+            padding: 1%;
+            width: 290px;
+            float: left;
+        }    
+        </style>
     </head>
     <body>
     <jsp:useBean id="booklist" type="BO.BookList" scope="request" />

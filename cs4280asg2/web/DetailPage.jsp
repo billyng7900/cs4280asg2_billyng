@@ -12,6 +12,13 @@
         <title>Details</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
+        <style>
+            .detailItem
+            {
+                float: left;
+            }
+
+        </style>
     </head>
     
     <body>

@@ -12,6 +12,14 @@
         <title>Shopping Cart</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
+        <style>
+            .shoppingCart td
+            {
+               vertical-align: top;
+               border-bottom: solid;
+               border-width: 1px;
+            }
+        </style>
     </head>
     
     <body>
