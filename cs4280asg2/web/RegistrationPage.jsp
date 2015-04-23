@@ -12,6 +12,58 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
         <title>Registration</title>
+        <style>
+            #registerPageContainer h2
+            {
+                padding-left: 30px;
+            }
+            
+            #registerItemContainer
+            {
+                width: 800px;
+                margin: auto;
+                background-color: #F8F8F8;
+                border: 1px solid #E8E8E8;
+                border-radius: 5px;
+            }
+            
+            #registerItemContainer table
+            {
+                margin: auto;
+                width: 80%;
+            }
+          
+            #registerItemContainer td
+            {
+                padding: 20px 0px;
+                border-top: 1px solid #E8E8E8;
+            }
+            
+            #username
+            {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            #password
+            {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            #pw_confirm
+            {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            #realname
+            {
+                width: 100%;
+                padding: 10px;
+            }
+            
+        </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">
             function checksubmit()
@@ -48,32 +100,39 @@
             </div>
         </div>        
         <div id="centerPanel">  
-            <Form action="Register" onsubmit="return checksubmit()" method="POST">
-                <table style="background-color: #F1F6F7; margin: auto">
-                    <tr>
-                        <td colspan="2" style="background-color: #1A6781; color: #FFFFFF; text-align: center"><b>Register</b></td>
-                    </tr>
-                    <tr>
-                        <td><label for='username'>Username:</label></td>
-                        <td><input type="text" id="username" name="username" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td><label for='password'>Password:</label></td>
-                        <td><input type="password" id="password" name="password" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td><label for='password'>Confirm Password:</label></td>
-                        <td><input type="password" id="pw_confirm" name="pw_confirm" value=""/></td>
-                    </tr>    
-                    <tr>
-                        <td><label for='realname'>Real Name:</label></td>
-                        <td><input type="text" id="realname" name="realname" value=""/></td>                   
-                    </tr>                    
-                    <tr>
-                        <td><input type="submit" value="Register"/></td>
-                    </tr>
-                </table>
-            </Form>
+            <div id="registerPageContainer" class="left">
+                <h2><label for="login">Register</label></h2>
+                <div id="registerItemContainer">
+                    <h3 class="center">PERSONAL INFORMATION<h3>
+                    <Form action="Register" onsubmit="return checksubmit()" method="POST">
+                        <table cellspacing="0" cellpadding="0">                           
+                            <tr>
+                                <td><label for='username'>Username</label></td>
+                                <td><input type="text" id="username" name="username" value=""/></td>
+                            </tr>
+                            <tr>
+                                <td><label for='password'>Password</label></td>
+                                <td><input type="password" id="password" name="password" value=""/></td>
+                            </tr>
+                            <tr>
+                                <td><label for='password'>Confirm Password</label></td>
+                                <td><input type="password" id="pw_confirm" name="pw_confirm" value=""/></td>
+                            </tr>    
+                            <tr>
+                                <td><label for='realname'>Real Name</label></td>
+                                <td><input type="text" id="realname" name="realname" value=""/></td>                   
+                            </tr>                    
+                            <tr>
+                                <td colspan="2" class="center">
+                                    <label style="font-size: 14px">Do not use your real personal data as input.</label><br><br>
+                                    <input type="submit" value="Register"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" />
+                    </Form>
+                </div>
+            </div>               
         </div>
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               

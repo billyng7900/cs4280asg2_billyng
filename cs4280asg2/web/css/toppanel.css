@@ -25,6 +25,16 @@ and open the template in the editor.
     position: relative;
 }
 
+a
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
 #searcharea
 {
     float:left;
