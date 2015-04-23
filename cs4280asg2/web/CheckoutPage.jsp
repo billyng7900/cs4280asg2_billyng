@@ -11,7 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Checkout</title>
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/toppanel.css">
     </head>
     <body>
         <div id="header" class="banner">
