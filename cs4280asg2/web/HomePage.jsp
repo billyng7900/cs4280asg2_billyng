@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="BO.*,java.util.*,function.*" %>
+<%@page import="BO.*,java.util.*,controller.*" %>
 <!DOCTYPE html>
 <html>
     <head>
