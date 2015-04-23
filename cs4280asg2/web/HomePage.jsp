@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/toppanel.css">
     </head>
     <body>
     <jsp:useBean id="booklist" type="BO.BookList" scope="request" />
@@ -20,7 +21,7 @@
         </div>       
         <div id="topPanel">
             <div class="topnav">
-                <jsp:include page="common/TopPanel.jsp" flush="true" />
+                <jsp:include page="common/TopPanel.html" flush="true" />
             </div>
         </div>             
         <div id="centerPanel">    

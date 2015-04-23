@@ -10,6 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Page</title>
+        <link rel="stylesheet" href="css/toppanel.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div id="header" class="banner">

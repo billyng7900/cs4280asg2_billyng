@@ -58,20 +58,20 @@ and open the template in the editor.
     height: 60px;
 }
 
-ul
+#menuarea ul
 {
     list-style: none;
     position: relative;
 }
 
-ul li
+#menuarea ul li
 {
     float: left;
     position: relative;
     padding: 0px 10px;
 }
 
-ul ul
+#menuarea ul ul
 {
     display: none;
     position: absolute;
@@ -82,13 +82,13 @@ ul ul
     margin: 0px;
 }
 
-ul li:hover > ul
+#menuarea ul li:hover > ul
 {
     display: block;
     background-color: #E0E0E0;
 }
 
-ul ul li
+#menuarea ul ul li
 {
     float: none;
     display: block;
@@ -97,7 +97,7 @@ ul ul li
     padding-bottom: 10%;
 }
 
-ul ul li:hover
+#menuarea ul ul li:hover
 {
     background-color: #FFFFFF;
 }
