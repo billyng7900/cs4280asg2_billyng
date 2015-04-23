@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
-import Dao.BookDao;
+
 import BO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,9 +14,9 @@ import javax.servlet.http.*;
 
 /**
  *
- * @author Billy
+ * @author billyng
  */
-public class HomeController extends HttpServlet {
+public class OrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,14 +32,31 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            BookDao dao = new BookDao();
-            ArrayList<Book> booklist = dao.getBookList();
-            BookList bo = new BookList();
-            bo.setBookList(booklist);
-            request.setAttribute("booklist", bo);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
-            dispatcher.forward(request, response);
-
+            HttpSession session = request.getSession();
+            if(session.getAttribute("cart")==null)
+            {
+                response.sendRedirect("Home");
+            }
+            else
+            {
+                ShoppingCart shoppingcart = (ShoppingCart)session.getAttribute("cart");
+                ArrayList<CartBook> booklist = shoppingcart.getShoppingCart();
+                int counter = 1;
+                String quantitywithnumber = "quantity";
+                for(int i=0;i<booklist.size();i++)
+                {
+                    quantitywithnumber = "quantity";
+                    quantitywithnumber += counter;
+                    int quantity = Integer.parseInt(request.getParameter(quantitywithnumber));
+                    if(booklist.get(i).getQuantity()!=quantity)
+                    {
+                        booklist.get(i).setQuantity(quantity);
+                    }
+                    counter++;
+                }
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CheckoutPage.jsp");
+                dispatcher.forward(request, response);
+            }
         } finally {
             out.close();
         }

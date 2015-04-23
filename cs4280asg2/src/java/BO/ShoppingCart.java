@@ -31,6 +31,7 @@ public class ShoppingCart {
     public String getCartBookList()
     {
         String printlist = "";
+        int counter=1;
         for(CartBook b:shoppingCart)
         {
             Book book = b.getBook();
@@ -49,8 +50,9 @@ public class ShoppingCart {
             printlist+="</a>";
             printlist+="</td>";
             printlist+="<td><label>$"+book.getPrice()+"</label></td>";
-            printlist+="<td><input type='text' id='quantity' name='quantity' value='"+b.getQuantity()+"' /></td>";
+            printlist+="<td><input type='text' id='quantity"+counter+"' name='quantity"+counter+"' value='"+b.getQuantity()+"' /></td>";
             printlist+="</tr>";
+            counter++;
         }
         return printlist;
     }

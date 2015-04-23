@@ -5,7 +5,7 @@
  */
 package controller;
 
-import function.*;
+import Dao.MenuDao;
 import BO.*;
 import java.io.IOException;
 import java.io.PrintWriter;

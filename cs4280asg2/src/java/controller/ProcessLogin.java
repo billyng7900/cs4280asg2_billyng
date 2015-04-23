@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import BO.*;
-import function.*;
-import function.UserDao;
+import Dao.UserDao;
 
 public class ProcessLogin extends HttpServlet {
    

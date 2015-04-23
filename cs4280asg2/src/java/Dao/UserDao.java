@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package function;
+package Dao;
 
 
 import java.util.*;

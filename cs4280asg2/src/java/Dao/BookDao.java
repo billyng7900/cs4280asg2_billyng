@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package function;
+package Dao;
 import java.util.*;
 import BO.Book;
 import java.sql.Connection;
