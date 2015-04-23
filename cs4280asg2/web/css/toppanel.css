@@ -78,12 +78,14 @@ ul ul
     top: 100%;
     background-color: white;
     float: bottom;
+    padding: 0px;
+    margin: 0px;
 }
 
 ul li:hover > ul
 {
     display: block;
-    background-color: #C9C9C7;
+    background-color: #E0E0E0;
 }
 
 ul ul li
@@ -91,5 +93,11 @@ ul ul li
     float: none;
     display: block;
     position: relative;
-    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+ul ul li:hover
+{
+    background-color: #FFFFFF;
 }
