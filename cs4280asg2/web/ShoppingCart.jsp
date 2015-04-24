@@ -36,7 +36,7 @@
                 <jsp:include page="Menu" flush="true" />
             </div>
         </div>        
-        <div id="centerPanel">  
+        <div id="centerPanel">
             <%
                 if(session.getAttribute("cart")==null)
                 {
@@ -49,8 +49,7 @@
                 {
             %>
             <form action="Order" method="POST">
-            <table class="shoppingCart">
-               
+            <table class="shoppingCart" cellspacing="0" cellpadding="0">              
                 <tr>
                     <td width="150px" style="font-size: 20px">Shopping Cart</td>
                     <td width="500px"></td>
