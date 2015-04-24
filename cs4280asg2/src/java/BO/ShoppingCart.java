@@ -56,4 +56,16 @@ public class ShoppingCart {
         }
         return printlist;
     }
+    
+    public float getTotalPrice()
+    {
+        float total = 0;
+        for(CartBook cartbook:shoppingCart)
+        {
+            Book b = cartbook.getBook();
+            float price = b.getPrice() * cartbook.getQuantity();
+            total+=price;
+        }
+        return total;
+    }
 }

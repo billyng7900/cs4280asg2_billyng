@@ -70,6 +70,43 @@
                 padding-left:50px;
             }
         </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $("#somepoints").change(function() {
+                if(this.checked)
+                {
+                    $("#paysomeloyaltypoint").prop('disabled', false);
+                }
+            });
+            $("#paysomeloyaltypoint").change(function(){
+                var pointwanttouse = $("#paysomeloyaltypoint").val();
+                var totalpoint = $("#totalpoint").val();
+                if(pointwanttouse>totalpoint)
+                {
+                    alert("Loyalty Point should not exceeds the total Loyalty Points");
+                    $("#paysomeloyaltypoint").val(0);
+                }
+                else
+                {
+                    $("#pointwillbeuse").val(pointwanttouse);
+                }
+            });
+            $("#allpoints").change(function() {
+                if(this.checked)
+                {
+                    $("#paysomeloyaltypoint").val(0);
+                    $("#paysomeloyaltypoint").prop('disabled', true);
+                    $("#pointwillbeuse").val($("#totalpoint").val());
+                }
+            });
+            $("#pointwillbeuse").change(function(){
+                var itemprice = $("#price").val();
+                var pointuse = $("#pointwillbeuse").val();
+                $("#totalprice").val(pointuse-itempoint);
+            })
+        });
+        </script>
     </head>
     <body>
         <div id="header" class="banner">
@@ -123,22 +160,22 @@
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align: left; background-color: #D9D9D9 ">
-                                    <label for="payment"><b>Your current loyalty points is: 100pt </b></label>
+                                    <label for="payment">Your current loyalty points is: <span id="totalpoint">${user.loyaltyPoints}</span>pt </b></label>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" rowspan="3" class="checkoutItemContainer">                                                                
                                     <p>
-                                        <input type='radio' name='paymentmethod' value='loyaltypoint'>
+                                        <input type='radio' id="allpoints" name='paymentmethod' value='loyaltypoint'>
                                         Pay by Loyalty Points
                                     </p>
                                     <p>
-                                        <input type='radio' name='paymentmethod' value='someloyaltypoint'>
+                                        <input type='radio' id="somepoints" name='paymentmethod' value='someloyaltypoint'>
                                         Pay by Some of Loyalty Points: 
-                                        <input type='text' style="width: 50px; padding: 5px" name='paysomeloyaltypoint' placeholder="Points">
+                                        <input type='number' style="width: 50px; padding: 5px" id='paysomeloyaltypoint' name='paysomeloyaltypoint' disabled="true" value="0" placeholder="Points">
                                     </p>
                                     <p>
-                                        <input type='radio' name='paymentmethod' value='creditcard'>
+                                        <input type='radio' id="nopoints" name='paymentmethod' value='creditcard' checked="true">
                                         Pay by Credit Card Only
                                     </p>                                
                                 </td>
@@ -147,13 +184,13 @@
                                     <p><b>Loyalty Points</b></p>
                                 </td>
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
-                                    <p>$1000</p>
-                                    <p>100</p>
+                                    <p id="price">$${cart.totalPrice}</p>
+                                    <p id="pointwillbeuse">0</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="checkoutItemContainer"><b><p>Total</b></td>
-                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8"><p>$900</p></td>
+                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8" id="totalprice"><p>$${cart.totalPrice}</p></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8; text-align: center">
