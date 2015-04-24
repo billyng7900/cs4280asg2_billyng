@@ -77,11 +77,13 @@
                 if(this.checked)
                 {
                     $("#paysomeloyaltypoint").prop('disabled', false);
+                    $("#pointwillbeuse").text(0);
+                    changeTotalPrice();
                 }
             });
             $("#paysomeloyaltypoint").change(function(){
                 var pointwanttouse = $("#paysomeloyaltypoint").val();
-                var totalpoint = $("#totalpoint").val();
+                var totalpoint = parseInt($("#totalpoint").text());
                 if(pointwanttouse>totalpoint)
                 {
                     alert("Loyalty Point should not exceeds the total Loyalty Points");
@@ -89,7 +91,8 @@
                 }
                 else
                 {
-                    $("#pointwillbeuse").val(pointwanttouse);
+                    $("#pointwillbeuse").text(pointwanttouse);
+                    changeTotalPrice();
                 }
             });
             $("#allpoints").change(function() {
@@ -97,15 +100,37 @@
                 {
                     $("#paysomeloyaltypoint").val(0);
                     $("#paysomeloyaltypoint").prop('disabled', true);
-                    $("#pointwillbeuse").val($("#totalpoint").val());
+                    var totalpoint = parseInt($("#totalpoint").text());
+                    var itemprice = parseFloat($("#price").text());
+                    if(totalpoint>itemprice)
+                    {
+                        var inttotalpoint = Math.floor(itemprice)+1;
+                        $("#pointwillbeuse").text(inttotalpoint);
+                    }
+                    else
+                    {
+                        $("#pointwillbeuse").text($("#totalpoint").text());
+                    }
+                    changeTotalPrice();
                 }
             });
-            $("#pointwillbeuse").change(function(){
-                var itemprice = $("#price").val();
-                var pointuse = $("#pointwillbeuse").val();
-                $("#totalprice").val(pointuse-itempoint);
-            })
+            $("#nopoints").change(function(){
+                if(this.checked)
+                {
+                    $("#pointwillbeuse").text(0);
+                    changeTotalPrice();
+                }
+            });
         });
+        function changeTotalPrice()
+        {
+            var itemprice = parseFloat($("#price").text());
+            var pointuse = parseInt($("#pointwillbeuse").text());
+            var totalprice = (itemprice-pointuse).toFixed(2);
+            if(totalprice<0)
+                totalprice = 0;
+            $("#totalprice").text(totalprice);
+        }
         </script>
     </head>
     <body>
@@ -184,13 +209,13 @@
                                     <p><b>Loyalty Points</b></p>
                                 </td>
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
-                                    <p id="price">$${cart.totalPrice}</p>
+                                    <p>$<span id="price">${cart.totalPrice}</span></p>
                                     <p id="pointwillbeuse">0</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="checkoutItemContainer"><b><p>Total</b></td>
-                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8" id="totalprice"><p>$${cart.totalPrice}</p></td>
+                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8"><p>$<span id="totalprice">${cart.totalPrice}</span></p></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8; text-align: center">
