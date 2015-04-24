@@ -18,13 +18,12 @@
         {
             text-align: center;
             padding: 1%;
-            width: 290px;
+            width: 30%;
             float: left;
         }    
         </style>
     </head>
     <body>
-    <jsp:useBean id="booklist" type="BO.BookList" scope="request" />
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />        
         </div>       
@@ -34,12 +33,12 @@
                 <jsp:include page="Menu" flush="true" />  
             </div>
         </div>             
-        <div id="centerPanel">    
+        <div id="centerPanel">   
             <div id="leftPanel">           
                 <jsp:include page="common/Menu.html" flush="true" />  
             </div>
-            <div id="mainPanel">                    
-                <jsp:getProperty name="booklist" property="homeBookList" />            
+            <div id="mainPanel">
+                 ${booklist.homeBookList}  
             </div>
         </div>
         <div id="footer" class="banner">
