@@ -55,6 +55,26 @@ public class BookDao {
         return null;
     }
     
+    public int updateBookAvailability(int bookID, int newAvailability)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("Update [book] SET [availability] = ? where [bookID] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setInt(1, newAvailability);
+            pstmt.setInt(2, bookID);
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+                return 1;
+            else
+                return -1;
+        }catch (ClassNotFoundException e) {
+            return -1;
+        }catch (SQLException e) {
+            return -1;
+        }
+    }
+            
     public ArrayList<Book> getBookListBySearch(String keyword)
     {
         try{

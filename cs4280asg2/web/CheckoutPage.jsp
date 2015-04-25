@@ -92,6 +92,12 @@
                 else
                 {
                     $("#pointwillbeuse").text(pointwanttouse);
+                    var itemprice = parseFloat($("#price").text());
+                    if(pointwanttouse>itemprice)
+                    {
+                        var inttotalpoint = Math.floor(itemprice)+1;
+                        $("#pointwillbeuse").text(inttotalpoint);
+                    }
                     changeTotalPrice();
                 }
             });
@@ -130,6 +136,7 @@
             if(totalprice<0)
                 totalprice = 0;
             $("#totalprice").text(totalprice);
+            $("#pointuse").val(pointuse);
         }
         </script>
     </head>
@@ -148,7 +155,7 @@
             <div id="checkoutPageContainer">
                 <h2><label for="payment">Checkout</label></h2>              
                 <div id="checkableItemContainer">
-                    <form>
+                    <form action="Checkout">
                         
                         <table width="90%" cellspacing="0" cellpadding="0">                          
                             <tr>
@@ -191,16 +198,16 @@
                             <tr>
                                 <td colspan="2" rowspan="3" class="checkoutItemContainer">                                                                
                                     <p>
-                                        <input type='radio' id="allpoints" name='paymentmethod' value='loyaltypoint'>
-                                        Pay by Loyalty Points
+                                        <input type='radio' id="allpoints" name='loyaltypoint' value='allloyaltypoint'>
+                                        Pay by All Loyalty Points
                                     </p>
                                     <p>
-                                        <input type='radio' id="somepoints" name='paymentmethod' value='someloyaltypoint'>
+                                        <input type='radio' id="somepoints" name='loyaltypoint' value='someloyaltypoint'>
                                         Pay by Some of Loyalty Points: 
                                         <input type='number' style="width: 50px; padding: 5px" id='paysomeloyaltypoint' name='paysomeloyaltypoint' disabled="true" value="0" placeholder="Points">
                                     </p>
                                     <p>
-                                        <input type='radio' id="nopoints" name='paymentmethod' value='creditcard' checked="true">
+                                        <input type='radio' id="nopoints" name='loyaltypoint' value='noloyaltypoint' checked="true">
                                         Pay by Credit Card Only
                                     </p>                                
                                 </td>
@@ -211,6 +218,7 @@
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
                                     <p>$<span id="price">${cart.totalPrice}</span></p>
                                     <p id="pointwillbeuse">0</p>
+                                    <input type="hidden" name="pointuse" id="pointuse" value=""/>
                                 </td>
                             </tr>
                             <tr>

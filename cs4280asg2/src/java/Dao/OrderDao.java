@@ -25,13 +25,16 @@ public class OrderDao {
             Timestamp timestamp = new Timestamp(datenow.getTimeInMillis());
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?,?,?,1,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?,?,?,1)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, orderID);
             pstmt.setInt(2, userID);
             pstmt.setInt(3, bookID);
             pstmt.setInt(4, quantity);
             pstmt.setTimestamp(5, timestamp);
-            pstmt.setInt(6, pointuse);
+            pstmt.executeUpdate();
+            pstmt = con.prepareStatement("insert into [Order_Point] values (?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setInt(1, orderID);
+            pstmt.setInt(2, pointuse);
             pstmt.executeUpdate();
             return 1;
         }catch(SQLException e){

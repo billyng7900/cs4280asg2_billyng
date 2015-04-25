@@ -84,13 +84,17 @@
             </div>
         </div>        
         <div id="centerPanel">          
-            <%
-               if(request.getParameter("error")=="1")
-               {
-                   out.println("Username exist,please use another one to register.");
-               }
-            %>           
+                       
             <div id="loginPageContainer" class="left">
+                <%
+                    if(request.getParameter("error")!=null)
+                    {
+                        if(request.getParameter("error").equals("1"))
+                        {
+                           out.println("Wrong username or password");
+                        }
+                    }
+                %>
                 <h2><label for="login">Login</label></h2>
                 <div id="loginItemContainer">
                     <h3 class="center">MEGABOOK ID<h3>
