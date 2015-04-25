@@ -7,7 +7,7 @@
 package controller;
 
 import BO.*;
-import Dao.OrderDao;
+import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -34,9 +34,37 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            OrderDao dao = new OrderDao();
-            out.println(dao.getNewOrderID());
-            //dao.insertOrderRecord(1, 1, 1, 2, 0);//test 
+            HttpSession session = request.getSession();
+            if(session.getAttribute("cart")==null)
+            {
+                response.sendRedirect("Home");
+            }
+            else
+            {
+                int pointwilluse = 0;
+                String loyaltyppoint = request.getParameter("pointuse");
+                ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+                BookDao bookdao = new BookDao();
+                OrderDao dao = new OrderDao();
+                int newOrderId = dao.getNewOrderID();
+                for(CartBook b:cart.getShoppingCart())
+                {
+                    Book dbbook = bookdao.getBook(b.getBook().getBookID());
+                    if(dbbook.getAvailability()<b.getQuantity())//check order quantity exceeds avilability
+                    {
+                        response.sendRedirect("ShoppingCart.jsp?error=1");
+                    }
+                }
+                for(CartBook b:cart.getShoppingCart())
+                {
+                    Book dbbook = bookdao.getBook(b.getBook().getBookID());
+                    int newAvailability = dbbook.getAvailability()-b.getQuantity();
+                    bookdao.updateBookAvailability(b.getBook().getBookID(), newAvailability);
+                    User user = (User)session.getAttribute("user");
+                    dao.insertOrderRecord(newOrderId,user.getUserId(), b.getBook().getBookID(), b.getQuantity(), pointwilluse); 
+                    response.sendRedirect("Home");
+                }
+            }
         }finally {
             out.close();
         }
