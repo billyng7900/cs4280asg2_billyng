@@ -79,7 +79,7 @@
             <div id="updatePageContainer" class="left">
                 <h2><label for="login">Update Book</label></h2>
                 <div id="updateItemContainer">                    
-                    <Form action="">
+                    <Form action="UpdateBook" method="POST">
                         <table cellspacing="0" cellpadding="0"> 
                             <tr>
                                 <td colspan="2"><h3 class="center">BOOK DETAILS<h3><td>
@@ -87,6 +87,7 @@
                             <tr>
                                 <td><label for='mypage'>Book ID</label></td>
                                 <td>${book.bookID}</td>
+                            <input type="hidden" name="bookID" value="${book.bookID}"/>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Book Name</label></td>
@@ -110,7 +111,7 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Cover Picture</label></td>
-                                <td><input type="text" value="/image/${book.imageURL}.jpg" name="bookcover"></td>
+                                <td><input type="text" value="${book.imageURL}.jpg" name="imageURL"></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="center">                                

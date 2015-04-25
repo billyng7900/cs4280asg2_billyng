@@ -34,11 +34,11 @@ public class BookMaintenanceUpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-            BookDao dao = new BookDao();
-            String bookID = request.getParameter("bookID");
-            Book book = dao.getBook(Integer.parseInt(bookID));
-            request.setAttribute("book", book);
-             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceUpdate.jsp");
+        BookDao dao = new BookDao();
+        String bookID = request.getParameter("bookID");
+        Book book = dao.getBook(Integer.parseInt(bookID));
+        request.setAttribute("book", book);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceUpdate.jsp");
         dispatcher.forward(request, response);
     }
 

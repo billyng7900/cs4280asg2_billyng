@@ -52,6 +52,10 @@
         <servlet-name>BookMaintenanceUpdateController</servlet-name>
         <servlet-class>controller.BookMaintenanceUpdateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBook</servlet-name>
+        <servlet-class>controller.UpdateBook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>BookMaintenanceUpdateController</servlet-name>
         <url-pattern>/BookMaintenanceUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBook</servlet-name>
+        <url-pattern>/UpdateBook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
