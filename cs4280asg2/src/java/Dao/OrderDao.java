@@ -18,7 +18,7 @@ import java.util.Calendar;
  * @author billyng
  */
 public class OrderDao {
-    public int insertOrderRecord(int orderID,int userID,int bookID,int quantity,int pointuse)
+    public int insertOrderRecord(int orderID,int userID,int bookID,int quantity)
     {
         try{
             Calendar datenow = Calendar.getInstance();
@@ -31,16 +31,50 @@ public class OrderDao {
             pstmt.setInt(3, bookID);
             pstmt.setInt(4, quantity);
             pstmt.setTimestamp(5, timestamp);
-            pstmt.executeUpdate();
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+                return 1;
+            else
+                return -1;
+        }catch(SQLException e){
+            return -1;
+        }catch (ClassNotFoundException e) {
+            return -1;
+        }
+    }
+    
+    public int insertOrderPoint(int orderID,int pointuse)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?,?,?,1)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt = con.prepareStatement("insert into [Order_Point] values (?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, orderID);
             pstmt.setInt(2, pointuse);
-            pstmt.executeUpdate();
-            return 1;
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+                return 1;
+            else
+                return -1;
         }catch(SQLException e){
-            return 0;
+            return -1;
         }catch (ClassNotFoundException e) {
-            return 0;
+            return -1;
+        }
+    }
+    
+    public Order getOrderRecordByUser(int userID)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("Select * from [Order] values (?,?,?,?,?,1)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            return null;
+        }catch(SQLException e){
+            return null;
+        }catch (ClassNotFoundException e) {
+            return null;
         }
     }
     

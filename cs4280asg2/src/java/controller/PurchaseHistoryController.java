@@ -3,22 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
-import BO.*;
 import Dao.*;
+import BO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
  *
- * @author yuchunng3
+ * @author Billy
  */
-public class CheckoutController extends HttpServlet {
+public class PurchaseHistoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,54 +33,15 @@ public class CheckoutController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
-            if(session.getAttribute("cart")==null)
+            if(session.getAttribute("user")==null)
             {
-                response.sendRedirect("Home");
+                response.sendRedirect("Login.jsp");
             }
             else
             {
-                User user = (User)session.getAttribute("user");
-                int pointwilluse = Integer.parseInt(request.getParameter("pointuse"));
-                ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-                BookDao bookdao = new BookDao();
-                OrderDao dao = new OrderDao();
-                int newOrderId = dao.getNewOrderID();
-                boolean isAvailabilityOver = false;
-                boolean notEnoughLoyaltyPoints = false;
-                UserDao userdao = new UserDao();
-                int latestLoyaltyPoints = userdao.getUserLoyaltyPoints(user.getUserId());
-                if(latestLoyaltyPoints-pointwilluse<0)
-                    notEnoughLoyaltyPoints = true;
-                for(CartBook b:cart.getShoppingCart())
-                {
-                    Book dbbook = bookdao.getBook(b.getBook().getBookID());
-                    if(dbbook.getAvailability()<b.getQuantity())//check order quantity exceeds avilability
-                    {
-                        isAvailabilityOver = true;
-                    }
-                }
-                if(isAvailabilityOver||notEnoughLoyaltyPoints)
-                {
-                    response.sendRedirect("ShoppingCart.jsp?error=1");
-                }
-                else
-                {
-                    for(CartBook b:cart.getShoppingCart())
-                    {
-                        Book dbbook = bookdao.getBook(b.getBook().getBookID());
-                        int newAvailability = dbbook.getAvailability()-b.getQuantity();
-                        bookdao.updateBookAvailability(b.getBook().getBookID(), newAvailability);
-                        
-                        dao.insertOrderRecord(newOrderId,user.getUserId(), b.getBook().getBookID(), b.getQuantity()); 
-                    }
-                    
-                    int userremainsloyaltypoints = latestLoyaltyPoints - pointwilluse;
-                    userdao.updateUserPoint(user.getUserId(), userremainsloyaltypoints);
-                    dao.insertOrderPoint(newOrderId, pointwilluse);
-                    response.sendRedirect("OrderSuccessful.jsp");
-                }
+                
             }
-        }finally {
+        } finally {
             out.close();
         }
     }
