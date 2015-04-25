@@ -25,13 +25,12 @@ public class MenuList {
     public String getMenuList(int type){
         
         String printlist = "";
-        
-        
-        printlist += "<div id='menuarea'>" +
-                    "<ul>" +
-                    "<li>" +
-                    "<a href='#'><img src='image/ui-icon-login.png' alt=''></a>" +
-                    "<ul>";
+               
+        printlist += "<div id='menuarea'>";
+        printlist += "<ul>";
+        printlist += "<li>";
+        printlist += "<a href='#'><img src='image/ui-icon-login.png' alt=''></a>";
+        printlist += "<ul>";
         if (type==1)
         {
             for (Menu m:menuList)
@@ -40,21 +39,19 @@ public class MenuList {
                 {
                    loginList.add(m);
                 }
-            }
-            
+            }            
             for(Menu m:loginList)
             {
-                printlist += "<li><a href='" + m.getMenuPath() + ".jsp'>" + m.getMenuName() + "</a></li>" ;
+                printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
             }
-            printlist += "</ul>" +
-                        "</li>" +
-                        "<li><a href='ShoppingCart.jsp'><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>" +
-                        "</ul>" +
-                        "</div>";
+            printlist += "</ul>";
+            printlist += "</li>";
+            printlist += "<li><a href='ShoppingCart'><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
+            printlist += "</ul>";
+            printlist += "</div>";
         }
         else
-        {
-            
+        {          
             for (Menu m:menuList)
             {                   
                 if (m.getMenuAccessType().contains("C"))
@@ -71,23 +68,21 @@ public class MenuList {
                 
             }
             printlist += "<li><a href='#'.jsp'>Logout</a></li>" ;
-            printlist += "</ul>" +
-                        "</li>" +
-                        "<a href='ShoppingCart.jsp'><li><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
-            printlist += "<li>" +
-                        "<a href='#'><img src='image/ui-icon-advance.png' alt=''></a>"+
-                        "<ul>";
+            printlist += "</ul>";
+            printlist += "</li>";
+            printlist += "<a href='ShoppingCart.jsp'><li><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
+            printlist += "<li>";
+            printlist += "<a href='#'><img src='image/ui-icon-advance.png' alt=''></a>";
+            printlist += "<ul>";
             for(Menu m:advanceList)
             {
-                printlist += "<li><a href='" + m.getMenuPath() + ".jsp'>" + m.getMenuName() + "</a></li>" ;
+                printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
             }
-            printlist += "</ul>" +
-                        "</li>" +
-                        "</ul>" +
-                        "</div>";
+            printlist += "</ul>";
+            printlist += "</li>";
+            printlist += "</ul>";
+            printlist += "</div>";
         }
-         
-                
         
         return printlist;
     }
