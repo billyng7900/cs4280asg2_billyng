@@ -128,6 +128,7 @@
                             <td>$24.37</td>
                         </tr>
                     </table>
+                    
                 </div>
             </div>       
         </div>

@@ -108,7 +108,7 @@
                             <th></th>
                             <th></th>
                         </tr>
-                        <jsp:include page="BookMaintenanceMain" flush="true" />
+                        ${booklist.maintenanceBookList}
                     </table>
                 </div>
             </div>
