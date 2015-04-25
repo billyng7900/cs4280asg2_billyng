@@ -50,7 +50,8 @@ public class ShoppingCart {
             printlist+="</a>";
             printlist+="</td>";
             printlist+="<td><label>$"+book.getPrice()+"</label></td>";
-            printlist+="<td><input type='text' id='quantity"+counter+"' name='quantity"+counter+"' value='"+b.getQuantity()+"' /></td>";
+            printlist+="<td><input type='number' id='quantity"+counter+"' name='quantity"+counter+"' min='1' max='"+book.getAvailability()+"' value='"+b.getQuantity()+"' /></td>";
+            printlist+="<td><input type='image' src='image/shoppingcart-icon-delete.png' alt='delete' height='20'></td>";
             printlist+="</tr>";
             counter++;
         }
