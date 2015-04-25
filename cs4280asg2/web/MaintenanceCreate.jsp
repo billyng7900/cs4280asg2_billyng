@@ -53,16 +53,7 @@
             {
                 border-top: 1px solid #E8E8E8;
                 padding: 20px 0px;
-            }       
-            
-            input[type=button]
-            {
-                border : solid 1px #2490D0;
-                font-size : 20px;
-                color : #ffffff;
-                padding: 5px 20px;
-                background-color : #2490D0;
-            }
+            }                  
         </style>
     </head>
     <body>
@@ -115,7 +106,6 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" />
                     </Form>
                 </div>
             </div>                          

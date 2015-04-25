@@ -128,11 +128,25 @@ table
 input[type=submit]
 {
     border : solid 1px #2490D0;
-    font-size : 20px;
+    font-size : 14px;
+    margin: 2px;
+    border-radius: 3px; 
     color : #ffffff;
-    padding: 5px 20px;
+    padding: 5px 10px;
     background-color : #2490D0;
 }
+
+input[type=button]
+{
+    border : solid 1px #2490D0;
+    font-size : 14px;
+    margin: 2px;
+    border-radius: 3px; 
+    color : #ffffff;
+    padding: 5px 10px;
+    background-color : #2490D0;
+}
+
 input[type=text]
 {
     //do something
