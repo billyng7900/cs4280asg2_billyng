@@ -16,6 +16,7 @@ public class MenuList {
     private ArrayList<Menu> menuList;
     private ArrayList<Menu> loginList = new ArrayList<Menu>();
     private ArrayList<Menu> advanceList = new ArrayList<Menu>();
+    private Menu shoppingcart = new Menu();
     
     public void setMenuList(ArrayList<Menu> menuList)
     {
@@ -39,6 +40,10 @@ public class MenuList {
                 {
                    loginList.add(m);
                 }
+                if (m.getMenuName().toUpperCase().contains("CART"))
+                {
+                    shoppingcart = m;
+                }
             }            
             for(Menu m:loginList)
             {
@@ -46,7 +51,7 @@ public class MenuList {
             }
             printlist += "</ul>";
             printlist += "</li>";
-            printlist += "<li><a href='ShoppingCart'><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
+            printlist += "<li><a href='" + shoppingcart.getMenuPath() + "'><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
             printlist += "</ul>";
             printlist += "</div>";
         }
@@ -65,7 +70,10 @@ public class MenuList {
                        advanceList.add(m);
                     }
                 }
-                
+                if (m.getMenuName().toUpperCase().contains("CART"))
+                {
+                    shoppingcart = m;
+                }
             }
             printlist += "<li><a href='#'.jsp'>Logout</a></li>" ;
             printlist += "</ul>";
@@ -76,7 +84,7 @@ public class MenuList {
             printlist += "<ul>";
             for(Menu m:advanceList)
             {
-                printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
+                printlist += "<li><a href='" + shoppingcart.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
             }
             printlist += "</ul>";
             printlist += "</li>";
