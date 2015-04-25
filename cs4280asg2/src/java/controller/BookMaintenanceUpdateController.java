@@ -37,9 +37,9 @@ public class BookMaintenanceUpdateController extends HttpServlet {
             BookDao dao = new BookDao();
             String bookID = request.getParameter("bookID");
             Book book = dao.getBook(Integer.parseInt(bookID));
-            BookMaintenanceUpdate main = new BookMaintenanceUpdate();
-            main.setBook(book);
-            out.println(main.getBookUpdate());        
+            request.setAttribute("book", book);
+             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceUpdate.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

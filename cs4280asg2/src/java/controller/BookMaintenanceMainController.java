@@ -38,9 +38,9 @@ public class BookMaintenanceMainController extends HttpServlet {
         ArrayList<Book> booklist = dao.getBookList();
         BookList bo = new BookList();
         bo.setBookList(booklist);
-        BookMaintenanceMain main = new BookMaintenanceMain();
-        main.setBookList(bo.getBookList());
-        out.println(main.getMaintenanceBookList());
+        request.setAttribute("booklist",bo);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenancePage.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

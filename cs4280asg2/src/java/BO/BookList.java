@@ -47,4 +47,22 @@ public class BookList {
     {
         return booklist;
     }
+    
+    public String getMaintenanceBookList()
+    {
+        String printlist = "";
+        for(Book b:booklist)
+        {
+            printlist += "<tr>";
+            printlist += "<td>" + b.getBookID() + "</td>";
+            printlist += "<td>" + b.getBookName() + "</td>";
+            printlist += "<td>" + b.getAvailability() + "</td>";
+            printlist += "<td><a href='BookMaintenanceUpdate?bookID=" + b.getBookID() + "'><input type='button' value='Update'></a></td>";
+            printlist += "<td><input type='button' value='Delete'></td>";
+            printlist += "</tr>";
+        }
+        return printlist;
+    }
+    
+    
 }

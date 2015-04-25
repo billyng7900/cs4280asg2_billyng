@@ -84,7 +84,7 @@
                             <tr>
                                 <td colspan="2"><h3 class="center">BOOK DETAILS<h3><td>
                             </tr>
-                            <jsp:include page="BookMaintenanceUpdate" flush="true" />
+                            ${book.bookUpdate}
                             <tr>
                                 <td colspan="2" class="center">                                
                                     <input type="submit" value="Save"/>
@@ -92,7 +92,6 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" />
                     </Form>
                 </div>
             </div>                          
