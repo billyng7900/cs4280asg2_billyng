@@ -17,12 +17,14 @@
             {
                 width: 90%;
                 margin: auto;
+                padding-bottom: 50px;
             }
             
             #detailItemContainer
             {
                 float: left;
                 width: 100%;
+                padding-bottom: 50px;
             }
             
             #detailItemContainer td
@@ -62,11 +64,31 @@
                                     by <jsp:getProperty name="book" property="author" /><br><br>
                                 </td>
                             </tr>
+                            <%
+                                if(book.getAvailability()>0){
+                            %>
+                            <tr>
+                                <td style="color: #477519">
+                                    In Stock
+                                </td>
+                            </tr>
+                            <%        
+                                }else{
+                            %>
+                            <tr>
+                                <td style="color: #FF3300">
+                                    Out of Stock
+                                </td>
+                            </tr>
+                            <% 
+                                }
+                            %>
                             <tr>
                                 <td>
                                     Price: $<jsp:getProperty name="book" property="price" />
                                 </td>                                
                             </tr>
+                            
                             <tr>
                                 <td>
                                     <form>
@@ -79,6 +101,9 @@
                                     </form>
                                 </td>
                             </tr>
+                            <%
+                                if(book.getAvailability()>0){
+                            %>
                             <tr>
                                 <td style="text-align: right">
                                     <form action="ShoppingCartAddController" method="POST">
@@ -87,6 +112,9 @@
                                     </form>
                                 </td>
                             </tr>
+                            <%
+                                }
+                            %>
                         </table>
                     </div>
                 </div>
