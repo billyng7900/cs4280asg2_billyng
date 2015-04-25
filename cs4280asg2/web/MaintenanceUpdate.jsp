@@ -111,7 +111,7 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Cover Picture</label></td>
-                                <td><input type="text" value="${book.imageURL}.jpg" name="imageURL"></td>
+                                <td><input type="text" value="${book.imageURL}" name="imageURL"></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="center">                                

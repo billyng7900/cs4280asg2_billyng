@@ -13,11 +13,23 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
         <style>
-            .detailItem
+            #detailPageContainer
+            {
+                width: 90%;
+                margin: auto;
+            }
+            
+            #detailItemContainer
             {
                 float: left;
+                width: 100%;
             }
-
+            
+            #detailItemContainer td
+            {
+                width: 100%;
+                word-wrap: break-word;
+            }
         </style>
     </head>
     
@@ -32,16 +44,13 @@
                 <jsp:include page="Menu" flush="true" />
             </div>
         </div>        
-        <div id="centerPanel">   
-            <div id="leftPanel">           
-                <jsp:include page="common/Menu.html" flush="true" />  
-            </div>
-            <div id="mainPanel">
-                <div class="detailItem" >
-                    <div style="float: left; width: 300px; text-align: center">
+        <div id="centerPanel">              
+            <div id="detailPageContainer">
+                <div id="detailItemContainer" >
+                    <div style="float: left; width: 35%">
                         <img src="image\<jsp:getProperty name='book' property='imageURL' />.jpg" alt="<jsp:getProperty name='book' property='bookName' />">
                     </div>
-                    <div style="float: left; width: 60%">
+                    <div style="float: left; width: 65%">
                         <table>
                             <tr>                            
                                 <td style="text-decoration: bold; font-size: 20px">
