@@ -1,7 +1,7 @@
 <%-- 
-    Document   : PurchaseHistory
-    Created on : Apr 24, 2015, 4:34:04 PM
-    Author     : waihingli3
+    Document   : RefundPage
+    Created on : 2015/4/26, 上午 12:14:38
+    Author     : liwaihing
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,29 +9,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Purchase History</title>
+        <title>Refund</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/toppanel.css">
         <style>
-            #historyPageContainer
+            #refundPageContainer
             {
                 padding-bottom: 50px;
             }
             
-            #historyPageContainer h2
+            #refundPageContainer h2
             {
                 padding-left: 50px;
             }
             
-            #historyItemContainer
+            #refundItemContainer
             {
                 width: 90%;
                 margin: auto;
                 background-color: #F8F8F8;
                 border: 1px solid #E8E8E8;
                 border-radius: 5px;
+                text-align: center;
                 padding-bottom: 50px;
             }
             
-            #historyItemContainer table
+            #refundItemContainer table
             {
                 margin: auto;
                 font-size: 14px;
@@ -39,14 +42,14 @@
                 padding-bottom: 50px;
             }
             
-            #historyItemContainer th
+            #refundItemContainer th
             {
                 background-color: #828282;
                 color: #FFFFFF;
                 height: 50px;
             }
           
-            #historyItemContainer td
+            #refundItemContainer td
             {
                 height: 50px;
             }
@@ -80,9 +83,9 @@
             </div>
         </div>
         <div id="centerPanel">                   
-            <div id="historyPageContainer" class="left">
+            <div id="refundPageContainer" class="left">
                 <h2><label for="history">Purchase History</label></h2>
-                <div id="historyItemContainer">
+                <div id="refundItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
                     <table width="90%" cellspacing="0" cellpadding="0">
                         <tr>
@@ -115,25 +118,14 @@
                                         <td>Point Used</td>
                                         <td>0</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <input type='button' value='Refund' onclick="window.location.href='RefundPage.jsp'">
-                                        </td>
-                                    </tr>
                                 </table>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="image/book_1.jpg" height="150px"><br>
-                                    Java: A Beginner's Guide Paperback
-                                </p>
-                            </td>
-                            <td>$24.37</td>
-                        </tr>
+                        </tr>                       
                     </table>
-                    
+                    <p style='color: red'>
+                        Confirm to refund?                       
+                    </p>
+                    <input type='button' value="Refund">
                 </div>
             </div>       
         </div>
