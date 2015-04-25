@@ -10,7 +10,7 @@ body
     color: #333300;
     font-size: 16px;
     font-family: Verdana, Geneva, sans-serif;
-    background-color: #E8E8E8; 
+    background-color: #FFFFFF; 
     min-width: 1000px;
 }
 
@@ -76,7 +76,7 @@ table
 #centerPanel
 {
     width: 80%;
-    height: 100%;
+    height: auto;
     margin: 0px auto;
     padding: 40px 0px;
     background-color: #FFFFFF;

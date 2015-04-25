@@ -44,6 +44,14 @@
         <servlet-name>processLogout</servlet-name>
         <servlet-class>controller.processLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookMaintenanceMainController</servlet-name>
+        <servlet-class>controller.BookMaintenanceMainController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookMaintenanceUpdateController</servlet-name>
+        <servlet-class>controller.BookMaintenanceUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>processLogout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookMaintenanceMainController</servlet-name>
+        <url-pattern>/BookMaintenanceMain</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookMaintenanceUpdateController</servlet-name>
+        <url-pattern>/BookMaintenanceUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
