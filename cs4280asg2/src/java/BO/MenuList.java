@@ -78,13 +78,13 @@ public class MenuList {
             printlist += "<li><a href='#'.jsp'>Logout</a></li>" ;
             printlist += "</ul>";
             printlist += "</li>";
-            printlist += "<a href='ShoppingCart.jsp'><li><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
+            printlist += "<a href='" + shoppingcart.getMenuPath() + "'><li><img src='image/ui-icon-shoppingcart.png' alt=''></li></a>";
             printlist += "<li>";
             printlist += "<a href='#'><img src='image/ui-icon-advance.png' alt=''></a>";
             printlist += "<ul>";
             for(Menu m:advanceList)
             {
-                printlist += "<li><a href='" + shoppingcart.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
+                printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
             }
             printlist += "</ul>";
             printlist += "</li>";
