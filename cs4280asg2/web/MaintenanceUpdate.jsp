@@ -84,7 +84,34 @@
                             <tr>
                                 <td colspan="2"><h3 class="center">BOOK DETAILS<h3><td>
                             </tr>
-                            ${book.bookUpdate}
+                            <tr>
+                                <td><label for='mypage'>Book ID</label></td>
+                                <td>${book.bookID}</td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Book Name</label></td>
+                                <td><input type="text" value="${book.bookName}" name="bookname"></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Author</label></td>
+                                <td><input type="text" value="${book.author}" name="author"></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Description</label></td>
+                                <td><textarea rows="10" name="description">${book.bookDescription}</textarea></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Price ($)</label></td>
+                                <td><input type="text" value="${book.price}" name="price"></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Availablity</label></td>
+                                <td><input type="text" value="${book.availability}" name="availability"></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Cover Picture</label></td>
+                                <td><input type="text" value="/image/${book.imageURL}.jpg" name="bookcover"></td>
+                            </tr>
                             <tr>
                                 <td colspan="2" class="center">                                
                                     <input type="submit" value="Save"/>
