@@ -23,6 +23,12 @@
                border-bottom: solid;
                border-width: 1px;
             }
+            
+            #cartItemContainer
+            {
+                width: 90%;
+                margin: auto;
+            }
         </style>
     </head>
     
@@ -37,12 +43,14 @@
             </div>
         </div>        
         <div id="centerPanel">
+            <h2>Shopping Cart</h2>
+            <div id="cartItemContainer">
             <%
                 if(session.getAttribute("cart")==null)
                 {
             %>
                 <!--If no items in cart-->
-                <h2>No Items Yet</h2>
+                <h3>No Items Yet</h3>
             <%
                 }
                 else
@@ -55,6 +63,7 @@
                     <td width="500px"></td>
                     <td width="150px">Price</td>
                     <td width="150px">Quantity</td>
+                    <td></td>
                 </tr>
                     ${cart.cartBookList}
                 <tr>
@@ -67,6 +76,7 @@
             <%
                 }
             %>
+            </div>
          </div>
         <div id="footer" class="banner">
             <jsp:include page="common/Header.html" flush="true" />               
