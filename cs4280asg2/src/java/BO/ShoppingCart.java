@@ -43,7 +43,7 @@ public class ShoppingCart {
             printlist+="<a href='DetailPage?bookID="+book.getBookID()+"'>";
             printlist+="<label style='text-decoration: bold; font-size: 20px'>";
             printlist+=book.getBookName();
-            printlist+="</label>";
+            printlist+="<br></label>";
             printlist+="<label style='font-size: 12px;'>";
             printlist+="by "+book.getAuthor()+"<br><br>";
             printlist+="</label>";
@@ -51,7 +51,7 @@ public class ShoppingCart {
             printlist+="</td>";
             printlist+="<td><label>$"+book.getPrice()+"</label></td>";
             printlist+="<td><input type='number' id='quantity"+counter+"' name='quantity"+counter+"' min='1' max='"+book.getAvailability()+"' value='"+b.getQuantity()+"' /></td>";
-            printlist+="<td><input type='image' src='image/shoppingcart-icon-delete.png' alt='delete' height='20'></td>";
+            printlist+="<td><input type='button' id='delete_"+book.getBookID()+"' value='Delete'></td>";
             printlist+="</tr>";
             counter++;
         }
