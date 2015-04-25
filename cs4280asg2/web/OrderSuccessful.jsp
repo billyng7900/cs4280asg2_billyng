@@ -37,6 +37,7 @@
             <div id="successfulItemContainer">                    
                     <h2>Thank You For Ordering</h2>
                     <input type="button" value="View My History" onclick="window.location.href='PurchaseHistory.jsp'">
+                    <input type="button" value="Go To Home Page" onclick="window.location.href='Home'">
             </div>                       
         </div>        
         <div id="footer" class="banner">

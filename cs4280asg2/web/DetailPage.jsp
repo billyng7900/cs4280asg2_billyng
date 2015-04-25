@@ -64,7 +64,7 @@
                                     <fieldset>
                                     <legend>Book Description</legend>
                                         <p>                                        
-                                            <jsp:getProperty name="book" property="bookDescription" />
+                                            <jsp:getProperty name="book" property="bookDescriptionHTML" />
                                         </p>
                                     </fieldset>
                                     </form>

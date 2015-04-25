@@ -93,6 +93,12 @@ public class Book {
         return price;
     }
     
+    public String getBookDescriptionHTML()
+    {
+        String printlist = "";
+        printlist += bookDescription.replace("\n", "<br>");
+        return printlist;
+    }
     public String getBookUpdate(){
         String printlist = "";
         

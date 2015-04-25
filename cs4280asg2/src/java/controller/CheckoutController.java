@@ -62,7 +62,7 @@ public class CheckoutController extends HttpServlet {
                     bookdao.updateBookAvailability(b.getBook().getBookID(), newAvailability);
                     User user = (User)session.getAttribute("user");
                     dao.insertOrderRecord(newOrderId,user.getUserId(), b.getBook().getBookID(), b.getQuantity(), pointwilluse); 
-                    response.sendRedirect("Home");
+                    response.sendRedirect("OrderSuccessful.jsp");
                 }
             }
         }finally {
