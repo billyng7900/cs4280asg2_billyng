@@ -97,6 +97,10 @@
                                 <td><textarea rows="10" name="description"></textarea></td>
                             </tr>
                             <tr>
+                                <td><label for='mypage'>Price ($)</label></td>
+                                <td><input type="text" value="" name="price"></td>
+                            </tr>
+                            <tr>
                                 <td><label for='mypage'>Availablity</label></td>
                                 <td><input type="text" value="" name="availability"></td>
                             </tr>

@@ -37,6 +37,10 @@ public class BookMaintenanceUpdate {
         printlist += "<td><textarea rows='10'>" + book.getBookDescription() + "</textarea></td>";
         printlist += "</tr>";
         printlist += "<tr>";
+        printlist += "<td><label for='mypage'>Price ($)</label></td>";
+        printlist += "<td><input type='text' value='" + book.getPrice()+ "'></td>";
+        printlist += "</tr>";
+        printlist += "<tr>";
         printlist += "<td><label for='mypage'>Availablity</label></td>";
         printlist += "<td><input type='text' value='" + book.getAvailability() + "'></td>";
         printlist += "</tr>";
