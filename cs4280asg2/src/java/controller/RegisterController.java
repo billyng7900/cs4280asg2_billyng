@@ -35,11 +35,12 @@ public class RegisterController extends HttpServlet {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String realname = request.getParameter("realname");
             UserDao dao = new UserDao();
-            boolean isUserNameRepeated = dao.checkRepeatedUserName(username);
-            if(isUserNameRepeated == false)
+            User isUserNameRepeated = dao.getUserByUserName(username);
+            if(isUserNameRepeated != null)
             {
-                int success = dao.registerUser(username, password);
+                int success = dao.registerUser(username, password,realname);
                 if(success==1)
                     response.sendRedirect("Home");
                 else

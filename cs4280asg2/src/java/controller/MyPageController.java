@@ -6,6 +6,7 @@
 package controller;
 
 import BO.*;
+import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,6 +40,10 @@ public class MyPageController extends HttpServlet {
             }
             else
             {
+                User user = (User)session.getAttribute("user");
+                UserDao dao = new UserDao();
+                User latestUser = dao.getUserByUserName(user.getUserName());
+                session.setAttribute("user", latestUser);
                 response.sendRedirect("MyPage.jsp");
             }
         } finally {

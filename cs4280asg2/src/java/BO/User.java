@@ -14,6 +14,8 @@ public class User {
     boolean isManager;
     int loyaltyPoints;
     int userId;
+    String realname;
+    
     public User()
     {
         
@@ -56,5 +58,15 @@ public class User {
     public int getLoyaltyPoints()
     {
         return loyaltyPoints;
+    }
+    
+    public void setRealName(String realname)
+    {
+        this.realname = realname;
+    }
+    
+    public String getRealName()
+    {
+        return realname;
     }
 }

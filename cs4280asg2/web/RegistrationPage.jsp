@@ -92,6 +92,15 @@
                 <div id="registerItemContainer">
                     <h3 class="center">PERSONAL INFORMATION<h3>
                     <Form action="Register" onsubmit="return checksubmit()" method="POST">
+                        <%
+                        if(request.getParameter("error")!=null)
+                        {
+                            if(request.getParameter("error").equals("1"))
+                            {
+                            out.println("Username had been used. Please use another one.");
+                            }
+                        }
+                        %>
                         <table cellspacing="0" cellpadding="0">                           
                             <tr>
                                 <td><label for='username'>Username</label></td>

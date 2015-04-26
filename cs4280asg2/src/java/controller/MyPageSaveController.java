@@ -6,17 +6,19 @@
 package controller;
 
 import BO.*;
+import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+
 /**
  *
  * @author Billy
  */
-public class ProcessLogout extends HttpServlet {
+public class MyPageSaveController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +34,16 @@ public class ProcessLogout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession();
-            session.invalidate();
-            response.sendRedirect("Home");
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MyPageSaveController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet MyPageSaveController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }
@@ -52,7 +61,7 @@ public class ProcessLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -66,7 +75,32 @@ public class ProcessLogout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")==null)
+        {
+            response.sendRedirect("Home");
+        }
+        else
+        {
+            User user = (User)session.getAttribute("user");
+            String password = request.getParameter("password");
+            String realname = request.getParameter("realname");
+            UserDao dao = new UserDao();
+            User checkUser = dao.getUser(user.getUserName(), password);
+            if(checkUser==null)
+                response.sendRedirect("MyPage.jsp?error=1");
+            else
+            {
+                int success = dao.updateUser(realname,user.getUserId());
+                if(success == 1)
+                    response.sendRedirect("MyPage");
+                else
+                    response.sendRedirect("Home");
+            }
+        }
+        
     }
 
     /**

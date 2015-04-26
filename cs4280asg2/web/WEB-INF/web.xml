@@ -60,6 +60,10 @@
         <servlet-name>PurchaseHistoryController</servlet-name>
         <servlet-class>controller.PurchaseHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MyPageSaveController</servlet-name>
+        <servlet-class>controller.MyPageSaveController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>PurchaseHistoryController</servlet-name>
         <url-pattern>/PurchaseHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyPageSaveController</servlet-name>
+        <url-pattern>/MyPageSave</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

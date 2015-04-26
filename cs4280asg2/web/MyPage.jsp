@@ -77,7 +77,7 @@
                 <h2><label for="login">My Page</label></h2>
                 <div id="myItemContainer">
                     
-                    <Form action="">
+                    <Form action="MyPageSave" method="Post">
                         <table cellspacing="0" cellpadding="0"> 
                             <tr>
                                 <td colspan="2"><h3 class="center">MY ACCOUNT DETAILS<h3><td>
@@ -88,23 +88,19 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Password</label></td>
-                                <td><input type='password' name='oldpw' value='' placeholder="logic: check pw if save"></td>
+                                <td><input type='password' name='password' value='' placeholder="logic: check pw if save"></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Real Name</label></td>
-                                <td><input type="text" id="realname" name="realname" value="//from db"/></td>
+                                <td><input type="text" id="realname" name="realname" value="${user.realName}"/></td>
                             </tr>
-                            <tr>
-                                <td><label for='mypage'>Address</label></td>
-                                <td><input type="text" id="address" name="address" value="//from db"/></td>
-                            </tr> 
                             <tr>
                                 <td><label for='mypage'>Loyalty Points</label></td>
                                 <td>${user.loyaltyPoints}</td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Purchase History</label></td>
-                                <td><a href='#' >Purchase History</a></td>
+                                <td><a href='PurchaseHistory' >Purchase History</a></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><h3 class="center">CHANGE PASSWORD<h3><td>
@@ -124,7 +120,6 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="hidden" name="requestURL" value="<%= request.getParameter("requestURL") %>" />
                     </Form>
                 </div>
             </div>                          
