@@ -8,6 +8,7 @@ package BO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -28,9 +29,17 @@ public class AllOrder {
     
     public String getAllOrderListToHtml()
     {
+        
         String printList = "";
         for(OrderList o:allList)
         {
+            Calendar datenow = Calendar.getInstance();
+            Date startDate = o.getOrderDate().getTime();
+            Date endDate = datenow.getTime();
+            long startTime = startDate.getTime();
+            long endTime = endDate.getTime();
+            long diffTime = endTime - startTime;
+            long diffDays = diffTime / (1000 * 60 * 60 * 24);
             SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             String orderdate = dateformat.format(o.getOrderDate().getTime()); 
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
@@ -53,7 +62,7 @@ public class AllOrder {
                 printList +=  "<tr>";
                 printList +=  "<td>";
                 printList += "<p>";
-                printList += "<img src='image/" + book.getImageURL()+ ".jpg' height='150px'><br>";
+                printList += "<img src='" + book.getImageURL()+ "' height='150px'><br>";
                 printList +=  book.getBookName();
                 printList +=  "</p>";
                 printList += "</td>";
@@ -71,9 +80,13 @@ public class AllOrder {
                     printList +=  "<td>"+o.getPointUse()+"</td>";
                     printList +=  "</tr>";
                     printList +=  "<tr>";
-                    printList +=  "<td colspan='2'>";
-                    printList +=  "<input type='button' value='Refund' onclick='window.location.href='RefundPage.jsp''>";
-                    printList +=  "</td>";
+                    if(diffDays<7)
+                    {
+                        printList +=  "<td colspan='2'>";
+                        printList +=  "<input type='button' value='Refund' onclick='window.location.href='RefundPage.jsp''>";
+                        printList +=  "<p>Refund should be done in 7 days</p>";
+                        printList +=  "</td>";
+                    }
                     printList +=  "</tr>";
                     printList += "</table>"; 
                 }

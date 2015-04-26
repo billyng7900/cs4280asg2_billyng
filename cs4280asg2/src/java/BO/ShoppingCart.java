@@ -38,7 +38,7 @@ public class ShoppingCart {
             Book book = b.getBook();
             printlist+="<tr>";
             printlist+="<td>";
-            printlist+="<a href='DetailPage?bookID="+book.getBookID()+"'><image src='image/"+book.getImageURL()+".jpg' height='150px'></a>";
+            printlist+="<a href='DetailPage?bookID="+book.getBookID()+"'><image src='"+book.getImageURL()+"' height='150px'></a>";
             printlist+="</td>";
             printlist+="<td>";
             printlist+="<a href='DetailPage?bookID="+book.getBookID()+"'>";

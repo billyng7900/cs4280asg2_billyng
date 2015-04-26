@@ -76,6 +76,10 @@
         <servlet-name>SearchMaintenanceController</servlet-name>
         <servlet-class>controller.SearchMaintenanceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookMaintenanceCreateController</servlet-name>
+        <servlet-class>controller.BookMaintenanceCreateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>SearchMaintenanceController</servlet-name>
         <url-pattern>/SearchMaintenance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookMaintenanceCreateController</servlet-name>
+        <url-pattern>/BookMaintenanceCreate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,6 +6,7 @@
 package controller;
 
 import BO.Book;
+import BO.User;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,12 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Billy
  */
-public class UpdateBook extends HttpServlet {
+public class BookMaintenanceCreateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +40,10 @@ public class UpdateBook extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShoppingChartAddController</title>");            
+            out.println("<title>Servlet BookMainteanceCreateController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShoppingChartAddController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BookMainteanceCreateController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -78,32 +80,40 @@ public class UpdateBook extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String hello = request.getParameter("bookID");
-            int bookID = Integer.parseInt(request.getParameter("bookID"));
-            String bookName = request.getParameter("bookname");
-            String author = request.getParameter("author");
-            String bookDescription = request.getParameter("description");
-            float price = Float.parseFloat(request.getParameter("price"));
-            int availability = Integer.parseInt(request.getParameter("availability"));
-            String imageURL = request.getParameter("imageURL");
-            Book book = new Book();
-            book.setBookID(bookID);
-            book.setBookName(bookName);
-            book.setAuthor(author);
-            book.setBookDescription(bookDescription);
-            book.setPrice(price);
-            book.setAvailability(availability);
-            book.setImageURL(imageURL);
-            BookDao dao = new BookDao();
-            int successful = dao.updateBook(book);
-            if(successful==1)
-                response.sendRedirect("BookMaintenanceMain");
-            else
+            HttpSession session = request.getSession();
+            if(session.getAttribute("user")==null)
+            {
                 response.sendRedirect("Home");
-        } catch(Exception e)
-        {
-            out.println(e);
-        }finally {
+            }
+            else
+            {
+                User user = (User)session.getAttribute("user");
+                if(user.getIsManager())
+                {
+                    BookDao dao = new BookDao();
+                    String bookname = request.getParameter("bookname");
+                    String author = request.getParameter("author");
+                    String description = request.getParameter("description");
+                    float price = Float.parseFloat(request.getParameter("price"));
+                    int availability = Integer.parseInt(request.getParameter("availability"));
+                    String imageURL = request.getParameter("bookcover");
+                    Book book = new Book();
+                    book.setBookName(bookname);
+                    book.setAuthor(author);
+                    book.setBookDescription(description);
+                    book.setPrice(price);
+                    book.setImageURL(imageURL);
+                    book.setAvailability(availability);
+                    int success = dao.insertBook(book);
+                    if(success==1)
+                        response.sendRedirect("BookMaintenanceMain");
+                    else
+                        response.sendRedirect("Home");
+                }
+                else
+                    response.sendRedirect("Home");
+            }
+        } finally {
             out.close();
         }
     }

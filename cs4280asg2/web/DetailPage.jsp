@@ -50,7 +50,7 @@
             <div id="detailPageContainer">
                 <div id="detailItemContainer" >
                     <div style="float: left; width: 35%">
-                        <img src="image\<jsp:getProperty name='book' property='imageURL' />.jpg" alt="<jsp:getProperty name='book' property='bookName' />">
+                        <img src="<jsp:getProperty name='book' property='imageURL' />" alt="<jsp:getProperty name='book' property='bookName' />">
                     </div>
                     <div style="float: left; width: 65%">
                         <table>

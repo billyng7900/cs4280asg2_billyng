@@ -70,7 +70,7 @@
             <div id="createPageContainer" class="left">
                 <h2><label for="login">Create Book</label></h2>
                 <div id="createItemContainer">                    
-                    <Form action="">
+                    <Form action="BookMaintenanceCreate" method="POST">
                         <table cellspacing="0" cellpadding="0"> 
                             <tr>
                                 <td colspan="2"><h3 class="center">BOOK DETAILS<h3><td>
@@ -85,7 +85,7 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Description</label></td>
-                                <td><textarea rows="10" name="description"></textarea></td>
+                                <td><textarea rows="10" name="description" value=""></textarea></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Price ($)</label></td>

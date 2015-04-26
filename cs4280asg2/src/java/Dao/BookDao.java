@@ -190,4 +190,28 @@ public class BookDao {
         } 
         return null;
     }
+    
+    public int insertBook(Book book)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("insert into [Book] values (?,?,?,?,?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setString(1, book.getBookName());
+            pstmt.setString(2, book.getBookDescription());
+            pstmt.setInt(3, book.getAvailability());
+            pstmt.setString(4, book.getImageURL());
+            pstmt.setFloat(5, book.getPrice());
+            pstmt.setString(6, book.getAuthor());
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+                return 1;
+            else
+                return -1;
+        }catch (ClassNotFoundException e) {
+            return -1;
+        }catch (SQLException e) {
+            return -1;
+        }
+    }
 }
