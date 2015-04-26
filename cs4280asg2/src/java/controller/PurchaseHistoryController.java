@@ -49,7 +49,7 @@ public class PurchaseHistoryController extends HttpServlet {
                 for(int i:orderIDList)
                 {
                     OrderList orderlist = dao.getOrderPointByUser(i);
-                    ArrayList<Order> order = dao.getOrderRecordByUser(i);
+                    ArrayList<Order> order = dao.getOrderRecordByUser(i,user.getUserId());
                     for(Order o:order)
                     {
                         Book book = bookdao.getBook(o.getBookID());

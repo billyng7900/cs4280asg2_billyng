@@ -42,11 +42,13 @@ public class AllOrder {
             long diffDays = diffTime / (1000 * 60 * 60 * 24);
             SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             String orderdate = dateformat.format(o.getOrderDate().getTime()); 
+            printList += "<form action='RequestRefund' method='post'>";
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
             printList += "<th colspan='3'>";
             printList += "<label class='orderinfo'>Order Date: "+orderdate+"</label>";
             printList += "<label class='orderinfo'>Order ID: "+o.getOrderID()+"</label>";
+            printList += "<input type='hidden' name='orderID' value='"+o.getOrderID()+"'/>";
             printList += "<label class='orderinfo'>Purchase Status: "+o.getStatusString()+"</label>";
             printList += "</th>";
             printList += "</tr>";
@@ -80,10 +82,10 @@ public class AllOrder {
                     printList +=  "<td>"+o.getPointUse()+"</td>";
                     printList +=  "</tr>";
                     printList +=  "<tr>";
-                    if(diffDays<7)
+                    if(diffDays<=7)
                     {
                         printList +=  "<td colspan='2'>";
-                        printList +=  "<input type='button' value='Refund' onclick='window.location.href='RefundPage.jsp''>";
+                        printList +=  "<input type='submit' value='Refund' />";
                         printList +=  "<p>Refund should be done in 7 days</p>";
                         printList +=  "</td>";
                     }
@@ -95,6 +97,7 @@ public class AllOrder {
                 counter++;
            }
             printList += "</table>";
+            printList += "</form>";
         }
         return printList;
     }

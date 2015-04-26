@@ -5,12 +5,21 @@
  */
 package controller;
 
+import BO.*;
+import Dao.BookDao;
+import Dao.OrderDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -59,7 +68,7 @@ public class RefundController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -73,7 +82,57 @@ public class RefundController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")==null)
+        {
+            response.sendRedirect("Home");
+        }
+        else
+        {
+            User user = (User)session.getAttribute("user");
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            OrderDao dao = new OrderDao();
+            BookDao bookdao = new BookDao();
+            OrderList bo = new OrderList();
+            ArrayList<Order> orderlist = dao.getOrderRecordByUser(orderID, user.getUserId());
+            if(orderlist!=null)
+            {
+                for(Order o:orderlist)
+                {
+                        Book book = bookdao.getBook(o.getBookID());
+                        o.setBook(book);
+                }
+                bo = dao.getOrderPointByUser(orderID);
+                bo.setOrderList(orderlist);
+                long dayDiff = getDayDiff(bo.getOrderDate());
+                if(dayDiff<=7)
+                {
+                    request.setAttribute("orderList", bo);
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RefundPage.jsp");
+                    dispatcher.forward(request, response);
+                }
+                else
+                    response.sendRedirect("PurchaseHistory");
+            }
+            else
+                response.sendRedirect("PurchaseHistory");
+            
+            
+        }
+    }
+    
+    public long getDayDiff(Calendar dateCompare)
+    {
+        Calendar datenow = Calendar.getInstance();
+        Date startDate = dateCompare.getTime();
+        Date endDate = datenow.getTime();
+        long startTime = startDate.getTime();
+        long endTime = endDate.getTime();
+        long diffTime = endTime - startTime;
+        long diffDays = diffTime / (1000 * 60 * 60 * 24);
+        return diffDays;
     }
 
     /**
