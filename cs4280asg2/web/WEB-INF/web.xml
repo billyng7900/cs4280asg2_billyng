@@ -42,7 +42,7 @@
     </servlet>
     <servlet>
         <servlet-name>processLogout</servlet-name>
-        <servlet-class>controller.processLogout</servlet-class>
+        <servlet-class>controller.ProcessLogout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookMaintenanceMainController</servlet-name>

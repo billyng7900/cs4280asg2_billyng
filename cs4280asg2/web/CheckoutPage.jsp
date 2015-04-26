@@ -136,6 +136,7 @@
             if(totalprice<0)
                 totalprice = 0;
             $("#totalprice").text(totalprice);
+            $("#totalpricehidden").val(totalprice);
             $("#pointuse").val(pointuse);
         }
         </script>
@@ -218,12 +219,13 @@
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
                                     <p>$<span id="price">${cart.totalPrice}</span></p>
                                     <p id="pointwillbeuse">0</p>
-                                    <input type="hidden" name="pointuse" id="pointuse" value=""/>
+                                    <input type="hidden" name="pointuse" id="pointuse" value="0"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="checkoutItemContainer"><b><p>Total</b></td>
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8"><p>$<span id="totalprice">${cart.totalPrice}</span></p></td>
+                            <input type="hidden" name="totalpricehidden" id="totalpricehidden" value="${cart.totalPrice}" />
                             </tr>
                             <tr>
                                 <td colspan="2" class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8; text-align: center">

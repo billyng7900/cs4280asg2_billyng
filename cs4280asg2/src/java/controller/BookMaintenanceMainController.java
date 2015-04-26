@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,13 +35,25 @@ public class BookMaintenanceMainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        BookDao dao = new BookDao();
-        ArrayList<Book> booklist = dao.getBookList();
-        BookList bo = new BookList();
-        bo.setBookList(booklist);
-        request.setAttribute("booklist",bo);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenancePage.jsp");
-        dispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")==null)
+           response.sendRedirect("Home"); 
+        else
+        {
+            User user = (User)session.getAttribute("user");
+            if(user.getIsManager())
+            {
+                BookDao dao = new BookDao();
+                ArrayList<Book> booklist = dao.getBookList();
+                BookList bo = new BookList();
+                bo.setBookList(booklist);
+                request.setAttribute("booklist",bo);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenancePage.jsp");
+                dispatcher.forward(request, response);
+            }
+            else
+               response.sendRedirect("Home"); 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

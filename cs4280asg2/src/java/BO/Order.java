@@ -15,14 +15,9 @@ public class Order {
     private int orderID;
     private int bookID;
     private int quantity;
-    private Calendar orderdate;
-    private int status;
-    private int pointuse;
+    private Book book;
     
-    public Order(int orderID,int bookID,int quantity,Calendar order_date,int status,int pointuse)
-    {
-        
-    }
+    
     
     public void setOrderID(int orderID)
     {
@@ -54,33 +49,14 @@ public class Order {
         return quantity;
     }
     
-    public void setOrderDate(Calendar orderdate)
+    public void setBook(Book book)
     {
-        this.orderdate = orderdate;
+        this.book = book;
     }
     
-    public Calendar getOrderDate()
+    public Book getBook()
     {
-        return orderdate;
+        return book;
     }
     
-    public void setStatus(int status)
-    {
-        this.status = status;
-    }
-    
-    public int getStatus()
-    {
-        return status;
-    }
-    
-    public void setPointUse()
-    {
-        this.pointuse = pointuse;
-    }
-    
-    public int getPointUse()
-    {
-        return pointuse;
-    }
 }

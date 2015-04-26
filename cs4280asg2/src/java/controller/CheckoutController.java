@@ -44,6 +44,8 @@ public class CheckoutController extends HttpServlet {
                 User user = (User)session.getAttribute("user");
                 int pointwilluse = Integer.parseInt(request.getParameter("pointuse"));
                 ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+                float pointwillearn = Float.parseFloat(request.getParameter("totalpricehidden"));
+                int pointwillearnint = (int) pointwillearn;
                 BookDao bookdao = new BookDao();
                 OrderDao dao = new OrderDao();
                 int newOrderId = dao.getNewOrderID();
@@ -67,6 +69,7 @@ public class CheckoutController extends HttpServlet {
                 }
                 else
                 {
+                    
                     for(CartBook b:cart.getShoppingCart())
                     {
                         Book dbbook = bookdao.getBook(b.getBook().getBookID());
@@ -76,9 +79,9 @@ public class CheckoutController extends HttpServlet {
                         dao.insertOrderRecord(newOrderId,user.getUserId(), b.getBook().getBookID(), b.getQuantity()); 
                     }
                     
-                    int userremainsloyaltypoints = latestLoyaltyPoints - pointwilluse;
+                    int userremainsloyaltypoints = latestLoyaltyPoints - pointwilluse + (pointwillearnint/10);
                     userdao.updateUserPoint(user.getUserId(), userremainsloyaltypoints);
-                    dao.insertOrderPoint(newOrderId, pointwilluse);
+                    dao.insertOrderPoint(newOrderId, pointwilluse,cart.getTotalPrice());
                     response.sendRedirect("OrderSuccessful.jsp");
                 }
             }

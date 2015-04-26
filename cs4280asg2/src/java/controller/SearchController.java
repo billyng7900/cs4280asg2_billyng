@@ -5,8 +5,12 @@
  */
 package controller;
 
+import BO.*;
+import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +36,14 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            //to be implemented.
+            String searchString = request.getParameter("seach_query");
+            BookDao dao = new BookDao();
+            ArrayList<Book> booklist = dao.getBookListBySearch(searchString);
+            BookList bo = new BookList();
+            bo.setBookList(booklist);
+            request.setAttribute("booklist", bo);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
+            dispatcher.forward(request, response);
         } finally {
             out.close();
         }

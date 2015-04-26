@@ -107,8 +107,8 @@ public class BookDao {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            PreparedStatement pstmt = con.prepareStatement("Select * from [book] where [book_name] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            pstmt.setString(1, keyword);
+            PreparedStatement pstmt = con.prepareStatement("Select * from [book] where [book_name] like ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setString(1, "%"+keyword+"%");
             ResultSet rs = pstmt.executeQuery();
             if(rs != null)
             {

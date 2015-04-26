@@ -84,56 +84,7 @@
                 <h2><label for="history">Purchase History</label></h2>
                 <div id="historyItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
-                    <table width="90%" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <th colspan="3">
-                                <label class="orderinfo">Order Date: 2015/04/24 17:17</label>
-                                <label class="orderinfo">Order ID: 0000000000</label>
-                                <label class="orderinfo">Purchase Status: Success</label>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="orderheader" width="50%">Item</td>
-                            <td class="orderheader" width="20%">Price</td>
-                            <td class="orderheader" width="30%"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="image/book_1.jpg" height="150px"><br>
-                                    Java: A Beginner's Guide Paperback
-                                </p>
-                            </td>
-                            <td>$24.37</td>
-                            <td rowspan="2" class="ordertotal">
-                                <table width='90%'>
-                                    <tr>
-                                        <td>Item Total</td>
-                                        <td>$48.74</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Point Used</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <input type='button' value='Refund' onclick="window.location.href='RefundPage.jsp'">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="image/book_1.jpg" height="150px"><br>
-                                    Java: A Beginner's Guide Paperback
-                                </p>
-                            </td>
-                            <td>$24.37</td>
-                        </tr>
-                    </table>
-                    
+                    ${allOrder.allOrderListToHtml}
                 </div>
             </div>       
         </div>

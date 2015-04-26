@@ -5,7 +5,6 @@
  */
 package controller;
 
-import Dao.*;
 import BO.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +16,7 @@ import javax.servlet.http.*;
  *
  * @author Billy
  */
-public class PurchaseHistoryController extends HttpServlet {
+public class ProcessLogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,35 +33,8 @@ public class PurchaseHistoryController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
-            if(session.getAttribute("user")==null)
-            {
-                response.sendRedirect("Login.jsp");
-            }
-            else
-            {
-                AllOrder allOrder = new AllOrder();
-                User user = (User)session.getAttribute("user");
-                OrderDao dao = new OrderDao();
-                BookDao bookdao = new BookDao();
-                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId());
-                ArrayList<OrderList> allList = new ArrayList<OrderList>();
-                for(int i:orderIDList)
-                {
-                    OrderList orderlist = dao.getOrderPointByUser(i);
-                    ArrayList<Order> order = dao.getOrderRecordByUser(i);
-                    for(Order o:order)
-                    {
-                        Book book = bookdao.getBook(o.getBookID());
-                        o.setBook(book);
-                    }
-                    orderlist.setOrderList(order);
-                    allList.add(orderlist);
-                }
-                allOrder.setAllOrderList(allList);
-                request.setAttribute("allOrder", allOrder);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/PurchaseHistory.jsp");
-                dispatcher.forward(request, response);
-            }
+            session.invalidate();
+            response.sendRedirect("Home");
         } finally {
             out.close();
         }
