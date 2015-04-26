@@ -88,43 +88,7 @@
                 <h2><label for="history">Refund</label></h2>
                 <div id="refundItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
-                    <table width="90%" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <th colspan="4">
-                                <label class="orderinfo">Order Date: 2015/04/24 17:17</label>
-                                <label class="orderinfo">Order ID: 0000000000</label>
-                                <label class="orderinfo">Purchase Status: Success</label>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="orderheader" width="40%">Item</td>
-                            <td class="orderheader" width="15%">Price</td>
-                            <td class="orderheader" width="15%">Quantity</td>
-                            <td class="orderheader" width="30%"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="image/book_1.jpg" height="150px"><br>
-                                    Java: A Beginner's Guide Paperback
-                                </p>
-                            </td>
-                            <td>$24.37</td>
-                            <td>1</td>
-                            <td rowspan="2" class="ordertotal">
-                                <table width='90%'>
-                                    <tr>
-                                        <td>Item Total</td>
-                                        <td>$48.74</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Point Used</td>
-                                        <td>0</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>                       
-                    </table>
+                    ${orderList.orderRefund}
                     <p style='color: red'>
                         Confirm to refund?                       
                     </p>
