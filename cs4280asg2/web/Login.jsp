@@ -19,6 +19,7 @@
                 background-color: #F8F8F8;
                 border: 1px solid #E8E8E8;
                 border-radius: 5px;
+                padding-bottom: 50px;
             }
             
             #loginItemContainer table
@@ -83,8 +84,7 @@
                 <jsp:include page="Menu" flush="true" />
             </div>
         </div>        
-        <div id="centerPanel">          
-                       
+        <div id="centerPanel">                                
             <div id="loginPageContainer" class="left">
                 <%
                     if(request.getParameter("error")!=null)
@@ -97,7 +97,7 @@
                 %>
                 <h2><label for="login">Login</label></h2>
                 <div id="loginItemContainer">
-                    <h3 class="center">MEGABOOK ID<h3>
+                    <h3 class="center">MEGABOOK ID</h3>
                     <Form action="ProcessLogin" method="POST" onsubmit="return checksubmit()">
                         <table width="60%" cellspacing="0" cellpadding="0">                           
                             <tr>

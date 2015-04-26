@@ -1,6 +1,6 @@
 <%-- 
-    Document   : OrderSuccessful
-    Created on : 2015/4/25, 下午 11:00:57
+    Document   : RefundRequest
+    Created on : 2015/4/26, 下午 11:53:40
     Author     : liwaihing
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Order Successful</title>
+        <title>Request</title>
         <style>
-            #successfulItemContainer
+           #requestItemContainer
             {
                 width: 90%;
                 margin: auto;
@@ -20,28 +20,28 @@
                 border-radius: 5px;    
                 padding-bottom: 50px;
                 text-align: center;
-            }                
+            }                               
         </style>
     </head>
     <body>
         <div id="header" class="banner">
-            <jsp:include page="common/Header.html" flush="true" />        
-        </div>
+            <jsp:include page="common/Header.html" flush="true" />           
+        </div>        
         <div id="topPanel">
             <div class="topnav">
                 <jsp:include page="common/TopPanel.html" flush="true" />
                 <jsp:include page="Menu" flush="true" />
             </div>
-        </div>         
+        </div>        
         <div id="centerPanel">
-            <div id="successfulItemContainer">                    
-                <h2>Thank You For Ordering</h2>
+            <div id="requestItemContainer">                    
+                <h2>Your Request Has Been Sent</h2>
                 <input type="button" value="View My History" onclick="window.location.href='PurchaseHistory'">
                 <input type="button" value="Go To Home Page" onclick="window.location.href='Home'">
             </div>                       
-        </div>        
+        </div>
         <div id="footer" class="banner">
-            <jsp:include page="common/Header.html" flush="true" />               
+            <jsp:include page="common/Header.html" flush="true" />           
         </div>
     </body>
 </html>

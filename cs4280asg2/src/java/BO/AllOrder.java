@@ -44,15 +44,16 @@ public class AllOrder {
             String orderdate = dateformat.format(o.getOrderDate().getTime()); 
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
-            printList += "<th colspan='3'>";
+            printList += "<th colspan='4'>";
             printList += "<label class='orderinfo'>Order Date: "+orderdate+"</label>";
             printList += "<label class='orderinfo'>Order ID: "+o.getOrderID()+"</label>";
             printList += "<label class='orderinfo'>Purchase Status: "+o.getStatusString()+"</label>";
             printList += "</th>";
             printList += "</tr>";
             printList +=  "<tr>";
-            printList +=  "<td class='orderheader' width='50%'>Item</td>";
-            printList +=  "<td class='orderheader' width='20%'>Price</td>";
+            printList +=  "<td class='orderheader' width='40%'>Item</td>";
+            printList +=  "<td class='orderheader' width='15%'>Price</td>";
+            printList +=  "<td class='orderheader' width='15%'>Quantity</td>";
             printList +=  "<td class='orderheader' width='30%'></td>";
             printList +=  "</tr>";
             int counter = 1;
@@ -67,6 +68,7 @@ public class AllOrder {
                 printList +=  "</p>";
                 printList += "</td>";
                 printList += "<td>$"+book.getPrice()+"</td>";
+                printList += "<td>$"+od.getQuantity()+"</td>";
                 printList += "<td rowspan="+o.getOrderList().size()+" class='ordertotal'>";
                 if(counter==1)
                 {

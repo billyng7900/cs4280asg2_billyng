@@ -53,7 +53,17 @@
             {
                 border-top: 1px solid #E8E8E8;
                 padding: 20px 0px;
-            }                  
+            }
+            
+            #createItemContainer a
+            {
+                color: #2490D0;
+            }
+            
+            #createItemContainer a:hover
+            {
+                text-decoration: underline;
+            }
         </style>
     </head>
     <body>
@@ -96,7 +106,12 @@
                                 <td><input type="text" value="" name="availability"></td>
                             </tr>
                             <tr>
-                                <td><label for='mypage'>Cover Picture</label></td>
+                                <td>
+                                    <label for='mypage'>
+                                        Cover Picture URL<br>
+                                        <a href="https://imgur.com/">https://imgur.com/</a>
+                                    </label>
+                                </td>
                                 <td><input type="text" value="" name="bookcover"></td>
                             </tr>
                             <tr>

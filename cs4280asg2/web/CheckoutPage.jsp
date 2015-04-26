@@ -193,7 +193,7 @@
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align: left; background-color: #D9D9D9 ">
-                                    <label for="payment">Your current loyalty points is: <span id="totalpoint">${user.loyaltyPoints}</span>pt </b></label>
+                                    <label for="payment">Your current loyalty points is: <span id="totalpoint">${user.loyaltyPoints}</span></b></label>
                                 </td>
                             </tr>
                             <tr>
@@ -223,10 +223,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="checkoutItemContainer"><b><p>Total</b></td>
-                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8"><p>$<span id="totalprice">${cart.totalPrice}</span></p></td>
+                                <td class="checkoutItemContainer">
+                                    <p><b>Net Total</b></p>
+                                    <p><b>Points Earn</b></p>
+                                </td>
+                                <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
+                                    <p>$<span id="totalprice">${cart.totalPrice}</span></p>
+                                    <p>0</p>
+                                </td>
                             <input type="hidden" name="totalpricehidden" id="totalpricehidden" value="${cart.totalPrice}" />
-                            </tr>
+                            </tr>                    
                             <tr>
                                 <td colspan="2" class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8; text-align: center">
                                     <input type="submit" value="Confirm to Checkout" name="checkout">

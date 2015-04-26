@@ -63,6 +63,16 @@
                 padding: 5px 20px;
                 background-color : #2490D0;
             }
+            
+            #updateItemContainer a
+            {
+                color: #2490D0;
+            }
+            
+            #updateItemContainer a:hover
+            {
+                text-decoration: underline;
+            }
         </style>
     </head>
     <body>
@@ -110,7 +120,12 @@
                                 <td><input type="text" value="${book.availability}" name="availability"></td>
                             </tr>
                             <tr>
-                                <td><label for='mypage'>Cover Picture</label></td>
+                                <td>
+                                    <label for='mypage'>
+                                        Cover Picture URL<br>
+                                        <a href="https://imgur.com/">https://imgur.com/</a>
+                                    </label>
+                                </td>
                                 <td><input type="text" value="${book.imageURL}" name="imageURL"></td>
                             </tr>
                             <tr>

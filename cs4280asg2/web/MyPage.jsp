@@ -13,6 +13,11 @@
         <link rel="stylesheet" href="css/toppanel.css">
         <link rel="stylesheet" href="css/style.css">
         <style>
+            #myPageContainer
+            {
+                padding-bottom: 50px;
+            }
+            
             #myPageContainer h2
             {             
                 padding-left: 50px;
@@ -25,6 +30,7 @@
                 background-color: #F8F8F8;
                 border: 1px solid #E8E8E8;
                 border-radius: 5px;
+                padding-bottom: 50px;
             }
             
             #myItemContainer table
@@ -87,10 +93,6 @@
                                 <td>${user.userName}</td>
                             </tr>
                             <tr>
-                                <td><label for='mypage'>Password</label></td>
-                                <td><input type='password' name='password' value='' placeholder="logic: check pw if save"></td>
-                            </tr>
-                            <tr>
                                 <td><label for='mypage'>Real Name</label></td>
                                 <td><input type="text" id="realname" name="realname" value="${user.realName}"/></td>
                             </tr>
@@ -100,19 +102,12 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Purchase History</label></td>
-                                <td><a href='PurchaseHistory' >Purchase History</a></td>
+                                <td><a href='PurchaseHistory'>Purchase History</a></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><h3 class="center">CHANGE PASSWORD<h3><td>
-                            </tr>
-                            <tr>
-                                <td><label for='mypage'>New Password</label></td>
-                                <td><input type='password' name='newpw' value=''></td>
-                            </tr>
-                            <tr>
-                                <td><label for='mypage'>Confirm New Password</label></td>
-                                <td><input type='password' name='confirm_newpw' value=''></td>
-                            </tr>
+                                <td><label for='mypage'>Change Password</label></td>
+                                <td><a href='ChangePassword.jsp'>Change Password</a></td>
+                            </tr>                           
                             <tr>
                                 <td colspan="2" class="center">
                                     <label style="font-size: 14px">Do not use your real personal data as input.</label><br><br>

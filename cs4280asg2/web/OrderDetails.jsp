@@ -1,6 +1,6 @@
 <%-- 
-    Document   : RefundPage
-    Created on : 2015/4/26, 上午 12:14:38
+    Document   : OrderDetails
+    Created on : 2015/4/26, 下午 11:01:52
     Author     : liwaihing
 --%>
 
@@ -9,21 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Refund</title>
+        <title>Order Details</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toppanel.css">
         <style>
-            #refundPageContainer
+            #orderPageContainer
             {
                 padding-bottom: 50px;
             }
             
-            #refundPageContainer h2
+            #orderPageContainer h2
             {
                 padding-left: 50px;
             }
             
-            #refundItemContainer
+            #orderItemContainer
             {
                 width: 90%;
                 margin: auto;
@@ -34,7 +34,7 @@
                 padding-bottom: 50px;
             }
             
-            #refundItemContainer table
+            #orderItemContainer table
             {
                 margin: auto;
                 font-size: 14px;
@@ -42,14 +42,14 @@
                 padding-bottom: 50px;
             }
             
-            #refundItemContainer th
+            #orderItemContainer th
             {
                 background-color: #828282;
                 color: #FFFFFF;
                 height: 50px;
             }
           
-            #refundItemContainer td
+            #orderItemContainer td
             {
                 height: 50px;
             }
@@ -84,9 +84,9 @@
             </div>
         </div>
         <div id="centerPanel">                   
-            <div id="refundPageContainer" class="left">
-                <h2><label for="history">Refund</label></h2>
-                <div id="refundItemContainer">
+            <div id="orderPageContainer" class="left">
+                <h2><label for="history">Purchase History</label></h2>
+                <div id="orderItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
                     <table width="90%" cellspacing="0" cellpadding="0">
                         <tr>
@@ -124,11 +124,9 @@
                                 </table>
                             </td>
                         </tr>                       
-                    </table>
-                    <p style='color: red'>
-                        Confirm to refund?                       
-                    </p>
-                    <input type='button' value="Refund">
+                    </table>                    
+                    <input type='button' value="Accept">
+                    <input type='button' value="Reject">
                 </div>
             </div>       
         </div>
