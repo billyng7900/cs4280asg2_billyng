@@ -64,6 +64,18 @@
         <servlet-name>MyPageSaveController</servlet-name>
         <servlet-class>controller.MyPageSaveController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCartController</servlet-name>
+        <servlet-class>controller.DeleteCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RefundController</servlet-name>
+        <servlet-class>controller.RefundController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchMaintenanceController</servlet-name>
+        <servlet-class>controller.SearchMaintenanceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -127,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>MyPageSaveController</servlet-name>
         <url-pattern>/MyPageSave</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartController</servlet-name>
+        <url-pattern>/DeleteCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefundController</servlet-name>
+        <url-pattern>/RequestRefund</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchMaintenanceController</servlet-name>
+        <url-pattern>/SearchMaintenance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -31,7 +31,7 @@ public class AllOrder {
         String printList = "";
         for(OrderList o:allList)
         {
-            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             String orderdate = dateformat.format(o.getOrderDate().getTime()); 
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";

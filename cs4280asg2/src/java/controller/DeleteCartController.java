@@ -6,17 +6,21 @@
 package controller;
 
 import BO.*;
+import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Billy
  */
-public class processLogout extends HttpServlet {
+public class DeleteCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +36,16 @@ public class processLogout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession();
-            session.invalidate();
-            response.sendRedirect("Home");
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteCartController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteCartController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }
@@ -52,7 +63,7 @@ public class processLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -66,7 +77,32 @@ public class processLogout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("cart")==null)
+        {
+            response.sendRedirect("Home");
+        }
+        else
+        {
+            ShoppingCart bo = (ShoppingCart)session.getAttribute("cart");
+            int bookID = Integer.parseInt(request.getParameter("bookID"));
+            ArrayList<CartBook> shoppingcart = bo.getShoppingCart();
+            for(int i=0;i<shoppingcart.size();i++)
+            {
+                if(shoppingcart.get(i).getBook().getBookID()==bookID)
+                {
+                    shoppingcart.remove(i);
+                }
+            }
+            bo.setShoppingCart(shoppingcart);
+            if(shoppingcart.size()==1)
+                session.setAttribute("cart", null);
+            else
+                session.setAttribute("cart", bo);
+            response.sendRedirect("ShoppingCart.jsp");
+        }
     }
 
     /**

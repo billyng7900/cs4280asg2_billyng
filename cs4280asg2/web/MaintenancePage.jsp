@@ -84,6 +84,7 @@
         <div id="centerPanel">
             <div id="maintenancePageContainer">
                 <h2>Book Maintenance</h2>
+                <form action="SearchMaintenance" method="get">
                 <table cellspacing="0" cellpadding="0" id="searchbox">
                     <td>
                         <input id="searchbook" type="text" name="seach_query" placeholder="Search for books"> 
@@ -95,6 +96,7 @@
                         <a href="MaintenanceCreate.jsp">Add New Book</a>
                     </td>
                 </table>
+                </form>
                 <div id="maintenanceItemContainer">                    
                     <table cellspacing="0" cellpadding="0" width="90%">                                                        
                         <tr>
