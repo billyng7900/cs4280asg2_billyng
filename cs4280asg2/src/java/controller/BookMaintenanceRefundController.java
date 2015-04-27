@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,7 +43,7 @@ public class BookMaintenanceRefundController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BookMaintenanceRefundController</title>");            
+            out.println("<title>Servlet BookMaintenanceRefundController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet BookMaintenanceRefundController at " + request.getContextPath() + "</h1>");
@@ -64,26 +66,34 @@ public class BookMaintenanceRefundController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-            response.sendRedirect("Home");
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            if(user.getIsManager())
-            {
-                OrderDao dao = new OrderDao();
-                AllOrder bo = new AllOrder();
-                ArrayList<OrderList> refundlist = dao.getRefundList();
-                bo.setAllOrderList(refundlist);
-                request.setAttribute("refundlist", bo);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceRefund.jsp");
-                dispatcher.forward(request, response);
-            }
-            else
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
                 response.sendRedirect("Home");
+            } else {
+                User user = (User) session.getAttribute("user");
+                if (user.getIsManager()) {
+                    con = cm.createConnection();
+                    OrderDao dao = new OrderDao();
+                    AllOrder bo = new AllOrder();
+                    ArrayList<OrderList> refundlist = dao.getRefundList(con);
+                    bo.setAllOrderList(refundlist);
+                    request.setAttribute("refundlist", bo);
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceRefund.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("Home");
+                }
+            }
+        } catch (Exception e) {
+            response.sendRedirect("Home");
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
     }
 

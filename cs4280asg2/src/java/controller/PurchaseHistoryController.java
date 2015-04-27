@@ -7,8 +7,10 @@ package controller;
 
 import Dao.*;
 import BO.*;
+import CommonFunction.CommonFunction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -30,6 +32,8 @@ public class PurchaseHistoryController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -40,19 +44,20 @@ public class PurchaseHistoryController extends HttpServlet {
             }
             else
             {
+                con = cm.createConnection();
                 AllOrder allOrder = new AllOrder();
                 User user = (User)session.getAttribute("user");
                 OrderDao dao = new OrderDao();
                 BookDao bookdao = new BookDao();
-                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId(),1);
+                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId(),1,con);
                 ArrayList<OrderList> allList = new ArrayList<OrderList>();
                 for(int i:orderIDList)
                 {
-                    OrderList orderlist = dao.getOrderPointByOrderID(i);
-                    ArrayList<Order> order = dao.getOrderRecordByOrderID(i);
+                    OrderList orderlist = dao.getOrderPointByOrderID(i,con);
+                    ArrayList<Order> order = dao.getOrderRecordByOrderID(i,con);
                     for(Order o:order)
                     {
-                        Book book = bookdao.getBook(o.getBookID());
+                        Book book = bookdao.getBook(o.getBookID(),con);
                         o.setBook(book);
                     }
                     orderlist.setOrderList(order);
@@ -63,7 +68,10 @@ public class PurchaseHistoryController extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/PurchaseHistory.jsp");
                 dispatcher.forward(request, response);
             }
+        } catch (Exception e) {
+            response.sendRedirect("Home");
         } finally {
+            cm.closeConnection();
             out.close();
         }
     }

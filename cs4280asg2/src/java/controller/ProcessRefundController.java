@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,7 +44,7 @@ public class ProcessRefundController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProcessRefundController</title>");            
+            out.println("<title>Servlet ProcessRefundController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProcessRefundController at " + request.getContextPath() + "</h1>");
@@ -79,38 +81,46 @@ public class ProcessRefundController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-            response.sendRedirect("Home");
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            OrderDao dao = new OrderDao();
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
-            boolean isUser = dao.getOrderIsUser(orderID, user.getUserId());
-            OrderList bo = new OrderList();
-            if(isUser)
-            {
-                ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID);
-                bo = dao.getOrderPointByOrderID(orderID);
-                long dayDiff = getDayDiff(bo.getOrderDate());
-                if(dayDiff<=7)
-                {
-                    int success = dao.updateOrderStatus(orderID, 2);
-                    response.sendRedirect("RefundRequest.jsp");
-                }
-                else
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                con = cm.createConnection();
+                User user = (User) session.getAttribute("user");
+                OrderDao dao = new OrderDao();
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                boolean isUser = dao.getOrderIsUser(orderID, user.getUserId(),con);
+                OrderList bo = new OrderList();
+                if (isUser) {
+                    ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID,con);
+                    bo = dao.getOrderPointByOrderID(orderID,con);
+                    long dayDiff = getDayDiff(bo.getOrderDate());
+                    if (dayDiff <= 7) {
+                        con.setAutoCommit(false);
+                        int success = dao.updateOrderStatus(orderID, 2,con);
+                        response.sendRedirect("RefundRequest.jsp");
+                        cm.commitConnection();
+                    } else {
+                        response.sendRedirect("PurchaseHistory");
+                    }
+                } else {
                     response.sendRedirect("PurchaseHistory");
+                }
             }
-            else
-                response.sendRedirect("PurchaseHistory");
+        } catch (Exception e) {
+            cm.rollbackConnection();
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
     }
-    
-    public long getDayDiff(Calendar dateCompare)
-    {
+
+    public long getDayDiff(Calendar dateCompare) {
         Calendar datenow = Calendar.getInstance();
         Date startDate = dateCompare.getTime();
         Date endDate = datenow.getTime();
@@ -120,6 +130,7 @@ public class ProcessRefundController extends HttpServlet {
         long diffDays = diffTime / (1000 * 60 * 60 * 24);
         return diffDays;
     }
+
     /**
      * Returns a short description of the servlet.
      *

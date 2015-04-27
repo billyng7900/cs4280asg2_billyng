@@ -6,9 +6,11 @@
 package controller;
 
 import BO.Book;
+import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,9 +77,13 @@ public class UpdateBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            con = cm.createConnection();
+            con.setAutoCommit(false);
             String hello = request.getParameter("bookID");
             int bookID = Integer.parseInt(request.getParameter("bookID"));
             String bookName = request.getParameter("bookname");
@@ -95,15 +101,21 @@ public class UpdateBook extends HttpServlet {
             book.setAvailability(availability);
             book.setImageURL(imageURL);
             BookDao dao = new BookDao();
-            int successful = dao.updateBook(book);
+            int successful = dao.updateBook(book,con);
             if(successful==1)
+            {
+                cm.commitConnection();
                 response.sendRedirect("BookMaintenanceMain");
+            }
             else
+            {
+                cm.rollbackConnection();
                 response.sendRedirect("Home");
-        } catch(Exception e)
-        {
-            out.println(e);
-        }finally {
+            }
+        } catch (Exception e) {
+            response.sendRedirect("Home");
+        } finally {
+            cm.closeConnection();
             out.close();
         }
     }

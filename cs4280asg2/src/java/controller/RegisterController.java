@@ -8,8 +8,10 @@ package controller;
 
 import Dao.UserDao;
 import BO.*;
+import CommonFunction.CommonFunction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -30,27 +32,40 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            con = cm.createConnection();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String realname = request.getParameter("realname");
             UserDao dao = new UserDao();
-            User isUserNameRepeated = dao.getUserByUserName(username);
-            if(isUserNameRepeated != null)
+            User isUserNameRepeated = dao.getUserByUserName(username,con);
+            if(isUserNameRepeated == null)
             {
-                int success = dao.registerUser(username, password,realname);
+                con.setAutoCommit(false);
+                int success = dao.registerUser(username, password,realname,con);
                 if(success==1)
+                {
+                    cm.commitConnection();
                     response.sendRedirect("Home");
+                }
                 else
+                {
+                    cm.rollbackConnection();
                     response.sendRedirect("Login.jsp");
+                }
             }
             else
             {
                 response.sendRedirect("RegistrationPage.jsp?error=1");
             }
+        } catch (Exception e) {
+            cm.rollbackConnection();
         } finally {
+            cm.closeConnection();
             out.close();
         }
     }

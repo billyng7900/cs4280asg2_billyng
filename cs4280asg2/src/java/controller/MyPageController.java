@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -30,6 +32,8 @@ public class MyPageController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -40,13 +44,17 @@ public class MyPageController extends HttpServlet {
             }
             else
             {
+                con = cm.createConnection();
                 User user = (User)session.getAttribute("user");
                 UserDao dao = new UserDao();
-                User latestUser = dao.getUserByUserName(user.getUserName());
+                User latestUser = dao.getUserByUserName(user.getUserName(),con);
                 session.setAttribute("user", latestUser);
                 response.sendRedirect("MyPage.jsp");
             }
+        } catch (Exception e) {
+            response.sendRedirect("Home");
         } finally {
+            cm.closeConnection();
             out.close();
         }
     }

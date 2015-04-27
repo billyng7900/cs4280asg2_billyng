@@ -7,9 +7,11 @@ package controller;
 
 import BO.Book;
 import BO.User;
+import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +81,8 @@ public class BookMaintenanceCreateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         try {
             HttpSession session = request.getSession();
             if(session.getAttribute("user")==null)
@@ -90,6 +94,7 @@ public class BookMaintenanceCreateController extends HttpServlet {
                 User user = (User)session.getAttribute("user");
                 if(user.getIsManager())
                 {
+                    con = cm.createConnection();
                     BookDao dao = new BookDao();
                     String bookname = request.getParameter("bookname");
                     String author = request.getParameter("author");
@@ -104,16 +109,28 @@ public class BookMaintenanceCreateController extends HttpServlet {
                     book.setPrice(price);
                     book.setImageURL(imageURL);
                     book.setAvailability(availability);
-                    int success = dao.insertBook(book);
+                    int success = dao.insertBook(book,con);
                     if(success==1)
+                    {
+                        cm.commitConnection();
                         response.sendRedirect("BookMaintenanceMain");
+                    }
                     else
+                    {
+                        cm.rollbackConnection();
                         response.sendRedirect("Home");
+                    }
                 }
                 else
+                {
+                    cm.rollbackConnection();
                     response.sendRedirect("Home");
+                }
             }
-        } finally {
+        } catch(Exception e){
+            cm.rollbackConnection();
+        }finally {
+            cm.closeConnection();
             out.close();
         }
     }

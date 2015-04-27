@@ -7,8 +7,10 @@ package controller;
 
 import Dao.BookDao;
 import BO.*;
+import CommonFunction.CommonFunction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -37,7 +39,7 @@ public class ShoppingCartAddController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShoppingChartAddController</title>");            
+            out.println("<title>Servlet ShoppingChartAddController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShoppingChartAddController at " + request.getContextPath() + "</h1>");
@@ -74,44 +76,49 @@ public class ShoppingCartAddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BookDao dao = new BookDao();
-        String bookID = request.getParameter("bookID");
-        Book book = dao.getBook(Integer.parseInt(bookID));
-        CartBook cbook = new CartBook();
-        cbook.setBook(book);
-        ArrayList<CartBook> booklist = new ArrayList<CartBook>();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("cart")==null)
-        {
-            cbook.setQuantity(1);
-            booklist.add(cbook);
-            ShoppingCart bo = new ShoppingCart();
-            bo.setShoppingCart(booklist);
-            session.setAttribute("cart", bo);
-        }
-        else//has item
-        {
-            ShoppingCart bo = (ShoppingCart)session.getAttribute("cart");
-            booklist = bo.getShoppingCart();
-            boolean hasrepeateditem = false;
-            for(CartBook b:booklist)
-            {
-                if(b.getBook().getBookID()==cbook.getBook().getBookID())
-                {
-                    b.setQuantity(b.getQuantity()+1);
-                    hasrepeateditem = true;
-                }
-            }
-            if(!hasrepeateditem)
-            {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
+        PrintWriter out = response.getWriter();
+        try {
+            con = cm.createConnection();
+            BookDao dao = new BookDao();
+            String bookID = request.getParameter("bookID");
+            Book book = dao.getBook(Integer.parseInt(bookID),con);
+            CartBook cbook = new CartBook();
+            cbook.setBook(book);
+            ArrayList<CartBook> booklist = new ArrayList<CartBook>();
+            HttpSession session = request.getSession();
+            if (session.getAttribute("cart") == null) {
                 cbook.setQuantity(1);
                 booklist.add(cbook);
+                ShoppingCart bo = new ShoppingCart();
+                bo.setShoppingCart(booklist);
+                session.setAttribute("cart", bo);
+            } else//has item
+            {
+                ShoppingCart bo = (ShoppingCart) session.getAttribute("cart");
+                booklist = bo.getShoppingCart();
+                boolean hasrepeateditem = false;
+                for (CartBook b : booklist) {
+                    if (b.getBook().getBookID() == cbook.getBook().getBookID()) {
+                        b.setQuantity(b.getQuantity() + 1);
+                        hasrepeateditem = true;
+                    }
+                }
+                if (!hasrepeateditem) {
+                    cbook.setQuantity(1);
+                    booklist.add(cbook);
+                }
+                bo.setShoppingCart(booklist);
+                session.setAttribute("cart", bo);
             }
-            bo.setShoppingCart(booklist);
-            session.setAttribute("cart", bo);
+            response.sendRedirect("DetailPage?bookID=" + bookID);
+        } catch (Exception e) {
+            response.sendRedirect("Home");
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
-        response.sendRedirect("DetailPage?bookID="+bookID);
-        
     }
 
     /**

@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package controller;
+
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,26 +36,34 @@ public class BookMaintenanceMainController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-           response.sendRedirect("Home"); 
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            if(user.getIsManager())
-            {
-                BookDao dao = new BookDao();
-                ArrayList<Book> booklist = dao.getBookList();
-                BookList bo = new BookList();
-                bo.setBookList(booklist);
-                request.setAttribute("booklist",bo);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenancePage.jsp");
-                dispatcher.forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                User user = (User) session.getAttribute("user");
+                if (user.getIsManager()) {
+                    con = cm.createConnection();
+                    BookDao dao = new BookDao();
+                    ArrayList<Book> booklist = dao.getBookList(con);
+                    BookList bo = new BookList();
+                    bo.setBookList(booklist);
+                    request.setAttribute("booklist", bo);
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenancePage.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("Home");
+                }
             }
-            else
-               response.sendRedirect("Home"); 
+        }catch(Exception e){
+            cm.rollbackConnection();
+        }finally {
+            cm.closeConnection();
+            out.close();
         }
     }
 

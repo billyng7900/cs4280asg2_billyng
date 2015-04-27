@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,7 +43,7 @@ public class RefundHistoryController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RefundHistoryController</title>");            
+            out.println("<title>Servlet RefundHistoryController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RefundHistoryController at " + request.getContextPath() + "</h1>");
@@ -64,23 +66,30 @@ public class RefundHistoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-        {
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                con = cm.createConnection();
+                User user = (User) session.getAttribute("user");
+                OrderDao dao = new OrderDao();
+                AllOrder bo = new AllOrder();
+                ArrayList<OrderList> orderlist = dao.getUserRefundList(user.getUserId(),con);
+                bo.setAllOrderList(orderlist);
+                request.setAttribute("refundlist", bo);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RefundHistory.jsp");
+                dispatcher.forward(request, response);
+            }
+        } catch (Exception e) {
             response.sendRedirect("Home");
-        }
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            OrderDao dao = new OrderDao();
-            AllOrder bo = new AllOrder();
-            ArrayList<OrderList> orderlist = dao.getUserRefundList(user.getUserId());
-            bo.setAllOrderList(orderlist);
-            request.setAttribute("refundlist", bo);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RefundHistory.jsp");
-            dispatcher.forward(request, response);
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
     }
 

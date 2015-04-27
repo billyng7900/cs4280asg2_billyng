@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,14 +34,24 @@ public class BookMaintenanceUpdateController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        BookDao dao = new BookDao();
-        String bookID = request.getParameter("bookID");
-        Book book = dao.getBook(Integer.parseInt(bookID));
-        request.setAttribute("book", book);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceUpdate.jsp");
-        dispatcher.forward(request, response);
+        try{
+            con = cm.createConnection();
+            BookDao dao = new BookDao();
+            String bookID = request.getParameter("bookID");
+            Book book = dao.getBook(Integer.parseInt(bookID),con);
+            request.setAttribute("book", book);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceUpdate.jsp");
+            dispatcher.forward(request, response);
+        }catch(Exception e){
+            response.sendRedirect("Home");
+        }finally {
+            cm.closeConnection();
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

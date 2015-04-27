@@ -6,9 +6,11 @@
 package controller;
 
 import BO.User;
+import CommonFunction.CommonFunction;
 import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -76,8 +78,11 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        try{
         HttpSession session = request.getSession();
             if(session.getAttribute("user")==null)
             {
@@ -85,22 +90,35 @@ public class ChangePasswordController extends HttpServlet {
             }
             else
             {
+                con = cm.createConnection();
                 User user = (User)session.getAttribute("user");
                 String password = request.getParameter("password");
                 String newpassword = request.getParameter("newpw");
                 UserDao dao = new UserDao();
-                User checkUser = dao.getUser(user.getUserName(), password);
+                User checkUser = dao.getUser(user.getUserName(), password,con);
                 if(checkUser==null)
                     response.sendRedirect("ChangePassword.jsp?error=1");
                 else
                 {
-                    int success = dao.updateUserPassword(user.getUserId(), newpassword);
+                    int success = dao.updateUserPassword(user.getUserId(), newpassword,con);
                     if(success==1)
+                    {
+                        cm.commitConnection();
                         response.sendRedirect("MyPage");
+                    }
                     else
+                    {
+                        cm.rollbackConnection();
                         response.sendRedirect("ChangePassword.jsp?error=1");
+                    }
                 }
             }
+        }catch (Exception e) {
+            cm.rollbackConnection();
+        } finally {
+            cm.closeConnection();
+            out.close();
+        }
     }
 
     /**

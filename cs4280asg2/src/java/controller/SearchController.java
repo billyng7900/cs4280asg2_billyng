@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,18 +35,24 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            con = cm.createConnection();
             String searchString = request.getParameter("seach_query");
             BookDao dao = new BookDao();
-            ArrayList<Book> booklist = dao.getBookListBySearch(searchString);
+            ArrayList<Book> booklist = dao.getBookListBySearch(searchString,con);
             BookList bo = new BookList();
             bo.setBookList(booklist);
             request.setAttribute("booklist", bo);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
             dispatcher.forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect("Home");
         } finally {
+            cm.closeConnection();
             out.close();
         }
     }

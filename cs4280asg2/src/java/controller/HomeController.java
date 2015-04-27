@@ -6,8 +6,11 @@
 package controller;
 import Dao.BookDao;
 import BO.*;
+import CommonFunction.CommonFunction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -29,20 +32,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            BookDao dao = new BookDao();
-            ArrayList<Book> booklist = dao.getBookList();
-            BookList bo = new BookList();
-            bo.setBookList(booklist);
-            request.setAttribute("booklist", bo);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
-            dispatcher.forward(request, response);
-
-        } finally {
-            out.close();
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +47,26 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            con = cm.createConnection();
+            BookDao dao = new BookDao();
+            ArrayList<Book> booklist = dao.getBookList(con);
+            BookList bo = new BookList();
+            bo.setBookList(booklist);
+            request.setAttribute("booklist", bo);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage.jsp");
+            dispatcher.forward(request, response);
+
+        } catch (SQLException e) {
+            response.sendRedirect("Home");
+        } finally {
+            cm.closeConnection();
+            out.close();
+        }
     }
 
     /**

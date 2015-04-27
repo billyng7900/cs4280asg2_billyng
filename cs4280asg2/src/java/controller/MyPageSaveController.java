@@ -6,13 +6,14 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
 
 /**
  *
@@ -38,7 +39,7 @@ public class MyPageSaveController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyPageSaveController</title>");            
+            out.println("<title>Servlet MyPageSaveController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MyPageSaveController at " + request.getContextPath() + "</h1>");
@@ -75,32 +76,41 @@ public class MyPageSaveController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-        {
-            response.sendRedirect("Home");
-        }
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            String password = request.getParameter("password");
-            String realname = request.getParameter("realname");
-            UserDao dao = new UserDao();
-            User checkUser = dao.getUser(user.getUserName(), password);
-            if(checkUser==null)
-                response.sendRedirect("MyPage.jsp?error=1");
-            else
-            {
-                int success = dao.updateUser(realname,user.getUserId());
-                if(success == 1)
-                    response.sendRedirect("MyPage");
-                else
-                    response.sendRedirect("Home");
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                con = cm.createConnection();
+                User user = (User) session.getAttribute("user");
+                String password = request.getParameter("password");
+                String realname = request.getParameter("realname");
+                UserDao dao = new UserDao();
+                User checkUser = dao.getUser(user.getUserName(), password,con);
+                if (checkUser == null) {
+                    response.sendRedirect("MyPage.jsp?error=1");
+                } else {
+                    con.setAutoCommit(false);
+                    int success = dao.updateUser(realname, user.getUserId(),con);
+                    if (success == 1) {
+                        cm.commitConnection();
+                        response.sendRedirect("MyPage");
+                    } else {
+                        cm.rollbackConnection();
+                        response.sendRedirect("Home");
+                    }
+                }
             }
+        } catch (Exception e) {
+            cm.rollbackConnection();
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
-        
     }
 
     /**

@@ -30,7 +30,7 @@
         <div id="topPanel">
             <div class="topnav">
                 <jsp:include page="common/TopPanel.html" flush="true" />
-                <jsp:include page="Menu" flush="true" />  
+                <jsp:include page="Menu" flush="true" />
             </div>
         </div>             
         <div id="centerPanel">   

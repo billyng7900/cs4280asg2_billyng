@@ -9,10 +9,12 @@ import BO.Book;
 import BO.Order;
 import BO.OrderList;
 import BO.User;
+import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import Dao.OrderDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +47,7 @@ public class OrderDetailController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderDetailController</title>");            
+            out.println("<title>Servlet OrderDetailController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet OrderDetailController at " + request.getContextPath() + "</h1>");
@@ -68,35 +70,42 @@ public class OrderDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-            response.sendRedirect("Home");
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
-            OrderDao dao = new OrderDao();
-            BookDao bookdao = new BookDao();
-            OrderList bo = new OrderList();
-            boolean isUser = dao.getOrderIsUser(orderID, user.getUserId());
-            if(isUser || user.getIsManager())
-            {
-                ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID);
-                for(Order o:orderlist)
-                {
-                        Book book = bookdao.getBook(o.getBookID());
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                con = cm.createConnection();
+                User user = (User) session.getAttribute("user");
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                OrderDao dao = new OrderDao();
+                BookDao bookdao = new BookDao();
+                OrderList bo = new OrderList();
+                boolean isUser = dao.getOrderIsUser(orderID, user.getUserId(),con);
+                if (isUser || user.getIsManager()) {
+                    ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID,con);
+                    for (Order o : orderlist) {
+                        Book book = bookdao.getBook(o.getBookID(),con);
                         o.setBook(book);
+                    }
+                    bo = dao.getOrderPointByOrderID(orderID,con);
+                    bo.setOrderList(orderlist);
+                    request.setAttribute("orderList", bo);
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderDetails.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect("PurchaseHistory");
                 }
-                bo = dao.getOrderPointByOrderID(orderID);
-                bo.setOrderList(orderlist);
-                request.setAttribute("orderList", bo);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderDetails.jsp");
-                dispatcher.forward(request, response);
             }
-            else
-                response.sendRedirect("PurchaseHistory");
+        } catch (Exception e) {
+            response.sendRedirect("Home");
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
     }
 

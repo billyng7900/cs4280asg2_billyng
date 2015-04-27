@@ -6,9 +6,11 @@
 package controller;
 
 import BO.*;
+import CommonFunction.CommonFunction;
 import Dao.OrderDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +41,7 @@ public class RefundLogicController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RefundLogicController</title>");            
+            out.println("<title>Servlet RefundLogicController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RefundLogicController at " + request.getContextPath() + "</h1>");
@@ -76,33 +78,38 @@ public class RefundLogicController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CommonFunction cm = new CommonFunction();
+        Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("user")==null)
-        {
-            response.sendRedirect("Home");
-        }
-        else
-        {
-            User user = (User)session.getAttribute("user");
-            int orderID = Integer.parseInt(request.getParameter("orderID"));
-            OrderDao dao = new OrderDao();
-            int success = 0;
-            if(user.getIsManager())
-            {
-                if(request.getParameter("accept")!=null)
-                {
-                    success = dao.updateOrderStatus(orderID, 3);
-                }
-                else if(request.getParameter("reject")!=null)
-                {
-                    success = dao.updateOrderStatus(orderID, 4); 
-                }
+        try {
+            HttpSession session = request.getSession();
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Home");
+            } else {
+                User user = (User) session.getAttribute("user");
+                int orderID = Integer.parseInt(request.getParameter("orderID"));
+                OrderDao dao = new OrderDao();
+                int success = 0;
+                if (user.getIsManager()) {
+                    con = cm.createConnection();
+                    con.setAutoCommit(false);
+                    if (request.getParameter("accept") != null) {
+                        success = dao.updateOrderStatus(orderID, 3,con);
+                    } else if (request.getParameter("reject") != null) {
+                        success = dao.updateOrderStatus(orderID, 4,con);
+                    }
+                    cm.commitConnection();
                     response.sendRedirect("BookMaintenanceRefund");
+                } else {
+                    response.sendRedirect("RefundHistory");
+                }
             }
-            else
-                response.sendRedirect("RefundHistory");
+        } catch (Exception e) {
+            cm.rollbackConnection();
+        } finally {
+            cm.closeConnection();
+            out.close();
         }
     }
 
