@@ -45,6 +45,40 @@
                 padding: 10px;
             }                       
         </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            function checksubmit()
+            {               
+                var password = $("#password").val();
+                var new_pw = $("#newpw").val();
+                var password_confirm = $("#confirm_newpw").val();
+                var errorBox = $("#errorContainer");
+                if(new_pw != password_confirm)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password do not match");
+                    return false;
+                }
+                if(!password || password.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");        
+                    return false;
+                }
+                else if (!new_pw || new_pw.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
+                    return false;
+                }
+                else if (!password_confirm || password_confirm.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
+                    return false;
+                }
+            }
+        </script>
     </head>
     <body>
         <div id="header" class="banner">
@@ -58,7 +92,19 @@
         </div>        
         <div id="centerPanel">                                 
             <div id="changepwPageContainer" class="left">               
-                <h2><label for="login">Login</label></h2>
+                <h2><label for="login">Change Password</label></h2>
+                <div id="errorContainer">
+                            <image src='image/ui-icon-error.png' alt='error' />
+                        <%
+                        if(request.getParameter("error")!=null)
+                        {
+                            if(request.getParameter("error").equals("1"))
+                            {
+                            out.println("Password is not correct. Please try again.");
+                            }
+                        }
+                        %>
+                        </div>
                 <div id="changepwItemContainer">
                     <h3 class="center">CHANGE PASSWORD</h3>
                     <Form action="ChangePassword" method="POST" onsubmit="return checksubmit()">

@@ -110,7 +110,7 @@ public class OrderList {
         String orderDate = dateformat.format(orderdate.getTime()); 
         printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
         printList += "<tr>";
-        printList += "<th colspan='4'>";
+        printList += "<th colspan='5'>";
         printList += "<label class='orderinfo'>Order Date: "+orderDate+"</label>";
         printList += "<label class='orderinfo'>Order ID: "+orderID+"</label>";
         printList += "<input type='hidden' name='orderID' value='"+orderID+"'/>";
@@ -119,8 +119,9 @@ public class OrderList {
         printList += "</tr>";
         printList +=  "<tr>";
         printList +=  "<td class='orderheader' width='40%'>Item</td>";
-        printList +=  "<td class='orderheader' width='15%'>Price</td>";
-        printList +=  "<td class='orderheader' width='15%'>Quantity</td>";
+        printList +=  "<td class='orderheader' width='10%'>Price</td>";
+        printList +=  "<td class='orderheader' width='10%'>Quantity</td>";
+        printList +=  "<td class='orderheader' width='10%'>Net Price</td>";
         printList +=  "<td class='orderheader' width='30%'></td>";
         printList +=  "</tr>";
         int counter = 1;
@@ -135,7 +136,8 @@ public class OrderList {
             printList +=  "</p>";
             printList += "</td>";
             printList += "<td>$"+book.getPrice()+"</td>";
-            printList += "<td>$"+od.getQuantity()+"</td>";
+            printList += "<td>"+od.getQuantity()+"</td>";
+            printList += "<td>$"+totalprice+"</td>";
             printList += "<td rowspan="+orderList.size()+" class='ordertotal'>";
             if(counter==1)
             {
@@ -147,8 +149,6 @@ public class OrderList {
                 printList +=  "<tr>";
                 printList +=  "<td>Point Used</td>";
                 printList +=  "<td>"+pointuse+"</td>";
-                printList +=  "</tr>";
-                printList +=  "<tr>";
                 printList +=  "</tr>";
                 printList += "</table>"; 
             }

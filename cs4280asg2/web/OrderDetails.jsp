@@ -72,6 +72,16 @@
                 background-color: #FFFFFF;
                 vertical-align: top;
             }
+            
+            #refundReason
+            {
+                width: 500px;
+                text-align: left;
+                margin: auto;
+                border: double #333300;
+                padding: 5px;
+                margin-bottom: 10px;
+            }                    
         </style>
     </head>
     <body>
@@ -91,11 +101,17 @@
                     <h3 class="center">ORDER HISTORY</h3>
                     <form action="RefundProcess" method="POST">
                         ${orderList.orderRefundDetailHtml}
-                        <% 
-                            User user = (User)session.getAttribute("user");
-                            if(user.getIsManager())
-                            {
-                        %>
+                        <p>
+                            Reason for refund:
+                        </p>
+                        <div id="refundReason">
+                            <p>dllm I am AN fan</p>
+                        </div>                       
+                    <% 
+                        User user = (User)session.getAttribute("user");
+                        if(user.getIsManager())
+                        {
+                    %>
                     <input type='submit' value="Accept" name="accept" />
                     <input type='submit' value="Reject" name="reject" />
                     <%

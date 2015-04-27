@@ -71,7 +71,7 @@ public class AllOrder {
                 printList +=  "</p>";
                 printList += "</td>";
                 printList += "<td>$"+book.getPrice()+"</td>";
-                printList += "<td>$"+od.getQuantity()+"</td>";
+                printList += "<td>"+od.getQuantity()+"</td>";
                 printList += "<td>$"+o.getTotalPrice()+"</td>";
                 printList += "<td rowspan="+o.getOrderList().size()+" class='ordertotal'>";
                 if(counter==1)

@@ -90,6 +90,10 @@
                     <form action="ProcessRefund" method="POST">
                     <h3 class="center">ORDER HISTORY</h3>
                     ${orderList.orderRefundRequestHtml}
+                    <p>
+                        Reason for refund:
+                    </p>
+                        <textarea rows="5" style="width: 500px"></textarea>                   
                     <p style='color: red'>
                         Confirm to refund?                       
                     </p>
