@@ -76,8 +76,27 @@
                     errorBox.css('display','block');
                     errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
                     return false;
-                }
+                } 
             }
+            
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('error')!=null)
+                {                   
+                    if ($.urlParam('error')=="1")
+                    {
+                        var errorBox = $("#errorContainer");
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password is not correct. Please try again.");
+                    }
+                }
+            });
         </script>
     </head>
     <body>
@@ -93,18 +112,7 @@
         <div id="centerPanel">                                 
             <div id="changepwPageContainer" class="left">               
                 <h2><label for="login">Change Password</label></h2>
-                <div id="errorContainer">
-                            <image src='image/ui-icon-error.png' alt='error' />
-                        <%
-                        if(request.getParameter("error")!=null)
-                        {
-                            if(request.getParameter("error").equals("1"))
-                            {
-                            out.println("Password is not correct. Please try again.");
-                            }
-                        }
-                        %>
-                        </div>
+                <div id="errorContainer"></div>
                 <div id="changepwItemContainer">
                     <h3 class="center">CHANGE PASSWORD</h3>
                     <Form action="ChangePassword" method="POST" onsubmit="return checksubmit()">
@@ -124,6 +132,7 @@
                             <tr>
                                 <td colspan="2" class="center">                                   
                                     <input type="submit" value="Save"/>
+                                    <input type="button" value="Back" onclick="window.history.back()"/>
                                 </td>
                             </tr>
                         </table>

@@ -110,8 +110,8 @@ and open the template in the editor.
     float: none;
     display: block;
     position: relative;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding: 5px 10px;
+    font-size: 14px;
 }
 
 #menuarea ul ul li:hover
