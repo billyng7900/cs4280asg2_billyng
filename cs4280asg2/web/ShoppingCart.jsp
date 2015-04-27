@@ -28,6 +28,7 @@
             {
                 width: 90%;
                 margin: auto;
+                text-align: center;
             }
         </style>
     </head>
@@ -50,7 +51,8 @@
                 {
             %>
                 <!--If no items in cart-->
-                <h3>No Items Yet</h3>
+                <img src="image/shoppingcart-icon-empty.png" alt="empty" align="middle" >
+                <p align="middle">Your shopping cart is empty</p>
             <%
                 }
                 else
@@ -59,7 +61,7 @@
             <form action="Order" method="POST">
             <table class="shoppingCart" cellspacing="0" cellpadding="0">              
                 <tr>
-                    <td width="150px" style="font-size: 20px">Shopping Cart</td>
+                    <td width="150px"></td>
                     <td width="500px"></td>
                     <td width="150px">Price</td>
                     <td width="150px">Quantity</td>
