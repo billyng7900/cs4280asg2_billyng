@@ -113,10 +113,10 @@ public class AllOrder {
         {
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
-            printList += "<th>Order ID</th>";
-            printList += "<th>Order Details</th>";
-            printList += "<th>Request User</th>";
-            printList += "<th>Status</th>";
+            printList += "<th width='20%'>Order ID</th>";
+            printList += "<th width='25%'>Order Details</th>";
+            printList += "<th width='25%'>Request User</th>";
+            printList += "<th width='30%'>Status</th>";
             printList += "</tr>";
             printList += "<tr>";
             printList += "<td>"+o.getOrderID()+"</td>";
@@ -136,9 +136,9 @@ public class AllOrder {
         {
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
-            printList += "<th>Order ID</th>";
-            printList += "<th>Order Details</th>";
-            printList += "<th>Status</th>";
+            printList += "<th width='20%'>Order ID</th>";
+            printList += "<th width='40%'>Order Details</th>";
+            printList += "<th width='40%'>Status</th>";
             printList += "</tr>";
             printList += "<tr>";
             printList += "<td>"+o.getOrderID()+"</td>";

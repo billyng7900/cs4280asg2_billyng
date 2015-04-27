@@ -75,6 +75,25 @@
                     return false;
                 }
             }
+                
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('error')!=null)
+                {                   
+                    if ($.urlParam('error')=="1")
+                    {
+                        var errorBox = $("#errorContainer");
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Wrong username or password. Please try again.");
+                    }
+                }
+            });
         </script>
     </head>
     <body>
@@ -90,18 +109,7 @@
         <div id="centerPanel">                                
             <div id="loginPageContainer" class="left">              
                 <h2><label for="login">Login</label></h2>
-                <div id="errorContainer">
-                    <image src='image/ui-icon-error.png' alt='error' />
-                <%
-                    if(request.getParameter("error")!=null)
-                    {
-                        if(request.getParameter("error").equals("1"))
-                        {
-                           out.println("Wrong username or password");
-                        }
-                    }
-                %>
-                </div>
+                <div id="errorContainer"></div>
                 <div id="loginItemContainer">
                     <h3 class="center">MEGABOOK ID</h3>
                     <Form action="ProcessLogin" method="POST" onsubmit="return checksubmit()">

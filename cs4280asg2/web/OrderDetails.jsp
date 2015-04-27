@@ -116,9 +116,9 @@
                     <input type='submit' value="Reject" name="reject" />
                     <%
                             }
-                    %>
-                    </form>
+                    %>                   
                     <input type="button" value="Back" onclick="window.history.back()">
+                    </form>
                 </div>
             </div>       
         </div>

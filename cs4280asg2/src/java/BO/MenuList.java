@@ -15,7 +15,8 @@ import java.util.*;
 public class MenuList {
     private ArrayList<Menu> menuList;
     private ArrayList<Menu> loginList = new ArrayList<Menu>();
-    private ArrayList<Menu> advanceList = new ArrayList<Menu>();
+    private ArrayList<Menu> userList = new ArrayList<Menu>();
+    private ArrayList<Menu> managerList = new ArrayList<Menu>();
     private Menu shoppingcart = new Menu();
     
     public void setMenuList(ArrayList<Menu> menuList)
@@ -61,11 +62,11 @@ public class MenuList {
             {                   
                 if (m.getMenuAccessType().contains("C"))
                 {
-                   advanceList.add(m);
+                   userList.add(m);
                 }
                 if (m.getMenuAccessType().contains("M"))
                 {
-                   advanceList.add(m);
+                   managerList.add(m);
                 }
                 if (m.getMenuName().toUpperCase().contains("CART"))
                 {
@@ -79,7 +80,11 @@ public class MenuList {
             printlist += "<li>";
             printlist += "<a href='#'><img src='image/ui-icon-advance.png' alt=''></a>";
             printlist += "<ul>";
-            for(Menu m:advanceList)
+            for(Menu m:userList)
+            {
+                printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
+            }
+            for(Menu m:managerList)
             {
                 printlist += "<li><a href='" + m.getMenuPath() + "'>" + m.getMenuName() + "</a></li>" ;
             }

@@ -93,6 +93,10 @@
                                 <td>${user.userName}</td>
                             </tr>
                             <tr>
+                                <td><label for='mypage'>Password</label></td>
+                                <td><input type='password' name='password' value='' placeholder="******"></td>
+                            </tr>
+                            <tr>
                                 <td><label for='mypage'>Real Name</label></td>
                                 <td><input type="text" id="realname" name="realname" value="${user.realName}"/></td>
                             </tr>

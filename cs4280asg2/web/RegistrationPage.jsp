@@ -78,6 +78,25 @@
                     return false;
                 }
             }
+            
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('error')!=null)
+                {                   
+                    if ($.urlParam('error')=="1")
+                    {
+                        var errorBox = $("#errorContainer");
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Username had been used. Please use another one.");
+                    }
+                }
+            });
         </script>
     </head>
     <body>
@@ -93,21 +112,10 @@
         <div id="centerPanel">  
             <div id="registerPageContainer" class="left">
                 <h2><label for="login">Register</label></h2>
+                <div id="errorContainer"></div>
                 <div id="registerItemContainer">
-                    <h3 class="center">PERSONAL INFORMATION<h3>
-                    <Form action="Register" onsubmit="return checksubmit()" method="POST">
-                        <div id="errorContainer">
-                            <image src='image/ui-icon-error.png' alt='error' />
-                        <%
-                        if(request.getParameter("error")!=null)
-                        {
-                            if(request.getParameter("error").equals("1"))
-                            {
-                            out.println("Username had been used. Please use another one.");
-                            }
-                        }
-                        %>
-                        </div>
+                    <h3 class="center">PERSONAL INFORMATION</h3>
+                     <Form action="Register" onsubmit="return checksubmit()" method="POST">                         
                         <table cellspacing="0" cellpadding="0">                           
                             <tr>
                                 <td><label for='username'>Username</label></td>
