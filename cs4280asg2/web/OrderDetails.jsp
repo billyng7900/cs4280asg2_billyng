@@ -89,7 +89,7 @@
                 <h2><label for="history">Purchase History</label></h2>
                 <div id="orderItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
-                    <form action="" method="">
+                    <form action="RefundProcess" method="POST">
                         ${orderList.orderRefundDetailHtml}
                         <% 
                             User user = (User)session.getAttribute("user");

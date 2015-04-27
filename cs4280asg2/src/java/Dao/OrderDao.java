@@ -216,7 +216,7 @@ public class OrderDao {
             ArrayList<OrderList> orderList = new ArrayList<OrderList>();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("Select * from [Order_Point] where status = 2 and userID = ? order by [orderID] desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("Select * from [Order_Point] where (status = 2 or status = 3 or status = 4) and userID = ? order by [orderID] desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
             if(rs!=null)

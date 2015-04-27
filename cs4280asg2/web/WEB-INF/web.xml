@@ -104,6 +104,10 @@
         <servlet-name>OrderDetailController</servlet-name>
         <servlet-class>controller.OrderDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RefundLogicController</servlet-name>
+        <servlet-class>controller.RefundLogicController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>OrderDetailController</servlet-name>
         <url-pattern>/OrderDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefundLogicController</servlet-name>
+        <url-pattern>/RefundProcess</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
