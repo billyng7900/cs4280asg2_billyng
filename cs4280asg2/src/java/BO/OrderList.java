@@ -20,6 +20,7 @@ public class OrderList {
     private Calendar orderdate;
     private int status;
     private float totalprice;
+    private int userID;
     
     public void setOrderList(ArrayList<Order> orderList)
     {
@@ -80,7 +81,15 @@ public class OrderList {
     {
         return status;
     }
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
+    }
     
+    public int getUserID()
+    {
+        return userID;
+    }
     public String getStatusString()
     {
         if(status==1)
@@ -91,7 +100,7 @@ public class OrderList {
             return "refund success";
     }
     
-    public String getOrderRefund()
+    public String getOrderRefundRequestHtml()
     {
         String printList = "";
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm");

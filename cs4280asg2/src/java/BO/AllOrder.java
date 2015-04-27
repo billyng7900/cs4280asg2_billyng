@@ -86,7 +86,7 @@ public class AllOrder {
                     printList +=  "<td>"+o.getPointUse()+"</td>";
                     printList +=  "</tr>";
                     printList +=  "<tr>";
-                    if(diffDays<=7)
+                    if(diffDays<=7&&o.getStatus()==1)
                     {
                         printList +=  "<td colspan='2'>";
                         printList +=  "<input type='submit' value='Refund' />";
@@ -102,6 +102,29 @@ public class AllOrder {
            }
             printList += "</table>";
             printList += "</form>";
+        }
+        return printList;
+    }
+    
+    public String getRefundListHtml()
+    {
+        String printList = "";
+        for(OrderList o:allList)
+        {
+            printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
+            printList += "<tr>";
+            printList += "<th>Order ID</th>";
+            printList += "<th>Order Details</th>";
+            printList += "<th>Request User</th>";
+            printList += "<th>Status</th>";
+            printList += "</tr>";
+            printList += "<tr>";
+            printList += "<td>"+o.getOrderID()+"</td>";
+            printList += "<td><a href='OrderDetails.jsp?orderID="+o.getOrderID()+"'>Order Details</a></td>";
+            printList += "<td>"+o.getUserID()+"</td>";
+            printList += "<td>"+o.getStatusString()+"</td>";
+            printList += "</tr>";
+            printList += "</table>";
         }
         return printList;
     }

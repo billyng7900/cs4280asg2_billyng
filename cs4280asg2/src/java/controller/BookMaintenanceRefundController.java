@@ -5,19 +5,23 @@
  */
 package controller;
 
-import Dao.*;
 import BO.*;
+import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Billy
+ * @author billyng
  */
-public class PurchaseHistoryController extends HttpServlet {
+public class BookMaintenanceRefundController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,36 +37,16 @@ public class PurchaseHistoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession();
-            if(session.getAttribute("user")==null)
-            {
-                response.sendRedirect("Login.jsp");
-            }
-            else
-            {
-                AllOrder allOrder = new AllOrder();
-                User user = (User)session.getAttribute("user");
-                OrderDao dao = new OrderDao();
-                BookDao bookdao = new BookDao();
-                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId());
-                ArrayList<OrderList> allList = new ArrayList<OrderList>();
-                for(int i:orderIDList)
-                {
-                    OrderList orderlist = dao.getOrderPointByOrderID(i);
-                    ArrayList<Order> order = dao.getOrderRecordByOrderID(i);
-                    for(Order o:order)
-                    {
-                        Book book = bookdao.getBook(o.getBookID());
-                        o.setBook(book);
-                    }
-                    orderlist.setOrderList(order);
-                    allList.add(orderlist);
-                }
-                allOrder.setAllOrderList(allList);
-                request.setAttribute("allOrder", allOrder);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/PurchaseHistory.jsp");
-                dispatcher.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BookMaintenanceRefundController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BookMaintenanceRefundController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }
@@ -80,7 +64,27 @@ public class PurchaseHistoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")==null)
+            response.sendRedirect("Home");
+        else
+        {
+            User user = (User)session.getAttribute("user");
+            if(user.getIsManager())
+            {
+                OrderDao dao = new OrderDao();
+                AllOrder bo = new AllOrder();
+                ArrayList<OrderList> refundlist = dao.getRefundList();
+                bo.setAllOrderList(refundlist);
+                request.setAttribute("refundlist", bo);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MaintenanceRefund.jsp");
+                dispatcher.forward(request, response);
+            }
+            else
+                response.sendRedirect("Home");
+        }
     }
 
     /**
@@ -94,7 +98,7 @@ public class PurchaseHistoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**

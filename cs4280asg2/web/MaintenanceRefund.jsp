@@ -73,20 +73,7 @@
                 <h2><label for="history">Refund Request</label></h2>
                 <div id="refundItemContainer">
                     <h3 class="center">ALL REQUESTS</h3>
-                    <table width="90%" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Order Details</th>
-                            <th>Request User</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="OrderDetails.jsp?orderID=1">Order Details</a></td>
-                            <td>Admin</td>
-                            <td>Pending</td>
-                        </tr>
-                    </table>
+                    ${refundlist.refundListHtml}
                 </div>
             </div>       
         </div>

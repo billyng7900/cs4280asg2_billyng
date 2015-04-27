@@ -104,12 +104,12 @@ public class CheckoutController extends HttpServlet {
                         int newAvailability = dbbook.getAvailability()-b.getQuantity();
                         bookdao.updateBookAvailability(b.getBook().getBookID(), newAvailability);
                         
-                        dao.insertOrderRecord(newOrderId,user.getUserId(), b.getBook().getBookID(), b.getQuantity()); 
+                        dao.insertOrderRecord(newOrderId, b.getBook().getBookID(), b.getQuantity()); 
                     }
                     
                     int userremainsloyaltypoints = latestLoyaltyPoints - pointwilluse + (pointwillearnint/10);
                     userdao.updateUserPoint(user.getUserId(), userremainsloyaltypoints);
-                    dao.insertOrderPoint(newOrderId, pointwilluse,cart.getTotalPrice());
+                    dao.insertOrderPoint(newOrderId, pointwilluse,cart.getTotalPrice(),user.getUserId());
                     session.setAttribute("cart", null);
                     response.sendRedirect("OrderSuccessful.jsp");
                 }

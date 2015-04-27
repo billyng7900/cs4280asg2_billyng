@@ -20,16 +20,15 @@ import java.util.GregorianCalendar;
  * @author billyng
  */
 public class OrderDao {
-    public int insertOrderRecord(int orderID,int userID,int bookID,int quantity)
+    public int insertOrderRecord(int orderID,int bookID,int quantity)
     {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, orderID);
-            pstmt.setInt(2, userID);
-            pstmt.setInt(3, bookID);
-            pstmt.setInt(4, quantity);
+            pstmt.setInt(2, bookID);
+            pstmt.setInt(3, quantity);
             int affectedRow = pstmt.executeUpdate();
             if(affectedRow>0)
                 return 1;
@@ -42,19 +41,19 @@ public class OrderDao {
         }
     }
     
-    public int insertOrderPoint(int orderID,int pointuse,float totalprice)
+    public int insertOrderPoint(int orderID,int pointuse,float totalprice,int userID)
     {
         try{
             Calendar datenow = Calendar.getInstance();
             Timestamp timestamp = new Timestamp(datenow.getTimeInMillis());
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?,?,?,1)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            pstmt = con.prepareStatement("insert into [Order_Point] values (?,?,?,?,1)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("insert into [Order_Point] values (?,?,?,?,1,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, orderID);
             pstmt.setInt(2, pointuse);
             pstmt.setTimestamp(3, timestamp);
             pstmt.setFloat(4, totalprice);
+            pstmt.setInt(5, userID);
             int affectedRow = pstmt.executeUpdate();
             if(affectedRow>0)
                 return 1;
@@ -73,7 +72,7 @@ public class OrderDao {
             ArrayList<Integer> orderIDList = new ArrayList<Integer>();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order] where userID = ? order by OrderID desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? order by OrderID desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
             if(rs!=null)
@@ -93,15 +92,36 @@ public class OrderDao {
         }
     }
     
-    public ArrayList<Order> getOrderRecordByUser(int orderID,int userID)
+    public boolean getOrderIsUser(int orderID,int userID)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ? and userID = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setInt(1, orderID);
+            pstmt.setInt(2, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs!=null&&rs.next()!=false)
+            {
+                return true;
+            }
+            else
+                return false;
+        }catch(SQLException e){
+            return false;
+        }catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+    
+    public ArrayList<Order> getOrderRecordByOrderID(int orderID)
     {
         try{
             ArrayList<Order> orderList = new ArrayList<Order>();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("select * from [Order] where orderID = ? and userID = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("select * from [Order] where orderID = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, orderID);
-            pstmt.setInt(2, userID);
             ResultSet rs = pstmt.executeQuery();
             if(rs!=null)
             {
@@ -125,7 +145,7 @@ public class OrderDao {
         }
     }
     
-    public OrderList getOrderPointByUser(int orderID)
+    public OrderList getOrderPointByOrderID(int orderID)
     {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -158,13 +178,44 @@ public class OrderDao {
         }
     }
     
+    public ArrayList<OrderList> getRefundList()
+    {   
+        try{
+            ArrayList<OrderList> orderList = new ArrayList<OrderList>();
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            Statement smt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = smt.executeQuery("Select * from [Order_Point] where status = 2 order by [orderID] desc");
+            if(rs!=null)
+            {
+                while(rs.next())
+                {   
+                    OrderList order = new OrderList();
+                    int orderID = rs.getInt("orderID");
+                    int orderStatus = rs.getInt("status");
+                    int userID = rs.getInt("userID");
+                    order.setOrderID(orderID);
+                    order.setUserID(userID);
+                    order.setStatus(orderStatus);
+                    orderList.add(order);
+                }
+                return orderList;
+            }
+            return null;
+        }catch(SQLException e){
+            return null;
+        }catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
+    
     public int getNewOrderID()
     {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
             Statement smt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = smt.executeQuery("Select [orderID] from [Order] order by [orderID] desc");
+            ResultSet rs = smt.executeQuery("Select [orderID] from [Order_Point] order by [orderID] desc");
             int latestorderid = -1;
             if(rs!= null)
             {
@@ -182,6 +233,26 @@ public class OrderDao {
             {
                 return -1;
             }
+        }catch(SQLException e){
+            return -1;
+        }catch (ClassNotFoundException e) {
+            return -1;
+        }
+    }
+    
+    public int updateOrderStatus(int orderID,int newStatus)
+    {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("update [Order_Point] set status = ? where orderID = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setInt(1, newStatus);
+            pstmt.setInt(2, orderID);
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+                return 1;
+            else
+                return -1;
         }catch(SQLException e){
             return -1;
         }catch (ClassNotFoundException e) {

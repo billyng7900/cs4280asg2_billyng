@@ -87,12 +87,14 @@
             <div id="refundPageContainer" class="left">
                 <h2><label for="history">Refund</label></h2>
                 <div id="refundItemContainer">
+                    <form action="ProcessRefund" method="POST">
                     <h3 class="center">ORDER HISTORY</h3>
-                    ${orderList.orderRefund}
+                    ${orderList.orderRefundRequestHtml}
                     <p style='color: red'>
                         Confirm to refund?                       
                     </p>
-                    <input type='button' value="Refund">
+                    <input type='submit' value="Refund">
+                    </form>
                 </div>
             </div>       
         </div>

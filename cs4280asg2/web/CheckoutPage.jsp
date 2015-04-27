@@ -73,6 +73,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
+            var itemprice = parseFloat($("#price").text());
+            $("#pointsearn").text(itemprice/10);
             $("#somepoints").change(function() {
                 if(this.checked)
                 {
@@ -137,6 +139,7 @@
                 totalprice = 0;
             $("#totalprice").text(totalprice);
             $("#totalpricehidden").val(totalprice);
+            $("#pointsearn").text(totalprice/10);
             $("#pointuse").val(pointuse);
         }
         </script>
@@ -229,7 +232,7 @@
                                 </td>
                                 <td class="checkoutItemContainer" style="border-right: 1px solid #E8E8E8">
                                     <p>$<span id="totalprice">${cart.totalPrice}</span></p>
-                                    <p>0</p>
+                                    <p id="pointsearn">0</p>
                                 </td>
                             <input type="hidden" name="totalpricehidden" id="totalpricehidden" value="${cart.totalPrice}" />
                             </tr>                    
