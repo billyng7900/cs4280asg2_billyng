@@ -22,6 +22,8 @@ public class BookDao {
 
     public Book getBook(int bookID, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("Select * from [book] where [bookID] = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        try
+        {
         pstmt.setInt(1, bookID);
         ResultSet rs = pstmt.executeQuery();
         if (rs != null && rs.next() != false) {
@@ -40,12 +42,12 @@ public class BookDao {
             book.setAuthor(author);
             book.setPrice(price);
             rs.close();
-            if (con != null) {
-                con.close();
-            }
             return book;
         }
         return null;
+        }finally{
+            pstmt.close();
+        }
     }
 
     public int updateBookAvailability(int bookID, int newAvailability, Connection con) throws SQLException {

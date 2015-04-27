@@ -52,7 +52,7 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("ShoppingCart.jsp");
+        doPost(request,response);
     }
 
     /**
@@ -126,6 +126,7 @@ public class CheckoutController extends HttpServlet {
                 }
             }
         }catch(Exception e){
+            e.printStackTrace();
             cm.rollbackConnection();
         }finally {
             cm.closeConnection();

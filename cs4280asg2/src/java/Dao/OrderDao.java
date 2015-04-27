@@ -25,14 +25,18 @@ public class OrderDao {
 
     public int insertOrderRecord(int orderID, int bookID, int quantity, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("insert into [Order] values (?,?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, orderID);
-        pstmt.setInt(2, bookID);
-        pstmt.setInt(3, quantity);
-        int affectedRow = pstmt.executeUpdate();
-        if (affectedRow > 0) {
-            return 1;
-        } else {
-            return -1;
+        try {
+            pstmt.setInt(1, orderID);
+            pstmt.setInt(2, bookID);
+            pstmt.setInt(3, quantity);
+            int affectedRow = pstmt.executeUpdate();
+            if (affectedRow > 0) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } finally {
+            pstmt.close();
         }
     }
 
@@ -40,87 +44,109 @@ public class OrderDao {
         Calendar datenow = Calendar.getInstance();
         Timestamp timestamp = new Timestamp(datenow.getTimeInMillis());
         PreparedStatement pstmt = con.prepareStatement("insert into [Order_Point] values (?,?,?,?,1,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, orderID);
-        pstmt.setInt(2, pointuse);
-        pstmt.setTimestamp(3, timestamp);
-        pstmt.setFloat(4, totalprice);
-        pstmt.setInt(5, userID);
-        int affectedRow = pstmt.executeUpdate();
-        if (affectedRow > 0) {
-            return 1;
-        } else {
-            return -1;
+        try {
+            pstmt.setInt(1, orderID);
+            pstmt.setInt(2, pointuse);
+            pstmt.setTimestamp(3, timestamp);
+            pstmt.setFloat(4, totalprice);
+            pstmt.setInt(5, userID);
+            int affectedRow = pstmt.executeUpdate();
+            if (affectedRow > 0) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } finally {
+            pstmt.close();
         }
     }
 
     public ArrayList<Integer> getAllOrderIDByUser(int userID, int status, Connection con) throws SQLException {
         ArrayList<Integer> orderIDList = new ArrayList<Integer>();
         PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? and status = ? order by OrderID desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, userID);
-        pstmt.setInt(2, status);
-        ResultSet rs = pstmt.executeQuery();
-        if (rs != null) {
-            while (rs.next()) {
-                int orderID = rs.getInt("orderID");
-                orderIDList.add(orderID);
+        try {
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, status);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    int orderID = rs.getInt("orderID");
+                    orderIDList.add(orderID);
+                }
+                return orderIDList;
             }
-            return orderIDList;
+            return null;
+        } finally {
+            pstmt.close();
         }
-        return null;
     }
 
     public boolean getOrderIsUser(int orderID, int userID, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ? and userID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, orderID);
-        pstmt.setInt(2, userID);
-        ResultSet rs = pstmt.executeQuery();
-        if (rs != null && rs.next() != false) {
-            return true;
-        } else {
-            return false;
+        try {
+            pstmt.setInt(1, orderID);
+            pstmt.setInt(2, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs != null && rs.next() != false) {
+                return true;
+            } else {
+                return false;
+            }
+        } finally {
+            pstmt.close();
         }
     }
 
     public ArrayList<Order> getOrderRecordByOrderID(int orderID, Connection con) throws SQLException {
         ArrayList<Order> orderList = new ArrayList<Order>();
         PreparedStatement pstmt = con.prepareStatement("select * from [Order] where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, orderID);
-        ResultSet rs = pstmt.executeQuery();
-        if (rs != null) {
-            while (rs.next()) {
-                Order order = new Order();
-                int bookID = rs.getInt("bookID");
-                int quantity = rs.getInt("quantity");
-                order.setOrderID(orderID);
-                order.setBookID(bookID);
-                order.setQuantity(quantity);
-                orderList.add(order);
+        try {
+            pstmt.setInt(1, orderID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    Order order = new Order();
+                    int bookID = rs.getInt("bookID");
+                    int quantity = rs.getInt("quantity");
+                    order.setOrderID(orderID);
+                    order.setBookID(bookID);
+                    order.setQuantity(quantity);
+                    orderList.add(order);
+                }
+                rs.close();
+                return orderList;
             }
-            return orderList;
+            return null;
+        } finally {
+            pstmt.close();
         }
-        return null;
     }
 
     public OrderList getOrderPointByOrderID(int orderID, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        pstmt.setInt(1, orderID);
-        ResultSet rs = pstmt.executeQuery();
-        if (rs != null && rs.next() != false) {
-            Timestamp orderdate = rs.getTimestamp("order_date");
-            int status = rs.getInt("status");
-            int pointuse = rs.getInt("point_use");
-            float totalprice = rs.getFloat("total_price");
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTimeInMillis(orderdate.getTime());
-            OrderList orderList = new OrderList();
-            orderList.setOrderDate(calendar);
-            orderList.setOrderID(orderID);
-            orderList.setPointUse(pointuse);
-            orderList.setTotalPrice(totalprice);
-            orderList.setStatus(status);
-            return orderList;
-        } else {
-            return null;
+        try {
+            pstmt.setInt(1, orderID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs != null && rs.next() != false) {
+                Timestamp orderdate = rs.getTimestamp("order_date");
+                int status = rs.getInt("status");
+                int pointuse = rs.getInt("point_use");
+                float totalprice = rs.getFloat("total_price");
+                GregorianCalendar calendar = new GregorianCalendar();
+                calendar.setTimeInMillis(orderdate.getTime());
+                OrderList orderList = new OrderList();
+                orderList.setOrderDate(calendar);
+                orderList.setOrderID(orderID);
+                orderList.setPointUse(pointuse);
+                orderList.setTotalPrice(totalprice);
+                orderList.setStatus(status);
+                rs.close();
+                return orderList;
+            } else {
+                return null;
+            }
+        } finally {
+            pstmt.close();
         }
     }
 
