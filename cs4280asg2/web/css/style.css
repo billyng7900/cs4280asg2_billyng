@@ -82,6 +82,38 @@ table
     background-color: #FFFFFF;
 }
 
+#errorContainer
+{
+    width:70%;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    padding-bottom: 20px;
+    display: none;
+}
+
+input[type=submit]
+{
+    border : solid 1px #2490D0;
+    font-size : 14px;
+    margin: 2px;
+    border-radius: 3px; 
+    color : #ffffff;
+    padding: 5px 10px;
+    background-color : #2490D0;
+}
+
+input[type=button]
+{
+    border : solid 1px #2490D0;
+    font-size : 14px;
+    margin: 2px;
+    border-radius: 3px; 
+    color : #ffffff;
+    padding: 5px 10px;
+    background-color : #2490D0;
+}
+
 /**************common************/
 
 /**************home,details************/
@@ -125,30 +157,5 @@ table
 
 /**************home,details************/
 
-input[type=submit]
-{
-    border : solid 1px #2490D0;
-    font-size : 14px;
-    margin: 2px;
-    border-radius: 3px; 
-    color : #ffffff;
-    padding: 5px 10px;
-    background-color : #2490D0;
-}
 
-input[type=button]
-{
-    border : solid 1px #2490D0;
-    font-size : 14px;
-    margin: 2px;
-    border-radius: 3px; 
-    color : #ffffff;
-    padding: 5px 10px;
-    background-color : #2490D0;
-}
-
-input[type=text]
-{
-    //do something
-}
 

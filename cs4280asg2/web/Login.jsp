@@ -61,14 +61,17 @@
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
+                var errorBox = $("#errorContainer");
                 if(!username || username.replace(/ /g,'').length==0)
                 {
-                    alert("Username cannot be empty");
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Username cannot be empty");
                     return false;
                 }
                 else if (!password || password.replace(/ /g,'').length==0)
-                {
-                    alert("Password cannot be empty");
+                {                  
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
                     return false;
                 }
             }
@@ -81,11 +84,14 @@
         <div id="topPanel">
             <div class="topnav">
                 <jsp:include page="common/TopPanel.html" flush="true" />
-                <jsp:include page="Menu" flush="true" />
+                <jsp:include page="Menu" flush="true" /> 
             </div>
         </div>        
         <div id="centerPanel">                                
-            <div id="loginPageContainer" class="left">
+            <div id="loginPageContainer" class="left">              
+                <h2><label for="login">Login</label></h2>
+                <div id="errorContainer">
+                    <image src='image/ui-icon-error.png' alt='error' />
                 <%
                     if(request.getParameter("error")!=null)
                     {
@@ -95,7 +101,7 @@
                         }
                     }
                 %>
-                <h2><label for="login">Login</label></h2>
+                </div>
                 <div id="loginItemContainer">
                     <h3 class="center">MEGABOOK ID</h3>
                     <Form action="ProcessLogin" method="POST" onsubmit="return checksubmit()">

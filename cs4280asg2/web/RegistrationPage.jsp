@@ -58,19 +58,23 @@
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var password_confirm = $("#pw_confirm").val();
+                var errorBox = $("#errorContainer");
                 if(password != password_confirm)
                 {
-                    alert("The password not match!");
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password do not match");
                     return false;
                 }
                 if(!username || username.replace(/ /g,'').length==0)
                 {
-                    alert("Username cannot be empty");
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Username cannot be empty");        
                     return false;
                 }
                 else if (!password || password.replace(/ /g,'').length==0)
                 {
-                    alert("Password cannot be empty");
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
                     return false;
                 }
             }
@@ -92,6 +96,8 @@
                 <div id="registerItemContainer">
                     <h3 class="center">PERSONAL INFORMATION<h3>
                     <Form action="Register" onsubmit="return checksubmit()" method="POST">
+                        <div id="errorContainer">
+                            <image src='image/ui-icon-error.png' alt='error' />
                         <%
                         if(request.getParameter("error")!=null)
                         {
@@ -101,6 +107,7 @@
                             }
                         }
                         %>
+                        </div>
                         <table cellspacing="0" cellpadding="0">                           
                             <tr>
                                 <td><label for='username'>Username</label></td>
