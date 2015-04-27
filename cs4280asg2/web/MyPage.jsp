@@ -67,6 +67,39 @@
                 text-decoration: underline;
             }
         </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            function checksubmit()
+            {               
+                var password = $("#password").val();               
+                var errorBox = $("#errorContainer");               
+                if(!password || password.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter your password");        
+                    return false;
+                }
+            }
+            
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('error')!=null)
+                {                   
+                    if ($.urlParam('error')=="1")
+                    {
+                        var errorBox = $("#errorContainer");
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password is not correct. Please try again.");
+                    }
+                }
+            });
+        </script>
     </head>
     <body>
         <div id="header" class="banner">
@@ -81,9 +114,9 @@
         <div id="centerPanel">
             <div id="myPageContainer" class="left">
                 <h2><label for="login">My Page</label></h2>
-                <div id="myItemContainer">
-                    
-                    <Form action="MyPageSave" method="Post">
+                <div id="errorContainer"></div>
+                <div id="myItemContainer">                   
+                    <Form action="MyPageSave" method="Post" onsubmit="return checksubmit()">
                         <table cellspacing="0" cellpadding="0"> 
                             <tr>
                                 <td colspan="2"><h3 class="center">MY ACCOUNT DETAILS<h3><td>
@@ -94,7 +127,7 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Password</label></td>
-                                <td><input type='password' name='password' value='' placeholder="******"></td>
+                                <td><input type='password' name='password' id="password" value=''></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Real Name</label></td>
