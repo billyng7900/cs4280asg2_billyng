@@ -18,6 +18,7 @@
             {
                 float: left;
                 padding-bottom: 50px;
+                width: 100%;
             }
             
             .contentItem

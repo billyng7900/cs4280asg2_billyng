@@ -97,7 +97,7 @@ public class DeleteCartController extends HttpServlet {
                 }
             }
             bo.setShoppingCart(shoppingcart);
-            if(shoppingcart.size()==1)
+            if(shoppingcart.size()==0)
                 session.setAttribute("cart", null);
             else
                 session.setAttribute("cart", bo);

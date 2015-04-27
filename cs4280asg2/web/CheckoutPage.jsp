@@ -161,8 +161,7 @@
             <div id="checkoutPageContainer">
                 <h2><label for="payment">Checkout</label></h2>              
                 <div id="checkableItemContainer">
-                    <form action="Checkout">
-                        
+                    <form action="Checkout" method="POST">                      
                         <table width="90%" cellspacing="0" cellpadding="0">                          
                             <tr>
                                 <th colspan="4"><h3 class="center">PAYMENT METHOD</h3></td>                                
