@@ -63,12 +63,9 @@ public class MenuList {
                 {
                    advanceList.add(m);
                 }
-                if(type==3)
+                if (m.getMenuAccessType().contains("M"))
                 {
-                    if (m.getMenuAccessType().contains("M"))
-                    {
-                       advanceList.add(m);
-                    }
+                   advanceList.add(m);
                 }
                 if (m.getMenuName().toUpperCase().contains("CART"))
                 {

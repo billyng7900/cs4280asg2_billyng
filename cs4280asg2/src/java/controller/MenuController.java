@@ -35,8 +35,12 @@ public class MenuController extends HttpServlet{
             }
             else
             {
+                User user = (User)session.getAttribute("user");
                 dao = new MenuDao();
-                menuList = dao.getMenu(2);   
+                if(user.getIsManager())
+                    menuList = dao.getMenu(3);
+                else
+                    menuList = dao.getMenu(2);   
                 MenuList mo = new MenuList();
                 mo.setMenuList(menuList);
                 out.println(mo.getMenuList(2));
