@@ -45,7 +45,7 @@ public class AllOrder {
             printList += "<form action='RequestRefund' method='post'>";
             printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
-            printList += "<th colspan='4'>";
+            printList += "<th colspan='5'>";
             printList += "<label class='orderinfo'>Order Date: "+orderdate+"</label>";
             printList += "<label class='orderinfo'>Order ID: "+o.getOrderID()+"</label>";
             printList += "<input type='hidden' name='orderID' value='"+o.getOrderID()+"'/>";
@@ -54,8 +54,9 @@ public class AllOrder {
             printList += "</tr>";
             printList +=  "<tr>";
             printList +=  "<td class='orderheader' width='40%'>Item</td>";
-            printList +=  "<td class='orderheader' width='15%'>Price</td>";
-            printList +=  "<td class='orderheader' width='15%'>Quantity</td>";
+            printList +=  "<td class='orderheader' width='10%'>Price</td>";
+            printList +=  "<td class='orderheader' width='10%'>Quantity</td>";
+            printList +=  "<td class='orderheader' width='10%'>Net Price</td>";
             printList +=  "<td class='orderheader' width='30%'></td>";
             printList +=  "</tr>";
             int counter = 1;
@@ -71,6 +72,7 @@ public class AllOrder {
                 printList += "</td>";
                 printList += "<td>$"+book.getPrice()+"</td>";
                 printList += "<td>$"+od.getQuantity()+"</td>";
+                printList += "<td>$"+o.getTotalPrice()+"</td>";
                 printList += "<td rowspan="+o.getOrderList().size()+" class='ordertotal'>";
                 if(counter==1)
                 {

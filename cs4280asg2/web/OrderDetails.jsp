@@ -80,7 +80,7 @@
         <div id="topPanel">
             <div class="topnav">
                 <jsp:include page="common/TopPanel.html" flush="true" />
-                <jsp:include page="Menu" flush="true" />
+                <jsp:include page="Menu" flush="true" /> 
             </div>
         </div>
         <div id="centerPanel">                   
@@ -90,7 +90,7 @@
                     <h3 class="center">ORDER HISTORY</h3>
                     <table width="90%" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th colspan="4">
+                            <th colspan="5">
                                 <label class="orderinfo">Order Date: 2015/04/24 17:17</label>
                                 <label class="orderinfo">Order ID: 0000000000</label>
                                 <label class="orderinfo">Purchase Status: Success</label>
@@ -98,8 +98,9 @@
                         </tr>
                         <tr>
                             <td class="orderheader" width="40%">Item</td>
-                            <td class="orderheader" width="15%">Price</td>
-                            <td class="orderheader" width="15%">Quantity</td>
+                            <td class="orderheader" width="10%">Price</td>
+                            <td class="orderheader" width="10%">Quantity</td>
+                            <td class="orderheader" width="10%">Net Price</td>
                             <td class="orderheader" width="30%"></td>
                         </tr>
                         <tr>
@@ -111,6 +112,7 @@
                             </td>
                             <td>$24.37</td>
                             <td>1</td>
+                            <td>$24.37</td>
                             <td rowspan="2" class="ordertotal">
                                 <table width='90%'>
                                     <tr>
@@ -127,6 +129,8 @@
                     </table>                    
                     <input type='button' value="Accept">
                     <input type='button' value="Reject">
+                    <br>Above: only role=manager, Below: user //please delete me<br>
+                    <input type="button" value="Back" onclick="window.history.back()">
                 </div>
             </div>       
         </div>
