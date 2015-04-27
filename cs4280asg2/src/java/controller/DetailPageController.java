@@ -32,20 +32,12 @@ public class DetailPageController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession(true);
-            if(session.getAttribute("user")==null)
-            {
-                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI()+"?"+request.getQueryString());
-            }
-            else
-            {
                 BookDao dao = new BookDao();
                 String bookID = request.getParameter("bookID");
                 Book book = dao.getBook(Integer.parseInt(bookID));
                 request.setAttribute("book", book);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DetailPage.jsp");
                 dispatcher.forward(request, response);
-            }
         }finally {
             out.close();
         }

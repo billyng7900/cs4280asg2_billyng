@@ -44,7 +44,7 @@ public class PurchaseHistoryController extends HttpServlet {
                 User user = (User)session.getAttribute("user");
                 OrderDao dao = new OrderDao();
                 BookDao bookdao = new BookDao();
-                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId());
+                ArrayList<Integer> orderIDList = dao.getAllOrderIDByUser(user.getUserId(),1);
                 ArrayList<OrderList> allList = new ArrayList<OrderList>();
                 for(int i:orderIDList)
                 {

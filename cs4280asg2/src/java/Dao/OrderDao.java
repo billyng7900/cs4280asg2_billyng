@@ -66,14 +66,15 @@ public class OrderDao {
         }
     }
     
-    public ArrayList<Integer> getAllOrderIDByUser(int userID)
+    public ArrayList<Integer> getAllOrderIDByUser(int userID, int status)
     {
         try{
             ArrayList<Integer> orderIDList = new ArrayList<Integer>();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
-            PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? order by OrderID desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? and status = ? order by OrderID desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             pstmt.setInt(1, userID);
+            pstmt.setInt(2, status);
             ResultSet rs = pstmt.executeQuery();
             if(rs!=null)
             {

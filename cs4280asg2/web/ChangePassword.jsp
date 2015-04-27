@@ -61,7 +61,7 @@
                 <h2><label for="login">Login</label></h2>
                 <div id="changepwItemContainer">
                     <h3 class="center">CHANGE PASSWORD</h3>
-                    <Form action="ProcessLogin" method="POST" onsubmit="return checksubmit()">
+                    <Form action="ChangePassword" method="POST" onsubmit="return checksubmit()">
                         <table width="70%" cellspacing="0" cellpadding="0">                                                         
                             <tr>
                                 <td><label for='mypage'>Old Password</label></td>

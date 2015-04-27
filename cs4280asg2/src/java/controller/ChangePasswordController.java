@@ -5,18 +5,21 @@
  */
 package controller;
 
-import BO.*;
+import BO.User;
+import Dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author billyng
  */
-public class OrderController extends HttpServlet {
+public class ChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,38 +35,16 @@ public class OrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession();
-            if(session.getAttribute("user")==null)
-            {
-                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI());
-            }
-            else
-            {
-                if(session.getAttribute("cart")==null)
-                {
-                    response.sendRedirect("Home");
-                }
-                else
-                {
-                    ShoppingCart shoppingcart = (ShoppingCart)session.getAttribute("cart");
-                    ArrayList<CartBook> booklist = shoppingcart.getShoppingCart();
-                    int counter = 1;
-                    String quantitywithnumber = "quantity";
-                    for(int i=0;i<booklist.size();i++)
-                    {
-                        quantitywithnumber = "quantity";
-                        quantitywithnumber += counter;
-                        int quantity = Integer.parseInt(request.getParameter(quantitywithnumber));
-                        if(booklist.get(i).getQuantity()!=quantity)
-                        {
-                            booklist.get(i).setQuantity(quantity);
-                        }
-                        counter++;
-                    }
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CheckoutPage.jsp");
-                    dispatcher.forward(request, response);
-                }
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChangePasswordController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }
@@ -95,7 +76,31 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+            if(session.getAttribute("user")==null)
+            {
+                response.sendRedirect("Home");
+            }
+            else
+            {
+                User user = (User)session.getAttribute("user");
+                String password = request.getParameter("password");
+                String newpassword = request.getParameter("newpw");
+                UserDao dao = new UserDao();
+                User checkUser = dao.getUser(user.getUserName(), password);
+                if(checkUser==null)
+                    response.sendRedirect("ChangePassword.jsp?error=1");
+                else
+                {
+                    int success = dao.updateUserPassword(user.getUserId(), newpassword);
+                    if(success==1)
+                        response.sendRedirect("MyPage");
+                    else
+                        response.sendRedirect("ChangePassword.jsp?error=1");
+                }
+            }
     }
 
     /**

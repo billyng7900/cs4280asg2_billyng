@@ -92,6 +92,26 @@ public class UserDao {
         } 
     }
     
+    public int updateUserPassword(int userID,String newpassword)
+    {
+       try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("Update [User] SET [password] = ? where [userID] = ?",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setString(1, newpassword);
+            pstmt.setInt(2,userID);
+            int affectRows = pstmt.executeUpdate();
+            if(affectRows>0)
+                return 1;
+            else
+                return -1;
+        }catch (ClassNotFoundException e) {
+            return -1;
+        }catch (SQLException e) {
+            return -1;
+        } 
+    }
+    
     public int updateUser(String realname,int userID)
     {
        try{

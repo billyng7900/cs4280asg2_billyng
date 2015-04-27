@@ -88,6 +88,10 @@
         <servlet-name>BookMaintenanceRefundController</servlet-name>
         <servlet-class>controller.BookMaintenanceRefundController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>BookMaintenanceRefundController</servlet-name>
         <url-pattern>/BookMaintenanceRefund</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
