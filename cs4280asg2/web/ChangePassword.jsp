@@ -52,13 +52,7 @@
                 var password = $("#password").val();
                 var new_pw = $("#newpw").val();
                 var password_confirm = $("#confirm_newpw").val();
-                var errorBox = $("#errorContainer");
-                if(new_pw != password_confirm)
-                {
-                    errorBox.css('display','block');
-                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password do not match");
-                    return false;
-                }
+                var errorBox = $("#errorContainer");               
                 if(!password || password.replace(/ /g,'').length==0)
                 {
                     errorBox.css('display','block');
@@ -77,6 +71,12 @@
                     errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
                     return false;
                 } 
+                if(new_pw != password_confirm)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password do not match");
+                    return false;
+                }
             }
             
             $(document).ready(function()
@@ -119,15 +119,15 @@
                         <table width="70%" cellspacing="0" cellpadding="0">                                                         
                             <tr>
                                 <td><label for='mypage'>Old Password</label></td>
-                                <td><input type='password' name='password' value=''></td>
+                                <td><input type='password' name='password' id="password" value=''></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>New Password</label></td>
-                                <td><input type='password' name='newpw' value=''></td>
+                                <td><input type='password' name='newpw' id="newpw" value=''></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Confirm New Password</label></td>
-                                <td><input type='password' name='confirm_newpw' value=''></td>
+                                <td><input type='password' name='confirm_newpw' id="confirm_newpw" value=''></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="center">                                   
