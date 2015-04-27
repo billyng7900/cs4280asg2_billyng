@@ -5,6 +5,7 @@
  */
 package BO;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,7 +73,10 @@ public class AllOrder {
                 printList += "</td>";
                 printList += "<td>$"+book.getPrice()+"</td>";
                 printList += "<td>"+od.getQuantity()+"</td>";
-                printList += "<td>$"+o.getTotalPrice()+"</td>";
+                NumberFormat f = NumberFormat.getNumberInstance();
+                f.setMaximumFractionDigits(2);
+                f.setMinimumFractionDigits(2);
+                printList += "<td>$"+f.format(book.getPrice()*od.getQuantity())+"</td>";
                 printList += "<td rowspan="+o.getOrderList().size()+" class='ordertotal'>";
                 if(counter==1)
                 {

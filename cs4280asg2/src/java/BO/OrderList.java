@@ -137,7 +137,10 @@ public class OrderList {
             printList += "</td>";
             printList += "<td>$"+book.getPrice()+"</td>";
             printList += "<td>"+od.getQuantity()+"</td>";
-            printList += "<td>$"+totalprice+"</td>";
+            NumberFormat f = NumberFormat.getNumberInstance();
+            f.setMaximumFractionDigits(2);
+            f.setMinimumFractionDigits(2);
+            printList += "<td>$"+f.format(book.getPrice()*od.getQuantity())+"</td>";
             printList += "<td rowspan="+orderList.size()+" class='ordertotal'>";
             if(counter==1)
             {
