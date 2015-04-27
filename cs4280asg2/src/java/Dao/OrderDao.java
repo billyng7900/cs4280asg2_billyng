@@ -210,6 +210,37 @@ public class OrderDao {
         }
     }
     
+    public ArrayList<OrderList> getUserRefundList(int userID)
+    {
+        try{
+            ArrayList<OrderList> orderList = new ArrayList<OrderList>();
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "aiad039");
+            PreparedStatement pstmt = con.prepareStatement("Select * from [Order_Point] where status = 2 and userID = ? order by [orderID] desc",ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs!=null)
+            {
+                while(rs.next())
+                {   
+                    OrderList order = new OrderList();
+                    int orderID = rs.getInt("orderID");
+                    int orderStatus = rs.getInt("status");
+                    order.setOrderID(orderID);
+                    order.setUserID(userID);
+                    order.setStatus(orderStatus);
+                    orderList.add(order);
+                }
+                return orderList;
+            }
+            return null;
+        }catch(SQLException e){
+            return null;
+        }catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
+    
     public int getNewOrderID()
     {
         try{

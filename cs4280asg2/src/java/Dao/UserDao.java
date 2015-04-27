@@ -77,7 +77,7 @@ public class UserDao {
                 {
                     int loyaltyPoints = rs.getInt("loyaltyPoints");
                     user.setUserName(username);
-                    user.setIsManager(true);
+                    user.setIsManager(false);
                     user.setLoyaltyPoints(loyaltyPoints);
                 }
                 return user;
@@ -201,7 +201,7 @@ public class UserDao {
                 {
                     int loyaltyPoints = rs.getInt("loyaltyPoints");
                     user.setUserName(username);
-                    user.setIsManager(true);
+                    user.setIsManager(false);
                     user.setLoyaltyPoints(loyaltyPoints);
                 }
                 return user;

@@ -74,7 +74,8 @@
         <script type="text/javascript">
         $(document).ready(function() {
             var itemprice = parseFloat($("#price").text());
-            $("#pointsearn").text(itemprice/10);
+            var intearnpoint = Math.floor(itemprice/10)
+            $("#pointsearn").text(intearnpoint);
             $("#somepoints").change(function() {
                 if(this.checked)
                 {
@@ -137,9 +138,10 @@
             var totalprice = (itemprice-pointuse).toFixed(2);
             if(totalprice<0)
                 totalprice = 0;
+            var earnpoint = Math.floor(totalprice/10)
             $("#totalprice").text(totalprice);
             $("#totalpricehidden").val(totalprice);
-            $("#pointsearn").text(totalprice/10);
+            $("#pointsearn").text(earnpoint);
             $("#pointuse").val(pointuse);
         }
         </script>

@@ -120,8 +120,29 @@ public class AllOrder {
             printList += "</tr>";
             printList += "<tr>";
             printList += "<td>"+o.getOrderID()+"</td>";
-            printList += "<td><a href='OrderDetails.jsp?orderID="+o.getOrderID()+"'>Order Details</a></td>";
+            printList += "<td><a href='OrderDetail?orderID="+o.getOrderID()+"'>Order Details</a></td>";
             printList += "<td>"+o.getUserID()+"</td>";
+            printList += "<td>"+o.getStatusString()+"</td>";
+            printList += "</tr>";
+            printList += "</table>";
+        }
+        return printList;
+    }
+    
+    public String getUserRefundListHtml()
+    {
+        String printList = "";
+        for(OrderList o:allList)
+        {
+            printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
+            printList += "<tr>";
+            printList += "<th>Order ID</th>";
+            printList += "<th>Order Details</th>";
+            printList += "<th>Status</th>";
+            printList += "</tr>";
+            printList += "<tr>";
+            printList += "<td>"+o.getOrderID()+"</td>";
+            printList += "<td><a href='OrderDetail?orderID="+o.getOrderID()+"'>Order Details</a></td>";
             printList += "<td>"+o.getStatusString()+"</td>";
             printList += "</tr>";
             printList += "</table>";

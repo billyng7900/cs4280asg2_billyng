@@ -4,6 +4,7 @@
     Author     : liwaihing
 --%>
 
+<%@page import="BO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -88,48 +89,19 @@
                 <h2><label for="history">Purchase History</label></h2>
                 <div id="orderItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
-                    <table width="90%" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <th colspan="5">
-                                <label class="orderinfo">Order Date: 2015/04/24 17:17</label>
-                                <label class="orderinfo">Order ID: 0000000000</label>
-                                <label class="orderinfo">Purchase Status: Success</label>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td class="orderheader" width="40%">Item</td>
-                            <td class="orderheader" width="10%">Price</td>
-                            <td class="orderheader" width="10%">Quantity</td>
-                            <td class="orderheader" width="10%">Net Price</td>
-                            <td class="orderheader" width="30%"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>
-                                    <img src="image/book_1.jpg" height="150px"><br>
-                                    Java: A Beginner's Guide Paperback
-                                </p>
-                            </td>
-                            <td>$24.37</td>
-                            <td>1</td>
-                            <td>$24.37</td>
-                            <td rowspan="2" class="ordertotal">
-                                <table width='90%'>
-                                    <tr>
-                                        <td>Item Total</td>
-                                        <td>$48.74</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Point Used</td>
-                                        <td>0</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>                       
-                    </table>                    
-                    <input type='button' value="Accept">
-                    <input type='button' value="Reject">
-                    <br>Above: only role=manager, Below: user //please delete me<br>
+                    <form action="" method="">
+                        ${orderList.orderRefundDetailHtml}
+                        <% 
+                            User user = (User)session.getAttribute("user");
+                            if(user.getIsManager())
+                            {
+                        %>
+                    <input type='submit' value="Accept" name="accept" />
+                    <input type='submit' value="Reject" name="reject" />
+                    <%
+                            }
+                    %>
+                    </form>
                     <input type="button" value="Back" onclick="window.history.back()">
                 </div>
             </div>       

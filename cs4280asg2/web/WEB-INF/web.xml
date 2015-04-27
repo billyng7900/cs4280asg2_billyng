@@ -92,6 +92,18 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessLogout</servlet-name>
+        <servlet-class>controller.ProcessLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RefundHistoryController</servlet-name>
+        <servlet-class>controller.RefundHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailController</servlet-name>
+        <servlet-class>controller.OrderDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -183,6 +195,18 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessLogout</servlet-name>
+        <url-pattern>/ProcessLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefundHistoryController</servlet-name>
+        <url-pattern>/RefundHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailController</servlet-name>
+        <url-pattern>/OrderDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
