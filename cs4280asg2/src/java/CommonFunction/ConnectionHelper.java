@@ -8,6 +8,10 @@ package CommonFunction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.DataSource;
+import javax.naming.*;
 
 /**
  *
@@ -19,13 +23,15 @@ public class ConnectionHelper {
     public Connection createConnection() throws SQLException {
         if (conn == null || conn.isClosed()) {
             try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conn = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "cs4280g13");
+                Context initCtx = new InitialContext();
+                Context envCtx = (Context)initCtx.lookup("java:comp/env");
+                DataSource ds = (DataSource)envCtx.lookup("jdbc/aiad039_db");
+                conn = ds.getConnection();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (NamingException e) {
                 e.printStackTrace();
-            }
+            } 
         }
         return conn;
     }

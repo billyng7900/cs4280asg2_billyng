@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/cs4280asg2"/>
+<Context antiJARLocking="true" path="/cs4280asg2">
+    <Resource name="jdbc/aiad039_db" auth="Container" type="javax.sql.DataSource"
+    maxActive="20" maxIdle="5" maxWait="3000" removeAbandoned="true"
+    username="aiad039" password="cs4280g13"
+    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    url="jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db;" />
+</Context>

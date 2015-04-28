@@ -13,6 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 /**
  *
@@ -25,8 +31,10 @@ public class MenuDao {
     {
         try{
             ArrayList<Menu> menuList = new ArrayList<Menu>();
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad039_db", "aiad039", "cs4280g13");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context)initCtx.lookup("java:comp/env");
+            DataSource ds = (DataSource)envCtx.lookup("jdbc/aiad039_db");
+            Connection  con = ds.getConnection();
             Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             String getMenuSql = "";
             if (type == 1)
@@ -56,9 +64,9 @@ public class MenuDao {
             }
             else
                return null;
-        }catch (ClassNotFoundException e) {
-            System.out.println("<div style='color: red'>" + e.toString() + "</div>");
         }catch (SQLException e) {
+            System.out.println("<div style='color: red'>" + e.toString() + "</div>");
+        } catch (NamingException e) {
             System.out.println("<div style='color: red'>" + e.toString() + "</div>");
         } 
         return null;
