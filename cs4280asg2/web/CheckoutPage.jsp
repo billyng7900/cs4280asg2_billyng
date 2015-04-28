@@ -145,15 +145,15 @@
             $("#pointuse").val(pointuse);
         }
         
-        function checksubmit()
-            {               
+        function checkSubmit()
+            {            
                 var cardno = $("#cardno").val();
                 var validdateM = $("#validdateM").val();
                 var validdateY = $("#validdateY").val();
                 var cardholder = $("#cardholder").val();
                 var securitycode = $("#securitycode").val();
                 var errorBox = $("#errorContainer");
-                if( $("#totalprice").val()>0)
+                if( $("#totalpricehidden").val()>0)
                 {
                     if(!cardno || cardno.replace(/ /g,'').length==0)
                     {
