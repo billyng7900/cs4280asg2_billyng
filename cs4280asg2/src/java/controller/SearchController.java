@@ -6,7 +6,7 @@
 package controller;
 
 import BO.*;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +35,7 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Billy
  */
-public class CommonFunction {
+public class ConnectionHelper {
     private  Connection conn;
     
     public Connection createConnection() throws SQLException {

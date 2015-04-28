@@ -6,7 +6,7 @@
 package controller;
 import Dao.BookDao;
 import BO.*;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -47,7 +47,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

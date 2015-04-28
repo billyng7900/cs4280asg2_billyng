@@ -7,7 +7,7 @@
 package controller;
 
 import BO.*;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,7 +69,7 @@ public class CheckoutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Connection con = null;
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         try {
             HttpSession session = request.getSession();
             if(session.getAttribute("cart")==null)

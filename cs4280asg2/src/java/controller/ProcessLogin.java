@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import BO.*;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import Dao.UserDao;
 
 public class ProcessLogin extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

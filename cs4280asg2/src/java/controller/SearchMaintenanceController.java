@@ -8,7 +8,7 @@ package controller;
 import BO.Book;
 import BO.BookList;
 import BO.User;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import Dao.BookDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class SearchMaintenanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

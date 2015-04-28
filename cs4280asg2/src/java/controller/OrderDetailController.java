@@ -7,7 +7,7 @@ package controller;
 
 import BO.Book;
 import BO.*;
-import CommonFunction.CommonFunction;
+import CommonFunction.ConnectionHelper;
 import Dao.BookDao;
 import Dao.OrderDao;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class OrderDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CommonFunction cm = new CommonFunction();
+        ConnectionHelper cm = new ConnectionHelper();
         Connection con = null;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
