@@ -144,6 +144,49 @@
             $("#pointsearn").text(earnpoint);
             $("#pointuse").val(pointuse);
         }
+        
+        function checksubmit()
+            {               
+                var cardno = $("#cardno").val();
+                var validdateM = $("#validdateM").val();
+                var validdateY = $("#validdateY").val();
+                var cardholder = $("#cardholder").val();
+                var securitycode = $("#securitycode").val();
+                var errorBox = $("#errorContainer");
+                if( $("#totalprice").val()>0)
+                {
+                    if(!cardno || cardno.replace(/ /g,'').length==0)
+                    {
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter credit card no.");        
+                        return false;
+                    }
+                    else if (!validdateM || validdateM.replace(/ /g,'').length==0)
+                    {
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter valid date");
+                        return false;
+                    }
+                    else if (!validdateY || validdateY.replace(/ /g,'').length==0)
+                    {
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter valid date");
+                        return false;
+                    } 
+                    else if (!cardholder || cardholder.replace(/ /g,'').length==0)
+                    {
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter card holder's name");
+                        return false;
+                    }
+                    else if (!securitycode || securitycode.replace(/ /g,'').length==0)
+                    {
+                        errorBox.css('display','block');
+                        errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter security code");
+                        return false;
+                    }     
+                }
+            }
         </script>
     </head>
     <body>
@@ -159,9 +202,10 @@
         </div>
         <div id="centerPanel" >
             <div id="checkoutPageContainer">
-                <h2><label for="payment">Checkout</label></h2>              
+                <h2><label for="payment">Checkout</label></h2>
+                <div id="errorContainer"></div>
                 <div id="checkableItemContainer">
-                    <form action="Checkout" method="POST">                      
+                    <form action="Checkout" method="POST" onsubmit="return checkSubmit()">                      
                         <table width="90%" cellspacing="0" cellpadding="0">                          
                             <tr>
                                 <th colspan="4"><h3 class="center">PAYMENT METHOD</h3></td>                                
@@ -171,22 +215,22 @@
                                     <label for="payment">Credit Card</label>
                                 </td>                                
                                 <td><label for="payment">Credit Card No.</label></td>
-                                <td><input type="text" name="cardno" placeholder="Credit Card No."></td>
+                                <td><input type="text" id="cardno" name="cardno" placeholder="Credit Card No."></td>
                             </tr>
                             <tr>
                                 <td><label for="payment">Valid Date</label></td>
-                                <td><input type="text" name="validdateM" placeholder="MM" style="width:30px">
+                                <td><input type="text" id="validdateM" name="validdateM" placeholder="MM" style="width:30px">
                                     /
-                                    <input type="text" name="validdateY" placeholder="YYYY" style="width:50px">
+                                    <input type="text" id="validdateY" name="validdateY" placeholder="YYYY" style="width:50px">
                                 </td>
                             </tr>                        
                             <tr>
                                 <td><label for="payment">Card Holder's Name</label></td>
-                                <td><input type="text" name="cardholder" placeholder="Card Holder's Name"></td>
+                                <td><input type="text" id="cardholder" name="cardholder" placeholder="Card Holder's Name"></td>
                             </tr>
                             <tr>
                                 <td><label for="payment">Security Code</label></td>
-                                <td><input type="text" name="security code" placeholder="Security Code"></td>
+                                <td><input type="text" id="securitycode" name="securitycode" placeholder="Security Code"></td>
                             </tr>
                             <tr>
                                 <td colspan="2">
