@@ -57,6 +57,8 @@
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
+                var realname = $("#realname").val();
+                var contact = $("#contact").val();
                 var password_confirm = $("#pw_confirm").val();
                 var errorBox = $("#errorContainer");
                 if(password != password_confirm)
@@ -75,6 +77,18 @@
                 {
                     errorBox.css('display','block');
                     errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password cannot be empty");
+                    return false;
+                }
+                else if (!realname || realname.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' />Real Name cannot be empty");
+                    return false;
+                }
+                else if (!contact || contact.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Contact cannot be empty");
                     return false;
                 }
             }
@@ -135,7 +149,7 @@
                             </tr>
                             <tr>
                                 <td><label for='realname'>Contact</label></td>
-                                <td><input type="text" id="contact" name="contact" value=""/></td>                   
+                                <td><input type="number" id="contact" name="contact" value=""/></td>                   
                             </tr>  
                             <tr>
                                 <td colspan="2" class="center">
