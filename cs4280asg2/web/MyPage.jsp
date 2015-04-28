@@ -73,12 +73,19 @@
             {               
                 var password = $("#password").val();               
                 var errorBox = $("#errorContainer");               
+                var contact = $("#contact");
                 if(!password || password.replace(/ /g,'').length==0)
                 {
                     errorBox.css('display','block');
                     errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter your password");        
                     return false;
                 }
+                else if(!contact || contact.replace(/ /g,'').length==0)
+                {
+                    errorBox.css('display','block');
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Please enter your contact information");        
+                    return false;
+                }    
             }
             
             $(document).ready(function()
@@ -132,6 +139,10 @@
                             <tr>
                                 <td><label for='mypage'>Real Name</label></td>
                                 <td><input type="text" id="realname" name="realname" value="${user.realName}"/></td>
+                            </tr>
+                            <tr>
+                                <td><label for='mypage'>Contact Number</label></td>
+                                <td><input type="text" id="contact" name="contact" value=""/></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Loyalty Points</label></td>
