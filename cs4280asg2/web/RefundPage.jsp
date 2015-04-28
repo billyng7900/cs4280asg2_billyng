@@ -93,7 +93,7 @@
                     <p>
                         Reason for refund:
                     </p>
-                        <textarea rows="5" style="width: 500px"></textarea>                   
+                        <textarea name="reason" rows="5" style="width: 500px"></textarea>                   
                     <p style='color: red'>
                         Confirm to refund?                       
                     </p>

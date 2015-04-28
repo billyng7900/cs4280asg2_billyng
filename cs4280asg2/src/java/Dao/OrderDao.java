@@ -60,13 +60,32 @@ public class OrderDao {
             pstmt.close();
         }
     }
-
-    public ArrayList<Integer> getAllOrderIDByUser(int userID, int status, Connection con) throws SQLException {
+    
+    public int insertRefundReason(int orderID, String reason, Connection con) throws SQLException
+    {
+       PreparedStatement pstmt = con.prepareStatement("insert into [Refund] values (?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        try {
+            pstmt.setInt(1,orderID);
+            pstmt.setString(2, reason);
+            int affectedRow = pstmt.executeUpdate();
+            if(affectedRow>0)
+            {
+                return 1;   
+            }
+            else
+            {
+                return -1;
+            }
+        } finally {
+            pstmt.close();
+        }
+    }
+    
+    public ArrayList<Integer> getAllOrderIDByUser(int userID, Connection con) throws SQLException {
         ArrayList<Integer> orderIDList = new ArrayList<Integer>();
-        PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? and status = ? order by OrderID desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? and (status = 1 or status = 4) order by OrderID desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {
             pstmt.setInt(1, userID);
-            pstmt.setInt(2, status);
             ResultSet rs = pstmt.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -80,7 +99,29 @@ public class OrderDao {
             pstmt.close();
         }
     }
-
+    
+    public Refund getRefund(int orderID, Connection con) throws SQLException
+    {
+        ArrayList<Integer> orderIDList = new ArrayList<Integer>();
+        PreparedStatement pstmt = con.prepareStatement("select * from [Refund] where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        try {
+            pstmt.setInt(1, orderID);
+            ResultSet rs = pstmt.executeQuery();
+            Refund refund = new Refund();
+            if (rs != null && rs.next()!=false) {
+                    String reason = rs.getString("refund_reason");
+                    refund.setReason(reason);
+                    return refund; 
+            }
+            else
+            {
+              return null;  
+            }
+        } finally {
+            pstmt.close();
+        }
+    }
+    
     public boolean getOrderIsUser(int orderID, int userID, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ? and userID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {

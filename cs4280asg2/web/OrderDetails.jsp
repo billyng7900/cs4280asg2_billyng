@@ -100,13 +100,8 @@
                 <div id="orderItemContainer">
                     <h3 class="center">ORDER HISTORY</h3>
                     <form action="RefundProcess" method="POST">
-                        ${orderList.orderRefundDetailHtml}
-                        <p>
-                            Reason for refund:
-                        </p>
-                        <div id="refundReason">
-                            <p>dllm I am AN fan</p>
-                        </div>                       
+                        ${refund.orderList.orderRefundDetailHtml}
+                        ${refund.reasonHtml}                       
                     <% 
                         User user = (User)session.getAttribute("user");
                         if(user.getIsManager())

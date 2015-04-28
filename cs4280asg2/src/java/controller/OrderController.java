@@ -35,7 +35,7 @@ public class OrderController extends HttpServlet {
             HttpSession session = request.getSession();
             if(session.getAttribute("user")==null)
             {
-                response.sendRedirect("Login.jsp?requestURL="+request.getRequestURI());
+                response.sendRedirect("Login.jsp?requestURL=ShoppingCart.jsp");
             }
             else
             {

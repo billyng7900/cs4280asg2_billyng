@@ -6,9 +6,7 @@
 package controller;
 
 import BO.Book;
-import BO.Order;
-import BO.OrderList;
-import BO.User;
+import BO.*;
 import CommonFunction.CommonFunction;
 import Dao.BookDao;
 import Dao.OrderDao;
@@ -84,7 +82,8 @@ public class OrderDetailController extends HttpServlet {
                 int orderID = Integer.parseInt(request.getParameter("orderID"));
                 OrderDao dao = new OrderDao();
                 BookDao bookdao = new BookDao();
-                OrderList bo = new OrderList();
+                OrderList orderList = new OrderList();
+                Refund bo = new Refund();
                 boolean isUser = dao.getOrderIsUser(orderID, user.getUserId(),con);
                 if (isUser || user.getIsManager()) {
                     ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID,con);
@@ -92,9 +91,11 @@ public class OrderDetailController extends HttpServlet {
                         Book book = bookdao.getBook(o.getBookID(),con);
                         o.setBook(book);
                     }
-                    bo = dao.getOrderPointByOrderID(orderID,con);
-                    bo.setOrderList(orderlist);
-                    request.setAttribute("orderList", bo);
+                    orderList = dao.getOrderPointByOrderID(orderID,con);
+                    orderList.setOrderList(orderlist);
+                    bo = dao.getRefund(orderID, con);
+                    bo.setOrderList(orderList);
+                    request.setAttribute("refund", bo);
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderDetails.jsp");
                     dispatcher.forward(request, response);
                 } else {

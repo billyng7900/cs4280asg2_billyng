@@ -87,28 +87,53 @@ public class ProcessRefundController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
-            if (session.getAttribute("user") == null) {
+            if (session.getAttribute("user") == null) 
+            {
                 response.sendRedirect("Home");
-            } else {
+            } 
+            else 
+            {
                 con = cm.createConnection();
                 User user = (User) session.getAttribute("user");
                 OrderDao dao = new OrderDao();
                 int orderID = Integer.parseInt(request.getParameter("orderID"));
                 boolean isUser = dao.getOrderIsUser(orderID, user.getUserId(),con);
                 OrderList bo = new OrderList();
-                if (isUser) {
+                if (isUser) 
+                {
                     ArrayList<Order> orderlist = dao.getOrderRecordByOrderID(orderID,con);
                     bo = dao.getOrderPointByOrderID(orderID,con);
                     long dayDiff = getDayDiff(bo.getOrderDate());
-                    if (dayDiff <= 7) {
+                    if (dayDiff <= 7 && bo.getStatus()==1) 
+                    {
                         con.setAutoCommit(false);
                         int success = dao.updateOrderStatus(orderID, 2,con);
-                        response.sendRedirect("RefundRequest.jsp");
-                        cm.commitConnection();
-                    } else {
+                        if(success>0)
+                        {
+                            String reason = request.getParameter("reason");
+                            success = dao.insertRefundReason(orderID, reason, con);
+                            if(success>0)
+                            {
+                                response.sendRedirect("RefundRequest.jsp");
+                                cm.commitConnection();
+                            }
+                            else
+                            {
+                                cm.rollbackConnection();
+                                response.sendRedirect("PurchaseHistory");
+                            }
+                        }
+                        else
+                        {
+                            cm.rollbackConnection();
+                            response.sendRedirect("PurchaseHistory");
+                        }
+                    } else 
+                    {
                         response.sendRedirect("PurchaseHistory");
                     }
-                } else {
+                } else 
+                {
                     response.sendRedirect("PurchaseHistory");
                 }
             }
