@@ -132,7 +132,11 @@
                             <tr>
                                 <td><label for='realname'>Real Name</label></td>
                                 <td><input type="text" id="realname" name="realname" value=""/></td>                   
-                            </tr>                    
+                            </tr>
+                            <tr>
+                                <td><label for='realname'>Contact</label></td>
+                                <td><input type="text" id="contact" name="contact" value=""/></td>                   
+                            </tr>  
                             <tr>
                                 <td colspan="2" class="center">
                                     <label style="font-size: 14px">Do not use your real personal data as input.</label><br><br>

@@ -41,12 +41,13 @@ public class RegisterController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String realname = request.getParameter("realname");
+            int contact = Integer.parseInt(request.getParameter("contact"));
             UserDao dao = new UserDao();
             User isUserNameRepeated = dao.getUserByUserName(username,con);
             if(isUserNameRepeated == null)
             {
                 con.setAutoCommit(false);
-                int success = dao.registerUser(username, password,realname,con);
+                int success = dao.registerUser(username, password,realname, contact, con);
                 if(success==1)
                 {
                     cm.commitConnection();

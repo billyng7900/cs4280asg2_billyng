@@ -89,13 +89,14 @@ public class MyPageSaveController extends HttpServlet {
                 User user = (User) session.getAttribute("user");
                 String password = request.getParameter("password");
                 String realname = request.getParameter("realname");
+                int contact = Integer.parseInt(request.getParameter("contact"));
                 UserDao dao = new UserDao();
                 User checkUser = dao.getUser(user.getUserName(), password,con);
                 if (checkUser == null) {
                     response.sendRedirect("MyPage.jsp?error=1");
                 } else {
                     con.setAutoCommit(false);
-                    int success = dao.updateUser(realname, user.getUserId(),con);
+                    int success = dao.updateUser(realname,contact, user.getUserId(),con);
                     if (success == 1) {
                         cm.commitConnection();
                         response.sendRedirect("MyPage");

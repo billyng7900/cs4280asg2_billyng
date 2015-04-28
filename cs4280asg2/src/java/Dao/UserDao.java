@@ -22,11 +22,12 @@ import javax.servlet.http.HttpSession;
  */
 public class UserDao {
 
-    public int registerUser(String username, String password, String realname, Connection con) throws SQLException {
-        PreparedStatement pstmt = con.prepareStatement("insert into [User] values (?,?,0,0,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    public int registerUser(String username, String password, String realname,int contact, Connection con) throws SQLException {
+        PreparedStatement pstmt = con.prepareStatement("insert into [User] values (?,?,0,0,?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         pstmt.setString(1, username);
         pstmt.setString(2, password);
         pstmt.setString(3, realname);
+        pstmt.setInt(4, contact);
         int affectedRow = pstmt.executeUpdate();
         if (affectedRow > 0) {
             return 1;
@@ -45,10 +46,12 @@ public class UserDao {
             String name = rs.getString("username");
             int userId = rs.getInt("userid");
             String realname = rs.getString("real_name");
+            int contact = rs.getInt("contact");
             User user = new User();
             user.setUserName(username);
             user.setUserId(userId);
             user.setRealName(realname);
+            user.setContact(contact);
             if (rs.getInt("ismanager") == 1) {
                 user.setIsManager(true);
             } else {
@@ -75,10 +78,11 @@ public class UserDao {
         }
     }
 
-    public int updateUser(String realname, int userID, Connection con) throws SQLException {
-        PreparedStatement pstmt = con.prepareStatement("Update [User] SET [Real_name] = ? where [userID] = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+    public int updateUser(String realname, int contact, int userID, Connection con) throws SQLException {
+        PreparedStatement pstmt = con.prepareStatement("Update [User] SET [Real_name] = ?, [contact] = ? where [userID] = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         pstmt.setString(1, realname);
-        pstmt.setInt(2, userID);
+        pstmt.setInt(2, contact);
+        pstmt.setInt(3, userID);
         int affectRows = pstmt.executeUpdate();
         if (affectRows > 0) {
             return 1;
@@ -119,10 +123,12 @@ public class UserDao {
             String name = rs.getString("username");
             int userId = rs.getInt("userid");
             String realname = rs.getString("real_name");
+            int contact = rs.getInt("contact");
             User user = new User();
             user.setUserName(username);
             user.setUserId(userId);
             user.setRealName(realname);
+            user.setContact(contact);
             if (rs.getInt("ismanager") == 1) {
                 user.setIsManager(true);
             } else {

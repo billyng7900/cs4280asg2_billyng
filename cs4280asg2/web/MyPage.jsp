@@ -142,7 +142,7 @@
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Contact Number</label></td>
-                                <td><input type="text" id="contact" name="contact" value=""/></td>
+                                <td><input type="text" id="contact" name="contact" value="${user.contact}"/></td>
                             </tr>
                             <tr>
                                 <td><label for='mypage'>Loyalty Points</label></td>

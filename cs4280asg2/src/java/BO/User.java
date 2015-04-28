@@ -15,6 +15,7 @@ public class User {
     int loyaltyPoints;
     int userId;
     String realname;
+    int contact;
     
     public User()
     {
@@ -68,5 +69,15 @@ public class User {
     public String getRealName()
     {
         return realname;
+    }
+    
+    public void setContact(int contact)
+    {
+        this.contact = contact;
+    }
+    
+    public int getContact()
+    {
+        return contact;
     }
 }
