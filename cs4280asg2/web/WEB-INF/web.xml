@@ -108,6 +108,10 @@
         <servlet-name>RefundLogicController</servlet-name>
         <servlet-class>controller.RefundLogicController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookMaintenanceDelete</servlet-name>
+        <servlet-class>controller.BookMaintenanceDelete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcessLogin</servlet-name>
         <url-pattern>/ProcessLogin</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>RefundLogicController</servlet-name>
         <url-pattern>/RefundProcess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookMaintenanceDelete</servlet-name>
+        <url-pattern>/BookMaintenanceDelete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

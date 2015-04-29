@@ -91,7 +91,7 @@ public class AllOrder {
                         printList += "<td>" + o.getPointUse() + "</td>";
                         printList += "</tr>";
                         printList += "<tr>";
-                        if (diffDays <= 7 && o.getStatus() == 1) {
+                        if (diffDays <= 7 && o.getStatus() == 1 && o.getPointUse()==0) {
                             printList += "<td colspan='2'>";
                             printList += "<input type='submit' value='Refund' />";
                             printList += "<p>Refund should be done in 7 days</p>";

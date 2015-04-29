@@ -49,7 +49,19 @@ public class BookDao {
             pstmt.close();
         }
     }
-
+    
+    public int deleteBook(int bookID, Connection con) throws SQLException
+    {
+        PreparedStatement pstmt = con.prepareStatement("delete from [book] where [bookID] = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        pstmt.setInt(1, bookID);
+        int affectedRow = pstmt.executeUpdate();
+        if (affectedRow > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    
     public int updateBookAvailability(int bookID, int newAvailability, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("Update [book] SET [availability] = ? where [bookID] = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         pstmt.setInt(1, newAvailability);

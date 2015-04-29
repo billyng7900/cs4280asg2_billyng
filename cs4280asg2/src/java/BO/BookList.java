@@ -58,7 +58,7 @@ public class BookList {
             printlist += "<td>" + b.getBookName() + "</td>";
             printlist += "<td>" + b.getAvailability() + "</td>";
             printlist += "<td><a href='BookMaintenanceUpdate?bookID=" + b.getBookID() + "'><input type='button' value='Update'></a></td>";
-            printlist += "<td><input type='button' value='Delete'></td>";
+            printlist += "<td><a href='BookMaintenanceDelete?bookID=" + b.getBookID() + "'><input type='button' value='Delete'></a></td>";
             printlist += "</tr>";
         }
         return printlist;
