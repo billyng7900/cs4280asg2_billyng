@@ -33,6 +33,27 @@
                 word-wrap: break-word;
             }
         </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">            
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('message')!=null)
+                {                   
+                    if ($.urlParam('message')=="1")
+                    {
+                        var msgBox = $("#msgContainer");
+                        msgBox.css('display','block');
+                        msgBox.html("<image src='image/ui-icon-error.png' alt='error' /> This item is added into your cart");
+                    }
+                }
+            });
+        </script>
     </head>
     
     <body>
@@ -53,6 +74,7 @@
                         <img src="<jsp:getProperty name='book' property='imageURL' />" alt="<jsp:getProperty name='book' property='bookName' />">
                     </div>
                     <div style="float: left; width: 65%">
+                        <div id="msgContainer"></div>
                         <table>
                             <tr>                            
                                 <td style="text-decoration: bold; font-size: 20px">
