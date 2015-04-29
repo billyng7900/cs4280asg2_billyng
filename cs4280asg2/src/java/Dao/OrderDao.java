@@ -40,10 +40,10 @@ public class OrderDao {
         }
     }
 
-    public int insertOrderPoint(int orderID, int pointuse, float totalprice, int userID, Connection con) throws SQLException {
+    public int insertOrderDetail(int orderID, int pointuse, float totalprice, int userID, Connection con) throws SQLException {
         Calendar datenow = Calendar.getInstance();
         Timestamp timestamp = new Timestamp(datenow.getTimeInMillis());
-        PreparedStatement pstmt = con.prepareStatement("insert into [Order_Point] values (?,?,?,?,1,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("insert into [Order_Detail] values (?,?,?,?,1,?)", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {
             pstmt.setInt(1, orderID);
             pstmt.setInt(2, pointuse);
@@ -83,7 +83,7 @@ public class OrderDao {
     
     public ArrayList<Integer> getAllOrderIDByUser(int userID, Connection con) throws SQLException {
         ArrayList<Integer> orderIDList = new ArrayList<Integer>();
-        PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Point] where userID = ? and (status = 1 or status = 4) order by OrderID desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("select distinct orderID from [Order_Detail] where userID = ? and (status = 1 or status = 4) order by OrderID desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
@@ -123,7 +123,7 @@ public class OrderDao {
     }
     
     public boolean getOrderIsUser(int orderID, int userID, Connection con) throws SQLException {
-        PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ? and userID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("select * from [Order_Detail] where orderID = ? and userID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {
             pstmt.setInt(1, orderID);
             pstmt.setInt(2, userID);
@@ -164,7 +164,7 @@ public class OrderDao {
     }
 
     public OrderList getOrderPointByOrderID(int orderID, Connection con) throws SQLException {
-        PreparedStatement pstmt = con.prepareStatement("select * from [Order_Point] where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("select * from [Order_Detail] where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         try {
             pstmt.setInt(1, orderID);
             ResultSet rs = pstmt.executeQuery();
@@ -194,7 +194,7 @@ public class OrderDao {
     public ArrayList<OrderList> getRefundList(Connection con) throws SQLException {
         ArrayList<OrderList> orderList = new ArrayList<OrderList>();
         Statement smt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = smt.executeQuery("Select * from [Order_Point] where status = 2 order by [orderID] desc");
+        ResultSet rs = smt.executeQuery("Select * from [Order_Detail] where status = 2 order by [orderID] desc");
         if (rs != null) {
             while (rs.next()) {
                 OrderList order = new OrderList();
@@ -213,7 +213,7 @@ public class OrderDao {
 
     public ArrayList<OrderList> getUserRefundList(int userID, Connection con) throws SQLException {
         ArrayList<OrderList> orderList = new ArrayList<OrderList>();
-        PreparedStatement pstmt = con.prepareStatement("Select * from [Order_Point] where (status = 2 or status = 3 or status = 4) and userID = ? order by [orderID] desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("Select * from [Order_Detail] where (status = 2 or status = 3 or status = 4) and userID = ? order by [orderID] desc", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         pstmt.setInt(1, userID);
         ResultSet rs = pstmt.executeQuery();
         if (rs != null) {
@@ -233,7 +233,7 @@ public class OrderDao {
 
     public int getNewOrderID(Connection con) throws SQLException {
         Statement smt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = smt.executeQuery("Select [orderID] from [Order_Point] order by [orderID] desc");
+        ResultSet rs = smt.executeQuery("Select [orderID] from [Order_Detail] order by [orderID] desc");
         int latestorderid = -1;
         if (rs != null) {
             if (rs.next() != false) {
@@ -248,7 +248,7 @@ public class OrderDao {
     }
 
     public int updateOrderStatus(int orderID, int newStatus, Connection con) throws SQLException {
-        PreparedStatement pstmt = con.prepareStatement("update [Order_Point] set status = ? where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement pstmt = con.prepareStatement("update [Order_Detail] set status = ? where orderID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         pstmt.setInt(1, newStatus);
         pstmt.setInt(2, orderID);
         int affectedRow = pstmt.executeUpdate();

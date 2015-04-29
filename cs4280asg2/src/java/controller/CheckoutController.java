@@ -119,7 +119,7 @@ public class CheckoutController extends HttpServlet {
                     
                     int userremainsloyaltypoints = latestLoyaltyPoints - pointwilluse + (pointwillearnint/10);
                     userdao.updateUserPoint(user.getUserId(), userremainsloyaltypoints,con);
-                    dao.insertOrderPoint(newOrderId, pointwilluse,cart.getTotalPrice(),user.getUserId(),con);
+                    dao.insertOrderDetail(newOrderId, pointwilluse,cart.getTotalPrice(),user.getUserId(),con);
                     cm.commitConnection();
                     session.setAttribute("cart", null);
                     response.sendRedirect("OrderSuccessful.jsp");
