@@ -31,6 +31,26 @@
                 text-align: center;
             }
         </style>
+        <script type="text/javascript">            
+            $(document).ready(function()
+            {
+                $.urlParam = function(name)
+                {
+                    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+                    return results[1] || 0;
+                }
+                              
+                if ($.urlParam('message')!=null)
+                {                   
+                    if ($.urlParam('message')=="1")
+                    {
+                        var msgBox = $("#errorContainer");
+                        msgBox.css('display','block');
+                        msgBox.html("<image src='image/ui-icon-error.png' alt='error' /> This item is added to shopping cart");
+                    }
+                }
+            });
+        </script>
     </head>
     
     <body>
@@ -45,6 +65,7 @@
         </div>        
         <div id="centerPanel">
             <h2>Shopping Cart</h2>
+            <div id="errorContainer"></div>
             <div id="cartItemContainer">
             <%
                 if(session.getAttribute("cart")==null)
