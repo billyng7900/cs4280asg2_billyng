@@ -28,16 +28,15 @@ public class AllOrder {
     }
 
     public String getAllOrderListToHtml() {
-
         String printList = "";
+        printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
+        printList += "<form action='RequestRefund' method='post'>";
         if (allList.isEmpty()) {
-            printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
             printList += "<td colspan='5'>";
             printList += "<label>No purchase history found</label>";
             printList += "</td>";
             printList += "</tr>";
-            printList += "</table>";
         } else {
             for (OrderList o : allList) {
                 Calendar datenow = Calendar.getInstance();
@@ -49,8 +48,6 @@ public class AllOrder {
                 long diffDays = diffTime / (1000 * 60 * 60 * 24);
                 SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                 String orderdate = dateformat.format(o.getOrderDate().getTime());
-                printList += "<form action='RequestRefund' method='post'>";
-                printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
                 printList += "<tr>";
                 printList += "<th colspan='5'>";
                 printList += "<label class='orderinfo'>Order Date: " + orderdate + "</label>";
@@ -107,47 +104,45 @@ public class AllOrder {
                     printList += "</tr>";
                     counter++;
                 }
-
-                printList += "</table>";
-                printList += "</form>";
             }
         }
+        printList += "</form>";
+        printList += "</table>";
         return printList;
     }
 
     public String getRefundListHtml() {
         String printList = "";
+        printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
         if (allList.isEmpty()) {
-            printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
             printList += "<tr>";
             printList += "<td colspan='4'>";
             printList += "<label>No pending refund request found</label>";
             printList += "</td>";
             printList += "</tr>";
-            printList += "</table>";
         } else {
+            printList += "<tr>";
+            printList += "<th width='20%'>Order ID</th>";
+            printList += "<th width='25%'>Order Details</th>";
+            printList += "<th width='25%'>Request User</th>";
+            printList += "<th width='30%'>Status</th>";
+            printList += "</tr>";
             for (OrderList o : allList) {
-                printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
-                printList += "<tr>";
-                printList += "<th width='20%'>Order ID</th>";
-                printList += "<th width='25%'>Order Details</th>";
-                printList += "<th width='25%'>Request User</th>";
-                printList += "<th width='30%'>Status</th>";
-                printList += "</tr>";
                 printList += "<tr>";
                 printList += "<td>" + o.getOrderID() + "</td>";
                 printList += "<td><a href='OrderDetail?orderID=" + o.getOrderID() + "'>Order Details</a></td>";
                 printList += "<td>" + o.getUserID() + "</td>";
                 printList += "<td>" + o.getStatusString() + "</td>";
                 printList += "</tr>";
-                printList += "</table>";
             }
         }
+        printList += "</table>";
         return printList;
     }
 
     public String getUserRefundListHtml() {
         String printList = "";
+        printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
         if (allList.isEmpty()) {
             printList += "<tr>";
             printList += "<td colspan='3'>";
@@ -155,21 +150,20 @@ public class AllOrder {
             printList += "</td>";
             printList += "</tr>";
         } else {
+            printList += "<tr>";
+            printList += "<th width='20%'>Order ID</th>";
+            printList += "<th width='40%'>Order Details</th>";
+            printList += "<th width='40%'>Status</th>";
+            printList += "</tr>";
             for (OrderList o : allList) {
-                printList += "<table width='90%' cellspacing='0' cellpadding='0'>";
-                printList += "<tr>";
-                printList += "<th width='20%'>Order ID</th>";
-                printList += "<th width='40%'>Order Details</th>";
-                printList += "<th width='40%'>Status</th>";
-                printList += "</tr>";
                 printList += "<tr>";
                 printList += "<td>" + o.getOrderID() + "</td>";
                 printList += "<td><a href='OrderDetail?orderID=" + o.getOrderID() + "'>Order Details</a></td>";
                 printList += "<td>" + o.getStatusString() + "</td>";
                 printList += "</tr>";
-                printList += "</table>";
             }
         }
+        printList += "</table>";
         return printList;
     }
 }
