@@ -121,6 +121,8 @@ public class CheckoutController extends HttpServlet {
                     userdao.updateUserPoint(user.getUserId(), userremainsloyaltypoints,con);
                     dao.insertOrderDetail(newOrderId, pointwilluse,cart.getTotalPrice(),user.getUserId(),con);
                     cm.commitConnection();
+                    User latestUser = userdao.getUserByUserName(user.getUserName(),con);
+                    session.setAttribute("user", latestUser);
                     session.setAttribute("cart", null);
                     response.sendRedirect("OrderSuccessful.jsp");
                 }
