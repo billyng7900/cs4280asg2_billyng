@@ -112,7 +112,7 @@ public class ShoppingCartAddController extends HttpServlet {
                 bo.setShoppingCart(booklist);
                 session.setAttribute("cart", bo);
             }
-            response.sendRedirect("DetailPage?bookID=" + bookID);
+            response.sendRedirect("DetailPage?bookID=" + bookID+"&message=1");
         } catch (Exception e) {
             response.sendRedirect("Home");
         } finally {
