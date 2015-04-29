@@ -74,7 +74,7 @@
                 if(new_pw != password_confirm)
                 {
                     errorBox.css('display','block');
-                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' /> Password do not match");
+                    errorBox.html("<image src='image/ui-icon-error.png' alt='error' />New Password and Confirm Password do not match");
                     return false;
                 }
             }

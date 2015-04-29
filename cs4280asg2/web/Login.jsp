@@ -97,6 +97,12 @@
         </script>
     </head>
     <body>
+        <%
+            if(session.getAttribute("user")!=null)
+            {
+                response.sendRedirect("Home");
+            }
+        %>
         <div id="header" class="banner">
             <jsp:include page="common/Header.html" flush="true" />           
         </div>        
